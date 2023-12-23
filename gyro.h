@@ -1,13 +1,3 @@
-#include <Arduino.h>
-#include <Wire.h>
-
-
-uint8_t gyro_address = 0x68;
-int16_t acc_y, acc_x, acc_z; 
-int16_t temperature; 
-int16_t gyro_roll, gyro_pitch, gyro_yaw; 
-
-
 void gyro_setup(void) {
   HWire.beginTransmission(gyro_address);                        //Start communication with the MPU-6050.
   HWire.write(0x6B);                                            //We want to write to the PWR_MGMT_1 register (6B hex).
@@ -29,8 +19,8 @@ void gyro_setup(void) {
   HWire.write(0x03);                                            //Set the register bits as 00000011 (Set Digital Low Pass Filter to ~43Hz).
   HWire.endTransmission();                                      //End the transmission with the gyro.
 
-//   acc_pitch_cal_value  = EEPROM.read(0x16);
-//   acc_roll_cal_value  = EEPROM.read(0x17);
+  // acc_pitch_cal_value  = EEPROM.read(0x16);
+  // acc_roll_cal_value  = EEPROM.read(0x17);
 }
 
 void read_gyro(){
@@ -72,8 +62,8 @@ void calibrate_gyro(void) {
       gyro_yaw_cal += gyro_yaw;                                                       //Ad yaw value to gyro_yaw_cal.
       delay(4);                                                                       //Small delay to simulate a 250Hz loop during calibration.
     }
-    red_led(HIGH);                                                                     //Set output PB3 low.
-    //Now that we have 2000 measures, we need to devide by 2000 to get the average gyro offset.
+    // red_led(HIGH);                                                                     //Set output PB3 low.
+    //Now that we have 2000 measures, we need to divide by 2000 to get the average gyro offset.
     gyro_roll_cal /= 2000;                                                            //Divide the roll total by 2000.
     gyro_pitch_cal /= 2000;                                                           //Divide the pitch total by 2000.
     gyro_yaw_cal /= 2000;                                                             //Divide the yaw total by 2000.

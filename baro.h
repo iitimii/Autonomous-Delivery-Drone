@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include <Wire.h>
-
 #define LPS22HB_WHO_AM_I        0X0F // Who am I
 #define LPS22HB_RES_CONF        0X1A // Normal (0) or Low current mode (1)
 #define LPS22HB_CTRL_REG1       0X10 // Output rate and filter settings
@@ -41,53 +38,23 @@ void LPSwrite(uint8_t reg, uint8_t data) {
 }
 
 
-float readPressure() {
-  float reading = (LPSread(LPS22HB_PRES_OUT_XL) |
-            (LPSread(LPS22HB_PRES_OUT_L) << 8) |
-            (LPSread(LPS22HB_PRES_OUT_H) << 16)) / 40.96;
-  
-  return reading;
-}
-
-
-float readTemperature() {
-float reading = (LPSread(LPS22HB_TEMP_OUT_L) << 0) | 
-          (LPSread(LPS22HB_TEMP_OUT_H) << 8);
-
-  return reading/100;
-}
-
-
-
 
 void baro_setup(){
-    HWire.begin();
-    delayMicroseconds(10);
-// while((LPSread(LPS22HB_CTRL_REG2) & 0x07) != 0) { TODO change this code
-//     yield();
-//   }
+while((LPSread(LPS22HB_CTRL_REG2) & 0x07) != 0) { //TODO change this code
+    yield();
+  }
 	LPSwrite(LPS22HB_CTRL_REG1, 0b01001110); // 50Hz
 }
 
-uint8_t count;
-float pid_error_gain_altitude, pid_throttle_gain_altitude;
-uint16_t C[7];
-uint8_t barometer_counter, temperature_counter, average_temperature_mem_location;
-int64_t OFF, OFF_C2, SENS, SENS_C1;
-float P;
-uint32_t raw_pressure, raw_temperature, temp, raw_temperature_rotating_memory[6], raw_average_temperature_total;
-float actual_pressure, actual_pressure_slow, actual_pressure_fast, actual_pressure_diff;
-float ground_pressure, altutude_hold_pressure, return_to_home_decrease;
-int32_t dT, dT_C5;
-//Altitude PID variables
-float pid_i_mem_altitude, pid_altitude_setpoint, pid_altitude_input, pid_output_altitude, pid_last_altitude_d_error;
-uint8_t parachute_rotating_mem_location;
-int32_t parachute_buffer[35], parachute_throttle;
-float pressure_parachute_previous;
-int32_t pressure_rotating_mem[50], pressure_total_avarage;
-uint8_t pressure_rotating_mem_location;
-float pressure_rotating_mem_actual;
 
 void read_baro(){
-  P = readPressure();
+    P = (LPSread(LPS22HB_PRES_OUT_XL) |
+            (LPSread(LPS22HB_PRES_OUT_L) << 8) |
+            (LPSread(LPS22HB_PRES_OUT_H) << 16)) / 40.96;
+
+    
+    T = (LPSread(LPS22HB_TEMP_OUT_L) << 0) | 
+          (LPSread(LPS22HB_TEMP_OUT_H) << 8)/100;
+
+  // to reduce loop time you don't have to request and read all the bytes in a loop
 }
