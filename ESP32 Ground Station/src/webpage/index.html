@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var socket = new WebSocket('ws://192.168.8.137');
+
+        socket.onopen = function() {
+            console.log('Connection is open...');
+        };
+
+        socket.onmessage = function(event) {
+            console.log('Received data: ' + event.data);
+            document.body.innerHTML += 'Received data: ' + event.data + '<br>';
+        };
+
+        socket.onerror = function(error) {
+            console.log('Error detected: ' + error);
+        };
+    </script>
+</body>
+</html>
