@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //In this part the various registers of the MPU-6050 are set.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+uint8_t nbytes = 14;
 void gyro_setup(void) {
   HWire.beginTransmission(gyro_address);                        //Start communication with the MPU-6050.
   HWire.write(0x6B);                                            //We want to write to the PWR_MGMT_1 register (6B hex).
@@ -21,9 +22,6 @@ void gyro_setup(void) {
   HWire.write(0x1A);                                            //We want to write to the CONFIG register (1A hex).
   HWire.write(0x03);                                            //Set the register bits as 00000011 (Set Digital Low Pass Filter to ~43Hz).
   HWire.endTransmission();                                      //End the transmission with the gyro.
-
-  // acc_pitch_cal_value = (readEEPROM(eeprom_address, 13) << 8 | readEEPROM(eeprom_address, 12));
-  // acc_roll_cal_value = (readEEPROM(eeprom_address, 15) << 8 | readEEPROM(eeprom_address, 14));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,26 +31,24 @@ void read_gyro(void) {
   HWire.beginTransmission(gyro_address);                       //Start communication with the gyro.
   HWire.write(0x3B);                                           //Start reading @ register 43h and auto increment with every read.
   HWire.endTransmission();                                     //End the transmission.
-  HWire.requestFrom(gyro_address, 14);                         //Request 14 bytes from the MPU 6050.
-  acc_y = HWire.read() << 8 | HWire.read();                    //Add the low and high byte to the acc_x variable.
-  acc_x = HWire.read() << 8 | HWire.read();                    //Add the low and high byte to the acc_y variable.
+  HWire.requestFrom(gyro_address, nbytes);                         //Request 14 bytes from the MPU 6050.
+  acc_x = HWire.read() << 8 | HWire.read();                    //Add the low and high byte to the acc_x variable.
+  acc_y = HWire.read() << 8 | HWire.read();                    //Add the low and high byte to the acc_y variable.
   acc_z = HWire.read() << 8 | HWire.read();                    //Add the low and high byte to the acc_z variable.
   temperature = HWire.read() << 8 | HWire.read();              //Add the low and high byte to the temperature variable.
-  gyro_roll = HWire.read() << 8 | HWire.read();                //Read high and low part of the angular data.
-  gyro_pitch = HWire.read() << 8 | HWire.read();               //Read high and low part of the angular data.
+  gyro_pitch = HWire.read() << 8 | HWire.read();                //Read high and low part of the angular data.
+  gyro_roll = HWire.read() << 8 | HWire.read();               //Read high and low part of the angular data.
   gyro_yaw = HWire.read() << 8 | HWire.read();                 //Read high and low part of the angular data.
-  gyro_pitch *= -1;                                            //Invert the direction of the axis.
-  gyro_yaw *= -1;                                              //Invert the direction of the axis.
+  gyro_pitch *= -1;                                             //Invert gyro_pitch due to the fact that the IMU is upside down.
+  gyro_roll *= -1;                                              //Invert gyro_roll due to the fact that the IMU is upside down.
+  gyro_yaw *= -1;
+  acc_y *= -1;
 
-  if (level_calibration_on == 0) {
-    acc_y -= acc_pitch_cal_value;                              //Subtact the manual accelerometer pitch calibration value.
-    acc_x -= acc_roll_cal_value;                               //Subtact the manual accelerometer roll calibration value.
-  }
-  if (cal_int >= 2000) {
-    gyro_roll -= gyro_roll_cal;                                  //Subtact the manual gyro roll calibration value.
-    gyro_pitch -= gyro_pitch_cal;                                //Subtact the manual gyro pitch calibration value.
-    gyro_yaw -= gyro_yaw_cal;                                    //Subtact the manual gyro yaw calibration value.
-  }
+  acc_y -= acc_y_cal;                         //Subtact the manual accelerometer pitch calibration value.
+  acc_x -= acc_x_cal;                          //Subtact the manual accelerometer roll calibration value.
+  gyro_roll -= gyro_roll_cal;                     //Subtact the manual gyro roll calibration value.
+  gyro_pitch -= gyro_pitch_cal;                   //Subtact the manual gyro pitch calibration value.
+  gyro_yaw -= gyro_yaw_cal;                       //Subtact the manual gyro yaw calibration value.
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +64,8 @@ void calibrate_gyro(void) {
       gyro_roll_cal += gyro_roll;                                                     //Ad roll value to gyro_roll_cal.
       gyro_pitch_cal += gyro_pitch;                                                   //Ad pitch value to gyro_pitch_cal.
       gyro_yaw_cal += gyro_yaw;                                                       //Ad yaw value to gyro_yaw_cal.
+      acc_x_cal += acc_x;                                                      
+      acc_y_cal += acc_y;
       delay(4);                                                                       //Small delay to simulate a 250Hz loop during calibration.
     }
     digitalWrite(RED_LED_PIN, HIGH);                                                                     //Set output PB3 low.
@@ -76,6 +74,8 @@ void calibrate_gyro(void) {
     gyro_roll_cal /= 2000;                                                            //Divide the roll total by 2000.
     gyro_pitch_cal /= 2000;                                                           //Divide the pitch total by 2000.
     gyro_yaw_cal /= 2000;                                                             //Divide the yaw total by 2000.
+    acc_x_cal /= 2000;
+    acc_y_cal /= 2000;
   }
 }
 

@@ -4,7 +4,6 @@ void telem_setup() {
     radio.setDataRate(RF24_250KBPS);
     radio.setPALevel(RF24_PA_MIN); 
     radio.setAutoAck(false);
-    radio.disableCRC();
     radio.disableAckPayload();
     radio.disableDynamicPayloads();
     radio.openWritingPipe(addresses[0]); 
@@ -22,8 +21,8 @@ void send_telemetry() {
       telemetry_send_payload2 = error;                 //uint32_t
       telemetry_send_payload3 =  channel_1;                     //int32_t
       telemetry_send_payload4 =  channel_2;                      //int32_t
-      telemetry_send_payload5 = battery_voltage;       //float
-      telemetry_send_payload6 = angle_pitch;           //float
+      telemetry_send_payload5 = (float)battery_voltage;       //float
+      telemetry_send_payload6 = (float)angle_pitch;           //float
       break;
 
 
@@ -31,10 +30,30 @@ void send_telemetry() {
       telemetry_send_signature = 'I';
       telemetry_send_payload1 = channel_3;
       telemetry_send_payload2 = channel_4;
+      telemetry_send_payload3 = channel_5;
+      telemetry_send_payload4 = channel_6;
+      telemetry_send_payload5 = (float)angle_pitch_acc;
+      telemetry_send_payload6 = (float)angle_roll;
+      break;
+
+      case 2:
+      telemetry_send_signature = 'M';
+      telemetry_send_payload1 = channel_7;
+      telemetry_send_payload2 = channel_8;
+      telemetry_send_payload3 = channel_9;
+      telemetry_send_payload4 = channel_10;
+      telemetry_send_payload5 = (float)angle_roll_acc;
+      telemetry_send_payload6 = (float)0;
+      break;
+
+      case 3:
+      telemetry_send_signature = 'L';
+      telemetry_send_payload1 = armed;
+      telemetry_send_payload2 = start;
       telemetry_send_payload3 = 0;
       telemetry_send_payload4 = 0;
-      telemetry_send_payload5 = 0;
-      telemetry_send_payload6 = angle_roll;
+      telemetry_send_payload5 = (float)0;
+      telemetry_send_payload6 = (float)0;
       break;
 
       default:
@@ -61,7 +80,7 @@ void send_telemetry() {
   data_tx.payload6 = telemetry_send_payload6;
 
   telemetry_loop_counter++;
-  if (telemetry_loop_counter >= 2)telemetry_loop_counter = 0;                             
+  if (telemetry_loop_counter >= 4)telemetry_loop_counter = 0;                             
   // radio.stopListening();
   radio.startFastWrite(&data_tx, sizeof(data_tx), true, true);
   // radio.startListening();

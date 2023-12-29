@@ -1,5 +1,5 @@
 void handler(void) {
-  measured_time = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT) - measured_time_start;
+  measured_time = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT) - measured_time_start+15;
   if (measured_time < 0) measured_time += 0x10000;
   measured_time_start = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT);
 
@@ -9,8 +9,8 @@ void handler(void) {
   if (error == 8 && start == 2)error = 0;
   }
   else channel_select_counter++;
-  if (measured_time<1000)measured_time=1000;
-  if (measured_time>2000)measured_time=2000;
+  // if (measured_time<1000)measured_time=1000;
+  // if (measured_time>2000)measured_time=2000;
 
   if (channel_select_counter == 1)channel_1 = measured_time;
   if (channel_select_counter == 2)channel_2 = measured_time;

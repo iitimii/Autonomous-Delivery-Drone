@@ -1,21 +1,73 @@
 <!DOCTYPE html>
 <html>
-<body>
-    <script>
-        var socket = new WebSocket('ws://192.168.8.137');
-
-        socket.onopen = function() {
-            console.log('Connection is open...');
-        };
-
-        socket.onmessage = function(event) {
-            console.log('Received data: ' + event.data);
-            document.body.innerHTML += 'Received data: ' + event.data + '<br>';
-        };
-
-        socket.onerror = function(error) {
-            console.log('Error detected: ' + error);
-        };
-    </script>
-</body>
-</html>
+    <head>
+        <title>Ground Station</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+            .data-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                padding: 20px;
+            }
+            .data-item {
+                flex: 1 0 20%;
+                margin: 10px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #fff;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="dataContainer" class="data-container"></div>
+    
+        <script>
+            var ws = new WebSocket('ws://192.168.8.137:80');
+            var loop_time, error, ch1, ch2, battery_voltage, angle_pitch, ch3, ch4, angle_roll;
+    
+            ws.onmessage = function(event) {
+                var data = event.data.split(',');
+                switch (String.fromCharCode(data[0])){
+                    case "T":
+                        loop_time = data[1];
+                        error = data[2];
+                        ch1 = data[3];
+                        ch2 = data[4];
+                        battery_voltage = data[5];
+                        angle_pitch = data[6];
+                        break;
+    
+                    case "I":
+                        ch3 = data[1];
+                        ch4 = data[2];
+                        angle_roll = data[6];
+                        break;
+    
+                    default:
+                        break;
+                }
+    
+                var container = document.getElementById('dataContainer');
+                container.innerHTML = `
+                    <div class="data-item">Loop Time: ${loop_time}</div>
+                    <div class="data-item">Error: ${error}</div>
+                    <div class="data-item">ch1: ${ch1}</div>
+                    <div class="data-item">ch2: ${ch2}</div>
+                    <div class="data-item">Battery Voltage: ${battery_voltage}</div>
+                    <div class="data-item">Angle Pitch: ${angle_pitch}</div>
+                    <div class="data-item">ch3: ${ch3}</div>
+                    <div class="data-item">ch4: ${ch4}</div>
+                    <div class="data-item">Angle Roll: ${angle_roll}</div>
+                `;
+            };
+        </script>
+    </body>
+    </html>

@@ -21,13 +21,6 @@ HardwareTimer *OutTim = new HardwareTimer(Instance_out);
 uint32_t chx = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(inTimPin), PinMap_PWM));
 
 
-// #define RXIBUS PA12
-// #define IBUS_BUFFSIZE 32
-// #define IBUS_MAXCHANNELS 10
-// static uint8_t ibus_index = 0;
-// static uint8_t ibus[IBUS_BUFFSIZE] = {0};
-// static uint16_t rc_value[IBUS_MAXCHANNELS] = {};
-
 TwoWire HWire (PB4, PA8);// might need to change to PB4 and PA8
 HardwareSerial gpsSerial(PA10, PA9);
 
@@ -65,9 +58,6 @@ int pid_max_altitude = 400;                //Maximum output of the PID-controlle
 //Increase this value when the quadcopter drops due to a lower battery voltage during a non altitude hold flight.
 float battery_compensation = 40.0;
 
-float gps_p_gain = 2.7;                    //Gain setting for the GPS P-controller (default = 2.7).
-float gps_d_gain = 6.5;                    //Gain setting for the GPS D-controller (default = 6.5).
-
 float declination = -1.4;                   //Set the declination between the magnetic and geographic north.
 
 int16_t manual_takeoff_throttle = 0;    //Enter the manual hover point when auto take-off detection is not desired (between 1400 and 1600).
@@ -76,7 +66,7 @@ int16_t motor_idle_speed = 1100;           //Enter the minimum throttle pulse of
 uint8_t gyro_address = 0x68;               //The I2C address of the MPU-6050 is 0x68 in hexadecimal form.
 uint8_t compass_address = 0x1E;            //The I2C address of the HMC5883L is 0x1E in hexadecimal form.
 uint8_t eeprom_address = 0x50;            //The I2C address of the EEPROM is 0x50 in hexadecimal form.
-uint8_t barometer_address = 0x50;            //The I2C address of the LPS22HB is 0x5D in hexadecimal form.
+uint8_t barometer_address = 0x5D;            //The I2C address of the LPS22HB is 0x5D in hexadecimal form.
 
 float low_battery_warning = 10.5;          //Set the battery warning at 10.5V (default = 10.5V).
 
@@ -89,12 +79,10 @@ float low_battery_warning = 10.5;          //Set the battery warning at 10.5V (d
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Declaring global variables
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//int16_t = signed 16 bit integer
-//uint16_t = unsigned 16 bit integer
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 uint8_t last_channel_1, last_channel_2, last_channel_3, last_channel_4;
-uint8_t check_byte, flip32, start;
+uint8_t check_byte, flip32, start, armed;
 uint8_t error, error_counter, error_led;
 uint8_t flight_mode, flight_mode_counter, flight_mode_led;
 uint8_t takeoff_detected, manual_altitude_change;
@@ -130,8 +118,8 @@ int32_t channel_10_start, channel_10;
 int32_t measured_time, measured_time_start, receiver_watchdog;
 int32_t acc_total_vector, acc_total_vector_at_start;
 int32_t gyro_roll_cal, gyro_pitch_cal, gyro_yaw_cal;
-int16_t acc_pitch_cal_value;
-int16_t acc_roll_cal_value;
+int16_t acc_pitch_cal_value, acc_y_cal;
+int16_t acc_roll_cal_value, acc_x_cal;
 
 int32_t acc_z_average_short_total, acc_z_average_long_total, acc_z_average_total ;
 int16_t acc_z_average_short[26], acc_z_average_long[51];
@@ -150,75 +138,7 @@ float pid_i_mem_yaw, pid_yaw_setpoint, gyro_yaw_input, pid_output_yaw, pid_last_
 float angle_roll_acc, angle_pitch_acc, angle_pitch, angle_roll, angle_yaw;
 float battery_voltage, dummy_float;
 
-//Compass variables
-uint8_t compass_calibration_on, heading_lock;
-int16_t compass_x, compass_y, compass_z;
-int16_t compass_cal_values[6];
-float compass_x_horizontal, compass_y_horizontal, actual_compass_heading;
-float compass_scale_y, compass_scale_z;
-int16_t compass_offset_x, compass_offset_y, compass_offset_z;
-float course_a, course_b, course_c, base_course_mirrored, actual_course_mirrored;
-float course_lock_heading, heading_lock_course_deviation;
 
-
-//Pressure variables.
-float pid_error_gain_altitude, pid_throttle_gain_altitude;
-uint16_t C[7];
-uint8_t barometer_counter, temperature_counter, average_temperature_mem_location;
-int64_t OFF, OFF_C2, SENS, SENS_C1;
-int32_t P, T;
-uint32_t raw_pressure, raw_temperature, temp, raw_temperature_rotating_memory[6], raw_average_temperature_total;
-float actual_pressure, actual_pressure_slow, actual_pressure_fast, actual_pressure_diff;
-float ground_pressure, altutude_hold_pressure, return_to_home_decrease;
-int32_t dT, dT_C5;
-
-//Altitude PID variables
-float pid_i_mem_altitude, pid_altitude_setpoint, pid_altitude_input, pid_output_altitude, pid_last_altitude_d_error;
-uint8_t parachute_rotating_mem_location;
-int32_t parachute_buffer[35], parachute_throttle;
-float pressure_parachute_previous;
-int32_t pressure_rotating_mem[50], pressure_total_avarage;
-uint8_t pressure_rotating_mem_location;
-float pressure_rotating_mem_actual;
-
-//GPS variables
-uint8_t read_serial_byte, incomming_message[100], number_used_sats, fix_type;
-uint8_t waypoint_set, latitude_north, longiude_east ;
-uint16_t message_counter;
-int16_t gps_add_counter;
-int32_t l_lat_gps, l_lon_gps, lat_gps_previous, lon_gps_previous;
-int32_t lat_gps_actual, lon_gps_actual, l_lat_waypoint, l_lon_waypoint;
-float gps_pitch_adjust_north, gps_pitch_adjust, gps_roll_adjust_north, gps_roll_adjust;
-float lat_gps_loop_add, lon_gps_loop_add, lat_gps_add, lon_gps_add;
-uint8_t new_line_found, new_gps_data_available, new_gps_data_counter;
-uint8_t gps_rotating_mem_location, return_to_home_step;
-int32_t gps_lat_total_avarage, gps_lon_total_avarage;
-int32_t gps_lat_rotating_mem[40], gps_lon_rotating_mem[40];
-int32_t gps_lat_error, gps_lon_error;
-int32_t gps_lat_error_previous, gps_lon_error_previous;
-uint32_t gps_watchdog_timer;
-
-float l_lon_gps_float_adjust, l_lat_gps_float_adjust, gps_man_adjust_heading;
-float return_to_home_lat_factor, return_to_home_lon_factor, return_to_home_move_factor;
-uint8_t home_point_recorded;
-int32_t lat_gps_home, lon_gps_home;
-
-
-//Adjust settings online
-uint32_t setting_adjust_timer;
-uint16_t setting_click_counter;
-uint8_t previous_channel_6;
-float adjustable_setting_1, adjustable_setting_2, adjustable_setting_3;
-
-
-//EEPROM
-uint8_t pid_save;
-uint32_t eeprom_save_byte;
-
-//RDC (Remote Drop Control) - 1950 is the init value and 1320 is the open value (count between closed and open is 1950-1320 = 630)
-uint8_t rdc_start, rdc_delay;
-int16_t rdc_servoPos;
-int16_t rdc_loop_count;
 
 //Telemetry variables
 #define CEPIN PB0 
