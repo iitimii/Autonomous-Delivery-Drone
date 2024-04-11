@@ -1,4 +1,4 @@
 .pio
-lib
+lib/RF24
 .snapshots
 .vscode
