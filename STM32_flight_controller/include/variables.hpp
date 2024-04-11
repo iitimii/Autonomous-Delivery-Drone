@@ -4,13 +4,15 @@
 #define GREEN_LED_PIN PB12
 #define BUZZER_PIN PB13
 
+#define ADC_RESOLUTION 12 // 12-bit resolution for STM32F401CCU6
+
 #define BAT_VOLTAGE_PIN PB1
 
 #define ch1_out PB6
 #define ch2_out PB7
 #define ch3_out PB8
 #define ch4_out PB9
-#define inTimPin PA3
+#define inTimPin PB10
 
 TIM_TypeDef *Instance_in = TIM2;
 TIM_TypeDef *Instance_out = TIM4;
@@ -82,7 +84,7 @@ float low_battery_warning = 10.5;          //Set the battery warning at 10.5V (d
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 uint8_t last_channel_1, last_channel_2, last_channel_3, last_channel_4;
-uint8_t check_byte, flip32, start, armed;
+uint8_t check_byte, flip32, start, armed, ready;
 uint8_t error, error_counter, error_led;
 uint8_t flight_mode, flight_mode_counter, flight_mode_led;
 uint8_t takeoff_detected, manual_altitude_change;
@@ -120,6 +122,7 @@ int32_t acc_total_vector, acc_total_vector_at_start;
 int32_t gyro_roll_cal, gyro_pitch_cal, gyro_yaw_cal;
 int16_t acc_pitch_cal_value, acc_y_cal;
 int16_t acc_roll_cal_value, acc_x_cal;
+int32_t max_angle;
 
 int32_t acc_z_average_short_total, acc_z_average_long_total, acc_z_average_total ;
 int16_t acc_z_average_short[26], acc_z_average_long[51];
@@ -128,15 +131,16 @@ uint8_t acc_z_average_short_rotating_mem_location, acc_z_average_long_rotating_m
 
 int32_t acc_alt_integrated;
 
-uint32_t loop_timer, error_timer, flight_mode_timer, loop_time_prev, loop_time_count;
+uint32_t loop_timer, error_timer, flight_mode_timer, loop_time_prev, loop_time_actual;
 
 float roll_level_adjust, pitch_level_adjust;
 float pid_error_temp;
-float pid_i_mem_roll, pid_roll_setpoint, gyro_roll_input, pid_output_roll, pid_last_roll_d_error;
-float pid_i_mem_pitch, pid_pitch_setpoint, gyro_pitch_input, pid_output_pitch, pid_last_pitch_d_error;
-float pid_i_mem_yaw, pid_yaw_setpoint, gyro_yaw_input, pid_output_yaw, pid_last_yaw_d_error;
+float pid_i_mem_roll, pid_roll_setpoint, gyro_roll_input, pid_output_roll, pid_last_roll_d_error, p_term_roll, i_term_roll, d_term_roll;
+float pid_i_mem_pitch, pid_pitch_setpoint, gyro_pitch_input, pid_output_pitch, pid_last_pitch_d_error, p_term_pitch, i_term_pitch, d_term_pitch;
+float pid_i_mem_yaw, pid_yaw_setpoint, gyro_yaw_input, pid_output_yaw, pid_last_yaw_d_error, p_term_yaw, i_term_yaw, d_term_yaw;
 float angle_roll_acc, angle_pitch_acc, angle_pitch, angle_roll, angle_yaw;
 float battery_voltage, dummy_float;
+float drone_roll_state, drone_pitch_state;
 
 
 

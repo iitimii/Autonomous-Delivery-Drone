@@ -1,0 +1,89 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 10px;
+    background-color: #222;
+    color: #fff;
+    font-family: 'Arial';
+    box-sizing: border-box;
+}
+
+#connectionStatus {
+    color: red;
+    font-size: 20px;
+}
+
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 5px; /* reduced gap */
+}
+
+.data-item {
+    padding: 2px; /* reduced padding */
+    border: 1px solid #444;
+    font-size: 1.2em;
+    border-radius: 2px;
+    background-color: #555;
+}
+
+.pid-control {
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* reduced gap */
+}
+
+#inputField {
+    width: 18%;
+    padding: 2px; /* reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px; /* reduced margin-bottom */
+}
+
+#sendButton {
+    padding: 5px 10px; /* reduced padding */
+    background-color: #008000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.pid-control-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    width: 20%;
+}
+
+.pid-control-buttons button {
+    flex: 1 0 45%;
+    margin: 5px;
+    background-color: #a41717;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.pid-control-buttons button:hover {
+    background-color: #8a1414;
+}
+
+.pid-control-response {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    width: 20%;
+}
+
+.button-selected {
+    background-color: #008000; /* This is the color green */
+    color: #ffffff; /* This is the color white */
+}

@@ -13,7 +13,7 @@ const byte addresses[][6] = {"00001", "00002"};
 uint8_t telemetry_loop_counter;
 uint8_t error;
 
-uint32_t loop_time;
+uint32_t loop_time, loop_timer;
 uint32_t ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
 float battery_voltage;
 float angle_pitch, angle_roll;
@@ -49,8 +49,10 @@ RXData data_rx;
 // const char* password = "enha6023";
 const char* ssid = "tachys";
 const char* password = "idontknowthepassword1704.";
+const char* esp_ssid = "Ground Station";
+const char* esp_password = "totheskies";
 
-
+WiFiServer server(0);
 WebSocketsServer webSocket = WebSocketsServer(80);
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
@@ -70,6 +72,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length
     case WStype_TEXT:
       Serial.printf("[%u] get Text: %s\n", num, payload);
 
+      int inputValue = atoi((char *)payload);
+      Serial.printf("Received integer: %d\n", inputValue);
+
       // echo data back to browser
       webSocket.sendTXT(num, payload);
       break;
@@ -86,11 +91,22 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  for (int i{0}; WiFi.status() != WL_CONNECTED && i<10; ++i) {
     delay(1000);
     Serial.println("Connecting to WiFi...");
   }
-  Serial.println(WiFi.localIP());
+
+  if (WiFi.status() == WL_CONNECTED)Serial.println(WiFi.localIP());
+
+  else {
+    Serial.println("WiFi not found, creating Access Point...");
+    WiFi.softAP(esp_ssid, esp_password);
+    IPAddress IP = WiFi.softAPIP();
+    Serial.print("ESP32 IP address: ");
+    Serial.println(IP);
+    server.begin();
+    delay(100);
+  }
 
   webSocket.begin();
   webSocket.onEvent(webSocketEvent);
@@ -104,39 +120,21 @@ void setup() {
     radio.disableDynamicPayloads();
     radio.openReadingPipe(0, addresses[0]); 
     radio.startListening();
+
 }
 
 void loop() {
-  digitalWrite(LED_BUILTIN, WiFi.status() == WL_CONNECTED);
+  loop_timer = micros();
+  // digitalWrite(LED_BUILTIN, WiFi.status() == WL_CONNECTED);
+  // digitalWrite(LED_BUILTIN, WiFi.softAPIP());
+  
 
   while(!radio.available()){
     webSocket.loop();
   }
   radio.read(&data_rx, sizeof(RXData));
-
   sendDataToWebPage(data_rx.signature, data_rx.payload1, data_rx.payload2, data_rx.payload3, data_rx.payload4, data_rx.payload5, data_rx.payload6);
 
   webSocket.loop();
+  while (micros() - loop_timer < 4000);
 }
-
-
-  // switch (data_rx.signature){
-
-  //   case 'T':
-  //   loop_time = data_rx.payload1;
-  //   error = data_rx.payload2;
-  //   ch1 = data_rx.payload3;
-  //   ch2 = data_rx.payload4;
-  //   battery_voltage = data_rx.payload5;
-  //   angle_pitch = data_rx.payload6;
-  //   break;
-
-  //   case 'I':
-  //   ch3 = data_rx.payload1;
-  //   ch4 = data_rx.payload2;
-  //   angle_roll = data_rx.payload6;
-  //   break;
-
-  //   default:
-  //   break;
-  // }

@@ -1,6 +1,7 @@
 void handler(void) {
-  measured_time = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT) - measured_time_start+15;
-  if (measured_time < 0) measured_time += 0x10000;
+  measured_time = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT) - measured_time_start;
+  if (measured_time < 0) measured_time += 0xFFFF;
+  measured_time+=10;
   measured_time_start = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT);
 
   if (measured_time > 3000){

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UAV Monitoring Ground Station</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+    <body>
+        <div id="connectionStatus" style="color: red;">Disconnected</div>
+        <div id="dataContainer" class="data-container"></div>
+        <div class="pid-control">
+            <h2>PID Control</h2>
+
+            <form id="sendForm">
+                <input type="text" id="inputField" required>
+                <button type="submit">Send</button>
+            </form>
+
+            <div class="pid-control-buttons">
+                <button class="column1">P</button>
+                <button class="column2">Roll</button>
+                <button class="column1">I</button>
+                <button class="column2">Yaw</button>
+                <button class="column1">D</button>
+                <button class="column2">Alt</button>
+            </div>
+
+            <div class="pid-control-response" id="responseField"></div>
+        </div>
+
+        <div id="statusIndicator" style="width: 50px; height: 50px;"></div>
+        
+        <script src="script.js"></script>
+    </body>
+    </html>

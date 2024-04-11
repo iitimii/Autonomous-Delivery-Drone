@@ -4,10 +4,12 @@ void telem_setup() {
     radio.setDataRate(RF24_250KBPS);
     radio.setPALevel(RF24_PA_MIN); 
     radio.setAutoAck(false);
+    radio.maskIRQ(true, true, false);
     radio.disableAckPayload();
     radio.disableDynamicPayloads();
     radio.openWritingPipe(addresses[0]); 
     radio.stopListening();
+    // attachInterrupt(NRF_IRQ, interruptFunction, FALLING);
 }
 
 
@@ -17,7 +19,7 @@ void send_telemetry() {
 
     case 0:
       telemetry_send_signature = 'T';                  //uint8_t
-      telemetry_send_payload1 = loop_time_count;       //uint32_t
+      telemetry_send_payload1 = loop_time_actual;       //uint32_t
       telemetry_send_payload2 = error;                 //uint32_t
       telemetry_send_payload3 =  channel_1;                     //int32_t
       telemetry_send_payload4 =  channel_2;                      //int32_t
@@ -50,7 +52,7 @@ void send_telemetry() {
       telemetry_send_signature = 'L';
       telemetry_send_payload1 = armed;
       telemetry_send_payload2 = start;
-      telemetry_send_payload3 = 0;
+      telemetry_send_payload3 = ready;
       telemetry_send_payload4 = 0;
       telemetry_send_payload5 = (float)0;
       telemetry_send_payload6 = (float)0;
