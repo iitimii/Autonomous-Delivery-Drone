@@ -4,7 +4,7 @@
 #define GREEN_LED_PIN PB12
 #define BUZZER_PIN PB13
 
-#define ADC_RESOLUTION 12 // 12-bit resolution for STM32F401CCU6
+
 
 #define BAT_VOLTAGE_PIN PB1
 
@@ -31,13 +31,13 @@ HardwareSerial gpsSerial(PA10, PA9);
 // const SPISettings nrfSPISettings(10000000, MSBFIRST, SPI_MODE0);
 // SPI_HandleTypeDef hspi1;
 // #define NRF24_SPI &hspi1
-
+int adc_res {12}; // 12-bit resolution for STM32F401CCU6
 
 bool auto_level = true;                 //Auto level on (true) or off (false).
 
-float pid_p_gain_roll = 1.3;               //Gain setting for the pitch and roll P-controller (default = 1.3).
-float pid_i_gain_roll = 0.04;              //Gain setting for the pitch and roll I-controller (default = 0.04).
-float pid_d_gain_roll = 18.0;              //Gain setting for the pitch and roll D-controller (default = 18.0).
+float pid_p_gain_roll = 1.0;               //Gain setting for the pitch and roll P-controller (default = 1.3).
+float pid_i_gain_roll = 1.0;              //Gain setting for the pitch and roll I-controller (default = 0.04).
+float pid_d_gain_roll = 1.0;              //Gain setting for the pitch and roll D-controller (default = 18.0).
 int pid_max_roll = 400;                    //Maximum output of the PID-controller (+/-).
 
 float pid_p_gain_pitch = pid_p_gain_roll;  //Gain setting for the pitch P-controller.
@@ -45,14 +45,14 @@ float pid_i_gain_pitch = pid_i_gain_roll;  //Gain setting for the pitch I-contro
 float pid_d_gain_pitch = pid_d_gain_roll;  //Gain setting for the pitch D-controller.
 int pid_max_pitch = pid_max_roll;          //Maximum output of the PID-controller (+/-).
 
-float pid_p_gain_yaw = 4.0;                //Gain setting for the pitch P-controller (default = 4.0).
-float pid_i_gain_yaw = 0.02;               //Gain setting for the pitch I-controller (default = 0.02).
-float pid_d_gain_yaw = 0.0;                //Gain setting for the pitch D-controller (default = 0.0).
+float pid_p_gain_yaw = 1.0;                //Gain setting for the pitch P-controller (default = 4.0).
+float pid_i_gain_yaw = 1.0;               //Gain setting for the pitch I-controller (default = 0.02).
+float pid_d_gain_yaw = 1.0;                //Gain setting for the pitch D-controller (default = 0.0).
 int pid_max_yaw = 400;                     //Maximum output of the PID-controller (+/-).
 
-float pid_p_gain_altitude = 1.4;           //Gain setting for the altitude P-controller (default = 1.4).
-float pid_i_gain_altitude = 0.2;           //Gain setting for the altitude I-controller (default = 0.2).
-float pid_d_gain_altitude = 0.75;          //Gain setting for the altitude D-controller (default = 0.75).
+float pid_p_gain_altitude = 1.0;           //Gain setting for the altitude P-controller (default = 1.4).
+float pid_i_gain_altitude = 1.0;           //Gain setting for the altitude I-controller (default = 0.2).
+float pid_d_gain_altitude = 1.0;          //Gain setting for the altitude D-controller (default = 0.75).
 int pid_max_altitude = 400;                //Maximum output of the PID-controller (+/-).
 
 //During flight the battery voltage drops and the motors are spinning at a lower RPM. This has a negative effecct on the
@@ -68,7 +68,7 @@ int16_t motor_idle_speed = 1100;           //Enter the minimum throttle pulse of
 uint8_t gyro_address = 0x68;               //The I2C address of the MPU-6050 is 0x68 in hexadecimal form.
 uint8_t compass_address = 0x1E;            //The I2C address of the HMC5883L is 0x1E in hexadecimal form.
 uint8_t eeprom_address = 0x50;            //The I2C address of the EEPROM is 0x50 in hexadecimal form.
-uint8_t barometer_address = 0x5D;            //The I2C address of the LPS22HB is 0x5D in hexadecimal form.
+uint8_t baro_address = 0x76;            //The I2C address of the LPS22HB is 0x5D in hexadecimal form.
 
 float low_battery_warning = 10.5;          //Set the battery warning at 10.5V (default = 10.5V).
 

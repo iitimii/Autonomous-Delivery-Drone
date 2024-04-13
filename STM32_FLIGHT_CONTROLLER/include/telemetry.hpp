@@ -1,15 +1,18 @@
-void telem_setup() {
+void telem_setup() 
+{
+    delay(50);
     radio.begin();            
     radio.setChannel(120);
     radio.setDataRate(RF24_250KBPS);
     radio.setPALevel(RF24_PA_MIN); 
     radio.setAutoAck(false);
-    radio.maskIRQ(true, true, false);
+    // radio.maskIRQ(true, true, false);
     radio.disableAckPayload();
     radio.disableDynamicPayloads();
     radio.openWritingPipe(addresses[0]); 
     radio.stopListening();
     // attachInterrupt(NRF_IRQ, interruptFunction, FALLING);
+    delay(50);
 }
 
 
@@ -81,10 +84,11 @@ void send_telemetry() {
   data_tx.payload5 = telemetry_send_payload5;
   data_tx.payload6 = telemetry_send_payload6;
 
-  telemetry_loop_counter++;
+  ++telemetry_loop_counter;
   if (telemetry_loop_counter >= 4)telemetry_loop_counter = 0;                             
-  // radio.stopListening();
-  radio.startFastWrite(&data_tx, sizeof(data_tx), true, true);
+  radio.stopListening();
+  // radio.startFastWrite(&data_tx, sizeof(data_tx), true, true);
+    radio.write(&data_tx, sizeof(data_tx));
   // radio.startListening();
 }
 

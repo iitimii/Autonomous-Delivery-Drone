@@ -47,8 +47,8 @@ RXData data_rx;
 
 // const char* ssid = "Galaxy A3003DB";
 // const char* password = "enha6023";
-const char* ssid = "tachys";
-const char* password = "idontknowthepassword1704.";
+const char* ssid = "Spectranet-LTE-300278";
+const char* password = "41C705F1";
 const char* esp_ssid = "Ground Station";
 const char* esp_password = "totheskies";
 
@@ -89,6 +89,7 @@ void sendDataToWebPage(uint8_t signature, uint32_t payload1, uint32_t payload2, 
 void setup() {
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(15, OUTPUT);
   
   WiFi.begin(ssid, password);
   for (int i{0}; WiFi.status() != WL_CONNECTED && i<10; ++i) {
@@ -120,6 +121,8 @@ void setup() {
     radio.disableDynamicPayloads();
     radio.openReadingPipe(0, addresses[0]); 
     radio.startListening();
+
+    digitalWrite(LED_BUILTIN, HIGH);
 
 }
 

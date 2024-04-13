@@ -4,7 +4,7 @@ void calculate_pid(void){
   else if (channel_1 < 1492)pid_roll_setpoint = channel_1 - 1492;
   pid_roll_setpoint = (pid_roll_setpoint*max_angle)/500;
   pid_roll_setpoint -= angle_roll;
-  pid_error_temp = pid_roll_setpoint - gyro_roll_input*0.3;
+  pid_error_temp = pid_roll_setpoint - gyro_roll_input;
   p_term_roll = pid_p_gain_roll * pid_error_temp;
   i_term_roll = i_term_roll + (pid_i_gain_roll * pid_error_temp);
   if(i_term_roll > pid_max_roll)i_term_roll = pid_max_roll;
@@ -20,7 +20,7 @@ void calculate_pid(void){
   else if (channel_1 < 1492)pid_pitch_setpoint = channel_1 - 1492;
   pid_pitch_setpoint = (pid_pitch_setpoint*max_angle)/500;
   pid_pitch_setpoint -= angle_pitch;
-  pid_error_temp = pid_pitch_setpoint - gyro_pitch_input*0.3;
+  pid_error_temp = pid_pitch_setpoint - gyro_pitch_input;
   p_term_pitch = pid_p_gain_pitch * pid_error_temp;
   i_term_pitch = i_term_pitch + (pid_i_gain_pitch * pid_error_temp);
   if(i_term_pitch > pid_max_pitch)i_term_pitch = pid_max_pitch;
