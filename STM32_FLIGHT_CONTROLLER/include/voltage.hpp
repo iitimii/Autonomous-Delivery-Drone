@@ -1,6 +1,6 @@
 void battery_setup() {
-  pinMode(BAT_VOLTAGE_PIN, INPUT_ANALOG); // Configure PB1 as analog input
   analogReadResolution(adc_res); // Set ADC resolution to 12-bit
+  pinMode(BAT_VOLTAGE_PIN, INPUT_ANALOG); // Configure PB1 as analog input
 }
 
 

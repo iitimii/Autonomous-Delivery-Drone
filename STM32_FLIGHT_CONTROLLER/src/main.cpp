@@ -13,6 +13,10 @@
 #include <I2C_utils.hpp>
 #include <voltage.hpp>
 
+PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel, dt);
+PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel, dt);
+PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel, dt);
+
 void setup()
 {
     battery_setup();
@@ -22,7 +26,6 @@ void setup()
     HWire.begin();
     HWire.setClock(400000);
 
-    pinMode(BAT_VOLTAGE_PIN, INPUT_ANALOG);
     pinMode(STM32_board_LED, OUTPUT);
 
     telem_setup();
@@ -52,24 +55,24 @@ void loop()
     loop_time_prev = micros();
     //------------------------------------------------------------------------------
     read_gyro();
-    gyro_roll_input = (gyro_roll_input * 0.7) + ((static_cast<float>(gyro_roll) / 65.5) * 0.3);
-    gyro_pitch_input = (gyro_pitch_input * 0.7) + ((static_cast<float>(gyro_pitch) / 65.5) * 0.3);
-    gyro_yaw_input = (gyro_yaw_input * 0.7) + ((static_cast<float>(gyro_yaw) / 65.5) * 0.3);
+    roll_velocity_lpf = (roll_velocity_lpf * 0.7) + ((static_cast<float>(roll_velocity) / 65.5) * 0.3);
+    pitch_velocity_lpf = (pitch_velocity_lpf * 0.7) + ((static_cast<float>(pitch_velocity) / 65.5) * 0.3);
+    yaw_velocity_lpf = (yaw_velocity_lpf * 0.7) + ((static_cast<float>(yaw_velocity) / 65.5) * 0.3);
 
-    angle_pitch += static_cast<float>(gyro_pitch) * 0.0000610687;
-    angle_roll += static_cast<float>(gyro_roll) * 0.0000610687;
+    pitch_angle += static_cast<float>(pitch_velocity) * 0.0000610687;
+    roll_angle += static_cast<float>(roll_velocity) * 0.0000610687;
 
-    angle_pitch -= angle_roll * sin(static_cast<float>(gyro_yaw) * 0.00000106585);
-    angle_roll += angle_pitch * sin(static_cast<float>(gyro_yaw) * 0.00000106585);
+    pitch_angle -= roll_angle * sin(static_cast<float>(yaw_velocity) * 0.00000106585);
+    roll_angle += pitch_angle * sin(static_cast<float>(yaw_velocity) * 0.00000106585);
 
-    acc_total_vector = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));
-    if (abs(acc_y) < acc_total_vector)
-        angle_pitch_acc = asin(static_cast<float>(acc_y) / acc_total_vector) * 57.29578;
-    if (abs(acc_x) < acc_total_vector)
-        angle_roll_acc = asin(static_cast<float>(acc_x) / acc_total_vector) * 57.29578;
+    acc_resultant = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));
+    if (abs(acc_y) < acc_resultant)
+        pitch_angle_acc = asin(static_cast<float>(acc_y) / acc_resultant) * 57.29578;
+    if (abs(acc_x) < acc_resultant)
+        roll_angle_acc = asin(static_cast<float>(acc_x) / acc_resultant) * 57.29578;
 
-    angle_pitch = angle_pitch * 0.995 + angle_pitch_acc * 0.005;
-    angle_roll = angle_roll * 0.995 + angle_roll_acc * 0.005;
+    pitch_angle = pitch_angle * 0.995 + pitch_angle_acc * 0.005;
+    roll_angle = roll_angle * 0.995 + roll_angle_acc * 0.005;
 
     if (channel_7 > 1500)
         armed = 1;
@@ -81,58 +84,65 @@ void loop()
     if (start == 1 && channel_3 < 1050 && channel_1 > 1400 && channel_1 < 1600 && channel_2 > 1400 && channel_2 < 1600 && channel_4 > 1400 && channel_4 < 1600)
     {
         start = 2;
-        angle_pitch = angle_pitch_acc;
-        angle_roll = angle_roll_acc;
-        i_term_roll = 0;
-        pid_last_roll_d_error = 0;
-        i_term_pitch = 0;
-        pid_last_pitch_d_error = 0;
-        i_term_yaw = 0;
-        pid_last_yaw_d_error = 0;
-    }
-    calculate_pid();
+        pitch_angle = pitch_angle_acc;
+        roll_angle = roll_angle_acc;
 
+        PID_roll_vel.reset();
+        PID_pitch_vel.reset();
+        PID_yaw_vel.reset();
+    }
+
+    
     battery_voltage = battery_voltage * 0.92 + get_voltage() * 0.08;
-    if (battery_voltage < 10.0 && error == 0)
+    if (battery_voltage < low_battery_warning && error == 0)
         error = 7;
 
     throttle = channel_3;
     if (start == 2)
     {
+        roll_vel_setpoint = PID_roll_vel.channel_setpoint(channel_1);
+        pitch_vel_setpoint = PID_pitch_vel.channel_setpoint(channel_2);
+        yaw_vel_setpoint = PID_yaw_vel.channel_setpoint(channel_4);
+
+        pid_roll_vel_output = PID_roll_vel.calculate(roll_vel_setpoint, roll_velocity_lpf);
+        pid_pitch_vel_output = PID_pitch_vel.calculate(pitch_vel_setpoint, pitch_velocity_lpf);
+        pid_yaw_vel_output = PID_yaw_vel.calculate(yaw_vel_setpoint, yaw_velocity_lpf);
+
+
         if (throttle > 1800)
             throttle = 1800;
-        esc_1 = throttle + pid_output_pitch - pid_output_roll + pid_output_yaw; // FR CCW
-        esc_2 = throttle + pid_output_pitch + pid_output_roll - pid_output_yaw; // FL CW
-        esc_3 = throttle - pid_output_pitch - pid_output_roll - pid_output_yaw; // BR CW
-        esc_4 = throttle - pid_output_pitch + pid_output_roll + pid_output_yaw; // BL CCW
+        motor_fr = throttle + pid_pitch_vel_output - pid_roll_vel_output + pid_yaw_vel_output; // FR CCW
+        motor_fl = throttle + pid_pitch_vel_output + pid_roll_vel_output - pid_yaw_vel_output; // FL CW
+        motor_br = throttle - pid_pitch_vel_output - pid_roll_vel_output - pid_yaw_vel_output; // BR CW
+        motor_bl = throttle - pid_pitch_vel_output + pid_roll_vel_output + pid_yaw_vel_output; // BL CCW
 
-        if (esc_1 < 1100)
-            esc_1 = 1100;
-        else if (esc_1 > 1995)
-            esc_1 = 1995;
+        if (motor_fr < 1100)
+            motor_fr = 1100;
+        else if (motor_fr > 1995)
+            motor_fr = 1995;
 
-        if (esc_2 < 1100)
-            esc_2 = 1100;
-        else if (esc_2 > 1995)
-            esc_2 = 1995;
+        if (motor_fl < 1100)
+            motor_fl = 1100;
+        else if (motor_fl > 1995)
+            motor_fl = 1995;
 
-        if (esc_3 < 1100)
-            esc_3 = 1100;
-        else if (esc_3 > 1995)
-            esc_3 = 1995;
+        if (motor_br < 1100)
+            motor_br = 1100;
+        else if (motor_br > 1995)
+            motor_br = 1995;
 
-        if (esc_4 < 1100)
-            esc_4 = 1100;
-        else if (esc_4 > 1995)
-            esc_4 = 1995;
+        if (motor_bl < 1100)
+            motor_bl = 1100;
+        else if (motor_bl > 1995)
+            motor_bl = 1995;
     }
 
     else
     {
-        esc_1 = 1000;
-        esc_2 = 1000;
-        esc_3 = 1000;
-        esc_4 = 1000;
+        motor_fr = 1000;
+        motor_fl = 1000;
+        motor_br = 1000;
+        motor_bl = 1000;
     }
 
     set_esc_pwm();

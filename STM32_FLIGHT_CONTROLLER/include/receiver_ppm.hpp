@@ -6,8 +6,6 @@ void handler(void) {
 
   if (measured_time > 3000){
   channel_select_counter = 0;
-  receiver_watchdog = 0;
-  if (error == 8 && start == 2)error = 0;
   }
   else channel_select_counter++;
 
@@ -57,10 +55,10 @@ void timer_setup(){
 
 
 void set_esc_pwm(){
-    OutTim->setCaptureCompare(1, esc_1, MICROSEC_COMPARE_FORMAT); //PB6 FR
-    OutTim->setCaptureCompare(2, esc_2, MICROSEC_COMPARE_FORMAT); //PB7 FL
-    OutTim->setCaptureCompare(3, esc_4, MICROSEC_COMPARE_FORMAT); //PB8 BL
-    OutTim->setCaptureCompare(4, esc_3, MICROSEC_COMPARE_FORMAT); //PB9 BR
+    OutTim->setCaptureCompare(1, motor_fr, MICROSEC_COMPARE_FORMAT); //PB6 FR
+    OutTim->setCaptureCompare(2, motor_fl, MICROSEC_COMPARE_FORMAT); //PB7 FL
+    OutTim->setCaptureCompare(3, motor_br, MICROSEC_COMPARE_FORMAT); //PB8 BR
+    OutTim->setCaptureCompare(4, motor_bl, MICROSEC_COMPARE_FORMAT); //PB9 BL
     OutTim->setCount(5000, MICROSEC_FORMAT);
 }
 

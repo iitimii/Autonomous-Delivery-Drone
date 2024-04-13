@@ -10,13 +10,8 @@
 
 RF24 radio(21, 5); 
 const byte addresses[][6] = {"00001", "00002"};
-uint8_t telemetry_loop_counter;
-uint8_t error;
 
-uint32_t loop_time, loop_timer;
-uint32_t ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8;
-float battery_voltage;
-float angle_pitch, angle_roll;
+uint32_t loop_timer;
 
  
 struct TXData 

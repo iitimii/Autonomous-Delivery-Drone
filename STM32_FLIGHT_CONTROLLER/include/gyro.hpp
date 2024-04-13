@@ -26,27 +26,27 @@ void gyro_setup()
 
 void read_gyro()
 {
-  HWire.beginTransmission(gyro_address);          // Start communication with the gyro.
-  HWire.write(0x3B);                              // Start reading @ register 43h and auto increment with every read.
-  HWire.endTransmission();                        // End the transmission.
-  HWire.requestFrom(gyro_address, nbytes);        // Request 14 bytes from the MPU 6050.
-  acc_y = HWire.read() << 8 | HWire.read();       // Add the low and high byte to the acc_x variable.
-  acc_x = HWire.read() << 8 | HWire.read();       // Add the low and high byte to the acc_y variable.
-  acc_z = HWire.read() << 8 | HWire.read();       // Add the low and high byte to the acc_z variable.
-  temperature = HWire.read() << 8 | HWire.read(); // Add the low and high byte to the temperature variable.
-  gyro_roll = HWire.read() << 8 | HWire.read();   // Read high and low part of the angular data.
-  gyro_pitch = HWire.read() << 8 | HWire.read();  // Read high and low part of the angular data.
-  gyro_yaw = HWire.read() << 8 | HWire.read();    // Read high and low part of the angular data.
-  
+  HWire.beginTransmission(gyro_address);             // Start communication with the gyro.
+  HWire.write(0x3B);                                 // Start reading @ register 43h and auto increment with every read.
+  HWire.endTransmission();                           // End the transmission.
+  HWire.requestFrom(gyro_address, nbytes);           // Request 14 bytes from the MPU 6050.
+  acc_y = HWire.read() << 8 | HWire.read();          // Add the low and high byte to the acc_x variable.
+  acc_x = HWire.read() << 8 | HWire.read();          // Add the low and high byte to the acc_y variable.
+  acc_z = HWire.read() << 8 | HWire.read();          // Add the low and high byte to the acc_z variable.
+  temperature = HWire.read() << 8 | HWire.read();    // Add the low and high byte to the temperature variable.
+  roll_velocity = HWire.read() << 8 | HWire.read();  // Read high and low part of the angular data.
+  pitch_velocity = HWire.read() << 8 | HWire.read(); // Read high and low part of the angular data.
+  yaw_velocity = HWire.read() << 8 | HWire.read();   // Read high and low part of the angular data.
+
   acc_z *= -1;
   acc_x *= -1;
   // acc_y *= -1;
 
   // acc_y -= acc_y_cal;                         //Subtact the manual accelerometer pitch calibration value.
   // acc_x -= acc_x_cal;                          //Subtact the manual accelerometer roll calibration value.
-  gyro_roll -= gyro_roll_cal;                     //Subtact the manual gyro roll calibration value.
-  gyro_pitch -= gyro_pitch_cal;                   //Subtact the manual gyro pitch calibration value.
-  gyro_yaw -= gyro_yaw_cal;                       //Subtact the manual gyro yaw calibration value.
+  roll_velocity -= roll_vel_cal;   // Subtact the manual gyro roll calibration value.
+  pitch_velocity -= pitch_vel_cal; // Subtact the manual gyro pitch calibration value.
+  yaw_velocity -= yaw_vel_cal;     // Subtact the manual gyro yaw calibration value.
 }
 
 void calibrate_gyro()
@@ -60,19 +60,18 @@ void calibrate_gyro()
       if (cal_int % 25 == 0)
         digitalWrite(STM32_board_LED, !digitalRead(STM32_board_LED)); // Change the led status every 125 readings to indicate calibration.
       read_gyro();                                                    // Read the gyro output.
-      gyro_roll_cal += gyro_roll;                                     // Ad roll value to gyro_roll_cal.
-      gyro_pitch_cal += gyro_pitch;                                   // Ad pitch value to gyro_pitch_cal.
-      gyro_yaw_cal += gyro_yaw;                                       // Ad yaw value to gyro_yaw_cal.
+      roll_vel_cal += roll_velocity;                                  // Ad roll value to roll_vel_cal.
+      pitch_vel_cal += pitch_velocity;                                // Ad pitch value to pitch_vel_cal.
+      yaw_vel_cal += yaw_velocity;                                    // Ad yaw value to yaw_vel_cal.
       // acc_x_cal += acc_x;
       // acc_y_cal += acc_y;
       delay(4); // Small delay to simulate a 250Hz loop during calibration.
     }
-    digitalWrite(RED_LED_PIN, HIGH); // Set output PB3 low.
 
     // Now that we have 2000 measures, we need to divide by 2000 to get the average gyro offset.
-    gyro_roll_cal /= 2000;  // Divide the roll total by 2000.
-    gyro_pitch_cal /= 2000; // Divide the pitch total by 2000.
-    gyro_yaw_cal /= 2000;   // Divide the yaw total by 2000.
+    roll_vel_cal /= 2000;  // Divide the roll total by 2000.
+    pitch_vel_cal /= 2000; // Divide the pitch total by 2000.
+    yaw_vel_cal /= 2000;   // Divide the yaw total by 2000.
     // acc_x_cal /= 2000;
     // acc_y_cal /= 2000;
   }
