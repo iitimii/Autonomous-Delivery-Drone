@@ -1,49 +1,53 @@
-void telem_setup() 
+void nrf_interupt()
 {
-    delay(50);
-    radio.begin();            
-    radio.setChannel(120);
-    radio.setDataRate(RF24_250KBPS);
-    radio.setPALevel(RF24_PA_MIN); 
-    radio.setAutoAck(false);
-    // radio.maskIRQ(true, true, false);
-    radio.disableAckPayload();
-    radio.disableDynamicPayloads();
-    radio.openWritingPipe(addresses[0]); 
-    radio.stopListening();
-    // attachInterrupt(NRF_IRQ, interruptFunction, FALLING);
-    delay(50);
+  while (radio.available())
+    radio.read(&data_rx, sizeof(data_rx));
 }
 
+void telem_setup()
+{
+  delay(50);
+  radio.begin();
+  radio.setChannel(120);
+  radio.setDataRate(RF24_250KBPS);
+  radio.setPALevel(RF24_PA_MIN);
+  radio.setAutoAck(false);
+  radio.maskIRQ(true, true, false);
+  radio.disableAckPayload();
+  radio.disableDynamicPayloads();
+  radio.openWritingPipe(addresses[0]);
+  radio.openReadingPipe(1, addresses[1]);
+  radio.stopListening();
+  attachInterrupt(NRF_IRQ, nrf_interupt, FALLING);
+  delay(50);
+}
 
-void send_telemetry() {
+void send_telemetry()
+{
 
-  switch (telemetry_loop_counter){
+  switch (telemetry_loop_counter)
+  {
 
-    case 0:
-      telemetry_send_signature = 'T';                  //uint8_t
-      telemetry_send_payload1 = loop_time_actual;       //uint32_t
-      telemetry_send_payload2 = error;                 //uint32_t
-      telemetry_send_payload3 =  channel_1;                     //int32_t
-      telemetry_send_payload4 =  channel_2;                      //int32_t
-      telemetry_send_payload5 = (float)battery_voltage;       //float
-      telemetry_send_payload6 = (float)pitch_angle;           //float
-      break;
+  case 0:
+    telemetry_send_signature = 'T';                   // uint8_t
+    telemetry_send_payload1 = loop_time_actual;       // uint32_t
+    telemetry_send_payload2 = error;                  // uint32_t
+    telemetry_send_payload3 = channel_1;              // int32_t
+    telemetry_send_payload4 = channel_2;              // int32_t
+    telemetry_send_payload5 = (float)battery_voltage; // float
+    telemetry_send_payload6 = (float)pitch_angle;     // float
+    break;
 
-      default:
-      telemetry_send_signature = 'E';
-      telemetry_send_payload1 = 0;
-      telemetry_send_payload2 = 0;
-      telemetry_send_payload3 = 0;
-      telemetry_send_payload4 = 0;
-      telemetry_send_payload5 = 0;
-      telemetry_send_payload6 = 0;
-      break;
-    
-
+  default:
+    telemetry_send_signature = 'E';
+    telemetry_send_payload1 = 0;
+    telemetry_send_payload2 = 0;
+    telemetry_send_payload3 = 0;
+    telemetry_send_payload4 = 0;
+    telemetry_send_payload5 = 0;
+    telemetry_send_payload6 = 0;
+    break;
   }
-
-
 
   data_tx.signature = telemetry_send_signature;
   data_tx.payload1 = telemetry_send_payload1;
@@ -54,11 +58,17 @@ void send_telemetry() {
   data_tx.payload6 = telemetry_send_payload6;
 
   ++telemetry_loop_counter;
-  if (telemetry_loop_counter >= 4)telemetry_loop_counter = 0;                             
+  if (telemetry_loop_counter >= 4)
+    telemetry_loop_counter = 0;
   radio.stopListening();
   // radio.startFastWrite(&data_tx, sizeof(data_tx), true, true);
-    radio.write(&data_tx, sizeof(data_tx));
+  radio.write(&data_tx, sizeof(data_tx));
   // radio.startListening();
+}
+
+void receive_telemetry()
+{
+  radio.startListening();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,7 +120,6 @@ void send_telemetry() {
 //   return data;
 // }
 
-
 // void nrf_read_reg_multi(uint8_t reg, uint8_t *data, int size){
 //   digitalWrite(CSNPIN, LOW);    //Pull csn to select nrf device
 //   nrfSPI.beginTransaction(nrfSPISettings);
@@ -124,20 +133,19 @@ void send_telemetry() {
 //   digitalWrite(CSNPIN, HIGH);    //Pull csn to release nrf device
 // }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 // void SPI1_Init(void)
 // {
 //   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
 //   /* Peripheral clock enable */
 //   __HAL_RCC_SPI1_CLK_ENABLE();
-  
+
 //   __HAL_RCC_GPIOA_CLK_ENABLE();
-//   /**SPI1 GPIO Configuration    
+//   /**SPI1 GPIO Configuration
 //   PA5     ------> SPI1_SCK
 //   PA6     ------> SPI1_MISO
-//   PA7     ------> SPI1_MOSI 
+//   PA7     ------> SPI1_MOSI
 //   */
 //   GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
 //   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -164,7 +172,6 @@ void send_telemetry() {
 //   }
 // }
 
-
 // void CS_Select (void)
 // {
 // 	digitalWrite(CSNPIN, LOW);
@@ -175,7 +182,6 @@ void send_telemetry() {
 // 	digitalWrite(CSNPIN, HIGH);
 // }
 
-
 // void CE_Enable (void)
 // {
 // 	digitalWrite(CEPIN, LOW);
@@ -185,8 +191,6 @@ void send_telemetry() {
 // {
 // 	digitalWrite(CEPIN, HIGH);
 // }
-
-
 
 // // write a single byte to the particular register
 // void nrf24_WriteReg (uint8_t Reg, uint8_t Data)
@@ -221,7 +225,6 @@ void send_telemetry() {
 // 	CS_UnSelect();
 // }
 
-
 // uint8_t nrf24_ReadReg (uint8_t Reg)
 // {
 // 	uint8_t data=0;
@@ -238,7 +241,6 @@ void send_telemetry() {
 // 	return data;
 // }
 
-
 // /* Read multiple bytes from the register */
 // void nrf24_ReadReg_Multi (uint8_t Reg, uint8_t *data, int size)
 // {
@@ -252,7 +254,6 @@ void send_telemetry() {
 // 	CS_UnSelect();
 // }
 
-
 // // send the command to the NRF
 // void nrfsendCmd (uint8_t cmd)
 // {
@@ -264,7 +265,6 @@ void send_telemetry() {
 // 	// Pull the CS HIGH to release the device
 // 	CS_UnSelect();
 // }
-
 
 // void nrf24_reset(uint8_t REG)
 // {
@@ -311,14 +311,10 @@ void send_telemetry() {
 // 	}
 // }
 
-
-
-
 // void NRF24_Init (void)
 // {
 // 	// disable the chip before configuring the device
 // 	CE_Disable();
-
 
 // 	// reset everything
 // 	nrf24_reset (0);
@@ -342,7 +338,6 @@ void send_telemetry() {
 
 // }
 
-
 // // set up the Tx mode
 
 // void NRF24_TxMode (uint8_t *Address, uint8_t channel)
@@ -354,7 +349,6 @@ void send_telemetry() {
 
 // 	nrf24_WriteRegMulti(TX_ADDR, Address, 5);  // Write the TX address
 
-
 // 	// power up the device
 // 	uint8_t config = nrf24_ReadReg(CONFIG);
 // //	config = config | (1<<1);   // write 1 in the PWR_UP bit
@@ -364,7 +358,6 @@ void send_telemetry() {
 // 	// Enable the chip after configuring the device
 // 	CE_Enable();
 // }
-
 
 // // transmit the data
 
@@ -405,7 +398,6 @@ void send_telemetry() {
 // 	return 0;
 // }
 
-
 // void NRF24_RxMode (uint8_t *Address, uint8_t channel)
 // {
 // 	// disable the chip before configuring the device
@@ -435,7 +427,6 @@ void send_telemetry() {
 
 // 	nrf24_WriteReg (RX_PW_P2, 32);   // 32 bit payload size for pipe 2
 
-
 // 	// power up the device in Rx mode
 // 	uint8_t config = nrf24_ReadReg(CONFIG);
 // 	config = config | (1<<1) | (1<<0);
@@ -444,7 +435,6 @@ void send_telemetry() {
 // 	// Enable the chip after configuring the device
 // 	CE_Enable();
 // }
-
 
 // uint8_t isDataAvailable (int pipenum)
 // {
@@ -460,7 +450,6 @@ void send_telemetry() {
 
 // 	return 0;
 // }
-
 
 // void NRF24_Receive (uint8_t *data)
 // {
@@ -485,8 +474,6 @@ void send_telemetry() {
 // 	cmdtosend = FLUSH_RX;
 // 	nrfsendCmd(cmdtosend);
 // }
-
-
 
 // // Read all the Register data
 // void NRF24_ReadAll (uint8_t *data)
@@ -514,18 +501,16 @@ void send_telemetry() {
 
 // }
 
-
-
 /*
 void send_telemetry2() {
   telemetry_loop_counter++;
 
   data_tx.payload = telemetry_send_byte;
 
-  if (telemetry_loop_counter == 125)telemetry_loop_counter = 0;                             
+  if (telemetry_loop_counter == 125)telemetry_loop_counter = 0;
   radio.stopListening();
 
-  
+
 
   radio.startListening();
 }
@@ -600,9 +585,7 @@ inline void RF24::endTransaction()
 
 */
 
-
-
-/* 
+/*
 "T"
 "M"
 Longitude int32

@@ -13,13 +13,17 @@
 #include <I2C_utils.hpp>
 #include <voltage.hpp>
 
-PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel, dt);
-PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel, dt);
-PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel, dt);
+PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel);
+PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel);
+PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel);
+
+PIDController PID_roll_ang(kp_roll_ang, ki_roll_ang, kd_roll_ang);
+PIDController PID_pitch_ang(kp_pitch_ang, ki_pitch_ang, kd_pitch_ang);
 
 void setup()
 {
     battery_setup();
+    pinMode(NRF_IRQ_PIN, INPUT_PULLUP);
     blueled(HIGH);
     ready = 0;
     HWire.setClock(400000);
@@ -36,7 +40,7 @@ void setup()
     check_device(baro_address, 3);
 
     gyro_setup();
-    // blink_led();
+    blink_led();
     calibrate_gyro();
 
     wait_for_receiver();
@@ -90,6 +94,8 @@ void loop()
         PID_roll_vel.reset();
         PID_pitch_vel.reset();
         PID_yaw_vel.reset();
+        PID_roll_ang.reset();
+        PID_pitch_ang.reset();
     }
 
     
@@ -100,12 +106,17 @@ void loop()
     throttle = channel_3;
     if (start == 2)
     {
-        roll_vel_setpoint = PID_roll_vel.channel_setpoint(channel_1);
-        pitch_vel_setpoint = PID_pitch_vel.channel_setpoint(channel_2);
+        roll_ang_setpoint = PID_roll_ang.channel_setpoint(channel_1);
+        roll_ang_setpoint /= 10; // Max angle 50 degrees
+        pitch_ang_setpoint = PID_pitch_ang.channel_setpoint(channel_2);
+        pitch_ang_setpoint /= 10;
         yaw_vel_setpoint = PID_yaw_vel.channel_setpoint(channel_4);
 
-        pid_roll_vel_output = PID_roll_vel.calculate(roll_vel_setpoint, roll_velocity_lpf);
-        pid_pitch_vel_output = PID_pitch_vel.calculate(pitch_vel_setpoint, pitch_velocity_lpf);
+        pid_roll_ang_output = PID_roll_ang.calculate(roll_ang_setpoint, roll_angle);
+        pid_pitch_ang_output = PID_pitch_ang.calculate(pitch_ang_setpoint, pitch_angle);
+
+        pid_roll_vel_output = PID_roll_vel.calculate(pid_roll_ang_output, roll_velocity_lpf);
+        pid_pitch_vel_output = PID_pitch_vel.calculate(pid_pitch_ang_output, pitch_velocity_lpf);
         pid_yaw_vel_output = PID_yaw_vel.calculate(yaw_vel_setpoint, yaw_velocity_lpf);
 
 
@@ -151,6 +162,7 @@ void loop()
     if (micros() - loop_timer > 4050)
         error = 5;
     send_telemetry();
+    receive_telemetry();
     while (micros() - loop_timer < 4000)
         ;
 }

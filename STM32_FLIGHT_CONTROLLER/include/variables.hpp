@@ -6,15 +6,20 @@
 #define ch3_out PB8
 #define ch4_out PB9
 #define inTimPin PB10
+#define NRF_IRQ_PIN PA1
 
 // PID Variables
-float dt = 0.004;
 int roll_vel_setpoint, pitch_vel_setpoint, yaw_vel_setpoint;
 int pid_roll_vel_output, pid_pitch_vel_output, pid_yaw_vel_output;
-float kp_roll_vel = 1, ki_roll_vel = 1, kd_roll_vel = 1;
-float kp_pitch_vel = 1, ki_pitch_vel = 1, kd_pitch_vel = 1;
-float kp_yaw_vel = 1, ki_yaw_vel = 1, kd_yaw_vel = 1;
+float kp_roll_vel = 1.0, ki_roll_vel = 0.0, kd_roll_vel = 0.0;
+float kp_pitch_vel = kp_roll_vel, ki_pitch_vel = ki_roll_vel, kd_pitch_vel = kd_roll_vel;
+float kp_yaw_vel = 1.0, ki_yaw_vel = 0.0, kd_yaw_vel = 0.0;
 
+int roll_ang_setpoint, pitch_ang_setpoint;
+int pid_roll_ang_output, pid_pitch_ang_output;
+float kp_roll_ang =2.0, ki_roll_ang = 0.0, kd_roll_ang = 0.0;
+float kp_pitch_ang = kp_roll_ang, ki_pitch_ang = ki_roll_ang, kd_pitch_ang = kd_roll_ang;
+    
 
 
 
@@ -32,7 +37,7 @@ int adc_res{12}; // 12-bit resolution for STM32F401CCU6
 
 
 // Battery variables
-float low_battery_warning = 10.5; // Set the battery warning at 10.5V (default = 10.5V).
+float low_battery_warning = 11.1; // Set the battery warning at 10.5V (default = 10.5V).
 float battery_voltage;
 
 

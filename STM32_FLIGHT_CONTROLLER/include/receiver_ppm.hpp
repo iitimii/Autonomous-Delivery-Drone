@@ -68,6 +68,7 @@ void wait_for_receiver()
   {
     error = 4;
     send_telemetry();
+    receive_telemetry();
     delay(4);
   }
 }

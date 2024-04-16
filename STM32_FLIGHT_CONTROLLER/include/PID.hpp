@@ -1,39 +1,41 @@
 class PIDController
 {
 private:
+    float kp, ki, kd;
+    float integral, prev_error;
+    const float i_max;
+    float dt;
+    
 public:
-    float kp, ki, kd, dt;
-    float i = 0;
-    float prev_error = 0;
 
-    PIDController(float kp, float ki, float kd, float dt)
+    PIDController(float kp, float ki, float kd, float dt = 0.004, float i_max = 400)
+    : kp(kp), ki(ki), kd(kd), i_max(i_max), integral(0), prev_error(0), dt(dt)
     {
-        this->kp = kp;
-        this->ki = ki;
-        this->kd = kd;
-        this->dt = dt;
 
-        this->i = 0;
-        this->prev_error = 0;
     }
 
     float calculate(int setpoint, float input)
     {
         float error = setpoint - input;
-        float p = kp * error;
-        i += ki * (error + prev_error)/2 * dt;
-        if (i > 400)
-            i = 400;
-        else if (i < -400)
-            i = -400;
-        float d = kd * (error - prev_error) / dt;
+        float proportional = kp * error;
+
+        if (ki == 0.0 && kd == 0.0) return proportional;
+    
+        integral += ki * ((error + prev_error)/2) * dt;
+        // i += ki * error * dt;
+        // Anti-windup: Limit integral term
+        if (integral > i_max)
+            integral = i_max;
+        else if (integral < -i_max)
+            integral = -i_max;
+        float derivative = kd * (error - prev_error) / dt;
         prev_error = error;
-        return p + i + d;
+        return proportional + integral + derivative;
     }
 
     void reset()
     {
-        i = 0;
+        integral = 0;
         prev_error = 0;
     }
 
