@@ -12,6 +12,8 @@
 #include <PID.hpp>
 #include <I2C_utils.hpp>
 #include <voltage.hpp>
+#include <Motors.hpp>
+#include <KalmanFilter.hpp>
 
 PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel);
 PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel);
@@ -19,6 +21,9 @@ PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel);
 
 PIDController PID_roll_ang(kp_roll_ang, ki_roll_ang, kd_roll_ang);
 PIDController PID_pitch_ang(kp_pitch_ang, ki_pitch_ang, kd_pitch_ang);
+
+KalmanFilter1d kf_roll;
+KalmanFilter1d kf_pitch;
 
 void setup()
 {
@@ -59,24 +64,11 @@ void loop()
     loop_time_prev = micros();
     //------------------------------------------------------------------------------
     read_gyro();
-    roll_velocity_lpf = (roll_velocity_lpf * 0.7) + ((static_cast<float>(roll_velocity) / 65.5) * 0.3);
-    pitch_velocity_lpf = (pitch_velocity_lpf * 0.7) + ((static_cast<float>(pitch_velocity) / 65.5) * 0.3);
-    yaw_velocity_lpf = (yaw_velocity_lpf * 0.7) + ((static_cast<float>(yaw_velocity) / 65.5) * 0.3);
+    calculate_angle_comp();
+    // get_acc_angle();
 
-    pitch_angle += static_cast<float>(pitch_velocity) * 0.0000610687;
-    roll_angle += static_cast<float>(roll_velocity) * 0.0000610687;
-
-    pitch_angle -= roll_angle * sin(static_cast<float>(yaw_velocity) * 0.00000106585);
-    roll_angle += pitch_angle * sin(static_cast<float>(yaw_velocity) * 0.00000106585);
-
-    acc_resultant = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));
-    if (abs(acc_y) < acc_resultant)
-        pitch_angle_acc = asin(static_cast<float>(acc_y) / acc_resultant) * 57.29578;
-    if (abs(acc_x) < acc_resultant)
-        roll_angle_acc = asin(static_cast<float>(acc_x) / acc_resultant) * 57.29578;
-
-    pitch_angle = pitch_angle * 0.995 + pitch_angle_acc * 0.005;
-    roll_angle = roll_angle * 0.995 + roll_angle_acc * 0.005;
+    // roll_angle = kf_roll.calculate(roll_angle_acc, roll_velocity);
+    // pitch_angle = kf_pitch.calculate(pitch_angle_acc, pitch_velocity);
 
     if (channel_7 > 1500)
         armed = 1;
@@ -125,7 +117,7 @@ void loop()
         motor_fr = throttle + pid_pitch_vel_output - pid_roll_vel_output + pid_yaw_vel_output; // FR CCW
         motor_fl = throttle + pid_pitch_vel_output + pid_roll_vel_output - pid_yaw_vel_output; // FL CW
         motor_br = throttle - pid_pitch_vel_output - pid_roll_vel_output - pid_yaw_vel_output; // BR CW
-        motor_bl = throttle - pid_pitch_vel_output + pid_roll_vel_output + pid_yaw_vel_output; // BL CCW
+        motor_bl = throttle - pid_pitch_vel_output + pid_roll_vel_output + pid_yaw_vel_output - 10; // BL CCW
 
         if (motor_fr < 1100)
             motor_fr = 1100;

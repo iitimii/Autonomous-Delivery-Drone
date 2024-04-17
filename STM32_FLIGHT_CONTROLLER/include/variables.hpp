@@ -11,9 +11,10 @@
 // PID Variables
 int roll_vel_setpoint, pitch_vel_setpoint, yaw_vel_setpoint;
 int pid_roll_vel_output, pid_pitch_vel_output, pid_yaw_vel_output;
-float kp_roll_vel = 1.0, ki_roll_vel = 0.0, kd_roll_vel = 0.0;
+
+float kp_roll_vel = 3.0, ki_roll_vel = 0.05, kd_roll_vel = 0.1;
 float kp_pitch_vel = kp_roll_vel, ki_pitch_vel = ki_roll_vel, kd_pitch_vel = kd_roll_vel;
-float kp_yaw_vel = 1.0, ki_yaw_vel = 0.0, kd_yaw_vel = 0.0;
+float kp_yaw_vel = 3.0, ki_yaw_vel = 0.05, kd_yaw_vel = 1.0;
 
 int roll_ang_setpoint, pitch_ang_setpoint;
 int pid_roll_ang_output, pid_pitch_ang_output;
@@ -56,8 +57,8 @@ int16_t acc_x, acc_y, acc_z;
 int32_t acc_resultant;
 int16_t roll_velocity, pitch_velocity, yaw_velocity;
 int32_t roll_vel_cal, pitch_vel_cal, yaw_vel_cal;
-float roll_angle_acc, pitch_angle_acc, pitch_angle, roll_angle;
-float roll_velocity_lpf, pitch_velocity_lpf, yaw_velocity_lpf;
+double roll_angle_acc, pitch_angle_acc, pitch_angle, roll_angle;
+double roll_velocity_lpf, pitch_velocity_lpf, yaw_velocity_lpf;
 int16_t temperature;
 
 

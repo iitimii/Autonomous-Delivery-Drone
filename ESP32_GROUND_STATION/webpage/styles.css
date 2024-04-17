@@ -6,45 +6,72 @@ body {
     padding: 10px;
     background-color: #222;
     color: #fff;
-    font-family: 'Arial';
+    font-family: 'Arial', sans-serif;
     box-sizing: border-box;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 #connectionStatus {
     color: red;
-    font-size: 20px;
+    font-size: 16px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .data-container {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+}
+
+.data-container h2 {
+    margin-top: 0;
+}
+
+#dataContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 5px; /* reduced gap */
+    gap: 10px;
 }
 
 .data-item {
-    padding: 2px; /* reduced padding */
+    padding: 5px;
     border: 1px solid #444;
     font-size: 1.2em;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #555;
 }
 
 .pid-control {
-    display: flex;
-    flex-direction: column;
-    gap: 2px; /* reduced gap */
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
 }
 
 #inputField {
-    width: 18%;
-    padding: 2px; /* reduced padding */
+    width: 60%;
+    padding: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 5px; /* reduced margin-bottom */
+    margin-bottom: 10px;
 }
 
-#sendButton {
-    padding: 5px 10px; /* reduced padding */
+#sendForm button {
+    padding: 5px 10px;
     background-color: #008000;
     color: #ffffff;
     border: none;
@@ -52,18 +79,19 @@ body {
     cursor: pointer;
 }
 
-
 .pid-control-buttons {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
 
-    width: 20%;
+.pid-control-buttons .column {
+    display: flex;
+    flex-direction: column;
 }
 
 .pid-control-buttons button {
-    flex: 1 0 45%;
-    margin: 5px;
+    margin: 5px 0;
     background-color: #a41717;
     color: #fff;
     border: none;
@@ -76,14 +104,89 @@ body {
     background-color: #8a1414;
 }
 
+.pid-control-buttons .button-selected {
+    background-color: #008000;
+    color: #ffffff;
+}
+
 .pid-control-response {
     border: 1px solid #ddd;
     padding: 10px;
     background-color: #f9f9f9;
-    width: 20%;
+    color: #333;
+    min-height: 100px;
+    word-wrap: break-word;
 }
 
-.button-selected {
-    background-color: #008000; /* This is the color green */
-    color: #ffffff; /* This is the color white */
+.status-indicator {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    text-align: center;
+}
+
+#statusIndicator {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: red;
+}
+
+.response-message {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.response-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.response-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.custom-message {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#customMessageInput {
+    width: 60%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#sendCustomMessageButton {
+    padding: 5px 10px;
+    background-color: #008000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-message-response {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    color: #333;
+    min-height: 100px;
+    word-wrap: break-word;
+    width: 100%;
+    margin-top: 10px;
 }

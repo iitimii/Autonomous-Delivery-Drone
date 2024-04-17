@@ -76,3 +76,34 @@ void calibrate_gyro()
     // acc_y_cal /= 2000;
   }
 }
+
+void get_acc_angle()
+    {
+        acc_resultant = sqrt((acc_x * acc_x) + (acc_y * acc_y) + (acc_z * acc_z));
+        if (abs(acc_y) < acc_resultant)
+            pitch_angle_acc = asin(static_cast<float>(acc_y) / acc_resultant) * 57.29578;
+        if (abs(acc_x) < acc_resultant)
+            roll_angle_acc = asin(static_cast<float>(acc_x) / acc_resultant) * 57.29578;
+    }
+
+void calculate_angle_comp()
+{
+  roll_velocity_lpf = (roll_velocity_lpf * 0.7) + ((static_cast<double>(roll_velocity) / 65.5) * 0.3);
+  pitch_velocity_lpf = (pitch_velocity_lpf * 0.7) + ((static_cast<double>(pitch_velocity) / 65.5) * 0.3);
+  yaw_velocity_lpf = (yaw_velocity_lpf * 0.7) + ((static_cast<double>(yaw_velocity) / 65.5) * 0.3);
+
+  pitch_angle += static_cast<double>(pitch_velocity) * 0.0000610687;
+  roll_angle += static_cast<double>(roll_velocity) * 0.0000610687;
+
+  pitch_angle -= roll_angle * sin(static_cast<double>(yaw_velocity) * 0.00000106585);
+  roll_angle += pitch_angle * sin(static_cast<double>(yaw_velocity) * 0.00000106585);
+
+  get_acc_angle();
+
+  pitch_angle = pitch_angle * 0.995 + pitch_angle_acc * 0.005;
+  roll_angle = roll_angle * 0.995 + roll_angle_acc * 0.005;
+}
+
+
+
+

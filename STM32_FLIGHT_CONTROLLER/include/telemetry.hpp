@@ -2,6 +2,9 @@ void nrf_interupt()
 {
   while (radio.available())
     radio.read(&data_rx, sizeof(data_rx));
+
+    digitalWrite(STM32_board_LED, !digitalRead(STM32_board_LED));
+
 }
 
 void telem_setup()
@@ -18,7 +21,7 @@ void telem_setup()
   radio.openWritingPipe(addresses[0]);
   radio.openReadingPipe(1, addresses[1]);
   radio.stopListening();
-  attachInterrupt(NRF_IRQ, nrf_interupt, FALLING);
+  attachInterrupt(NRF_IRQ_PIN, nrf_interupt, FALLING);
   delay(50);
 }
 
@@ -32,9 +35,9 @@ void send_telemetry()
     telemetry_send_signature = 'T';                   // uint8_t
     telemetry_send_payload1 = loop_time_actual;       // uint32_t
     telemetry_send_payload2 = error;                  // uint32_t
-    telemetry_send_payload3 = channel_1;              // int32_t
-    telemetry_send_payload4 = channel_2;              // int32_t
-    telemetry_send_payload5 = (float)battery_voltage; // float
+    telemetry_send_payload3 = 0;              // int32_t
+    telemetry_send_payload4 = 0;              // int32_t
+    telemetry_send_payload5 = (float)roll_angle; // float
     telemetry_send_payload6 = (float)pitch_angle;     // float
     break;
 
