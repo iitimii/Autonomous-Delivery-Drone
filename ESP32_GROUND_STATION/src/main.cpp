@@ -2,10 +2,12 @@
 #include <WiFi.h>
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
-#include <SPI.h>
+#include <SPI.h>             
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <RF24_config.h>
+#include <ESPmDNS.h>
+
 
 RF24 radio(21, 5);
 const byte addresses[][6] = {"00001", "00002"};
@@ -88,6 +90,8 @@ void setup()
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(15, OUTPUT);
+
+  // TODO Make esp ipaddress static or multicast dns
 
   WiFi.begin(ssid, password);
   for (int i{0}; WiFi.status() != WL_CONNECTED && i < 20; ++i)
