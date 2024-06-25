@@ -4,8 +4,6 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 #include <RF24_config.h>
-#include <SPI.h>
-
 
 
 namespace telemetry
@@ -34,6 +32,7 @@ namespace telemetry
   void send(RadioData& data);
   void interrupt();
   void loop();
+  void read(uint32_t loop_time);
 }
 
 #endif // TELEMETRY_HPP

@@ -51,4 +51,12 @@ namespace telemetry
             Serial.println(count);
         }
     }
+
+    // void read(uint32_t loop_time)
+    // {
+    //     while (!radio.available() && ((micros() - loop_time) < 4300));
+    //     // if (radio.available())
+    //     radio.read(&data_rx, sizeof(RadioData));
+    // }
+
 }

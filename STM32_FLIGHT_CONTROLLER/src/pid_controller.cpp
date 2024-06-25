@@ -1,3 +1,5 @@
+#include "pid_controller.hpp"
+
 class PIDController
 {
 private:
@@ -56,3 +58,24 @@ public:
         return setpoint;
     }
 };
+
+
+int roll_vel_setpoint, pitch_vel_setpoint, yaw_vel_setpoint;
+int pid_roll_vel_output, pid_pitch_vel_output, pid_yaw_vel_output;
+
+float kp_roll_vel = 3.0, ki_roll_vel = 0.05, kd_roll_vel = 0.1;
+float kp_pitch_vel = kp_roll_vel, ki_pitch_vel = ki_roll_vel, kd_pitch_vel = kd_roll_vel;
+float kp_yaw_vel = 3.0, ki_yaw_vel = 0.05, kd_yaw_vel = 1.0;
+
+int roll_ang_setpoint, pitch_ang_setpoint;
+int pid_roll_ang_output, pid_pitch_ang_output;
+float kp_roll_ang =2.0, ki_roll_ang = 0.0, kd_roll_ang = 0.0;
+float kp_pitch_ang = kp_roll_ang, ki_pitch_ang = ki_roll_ang, kd_pitch_ang = kd_roll_ang;
+
+
+PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel);
+PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel);
+PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel);
+
+PIDController PID_roll_ang(kp_roll_ang, ki_roll_ang, kd_roll_ang);
+PIDController PID_pitch_ang(kp_pitch_ang, ki_pitch_ang, kd_pitch_ang);

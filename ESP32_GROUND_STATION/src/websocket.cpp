@@ -31,7 +31,6 @@ namespace websocket
 
             StaticJsonDocument<256> doc;
 
-            
             DeserializationError error = deserializeJson(doc, payload);
 
             if (error)
@@ -41,16 +40,14 @@ namespace websocket
                 return;
             }
 
-        
             const char *type = doc["type"];
             const char *message = doc["message"];
             // telemetry::ack = false;
 
-            
             if (strcmp(type, "PID") == 0)
             {
                 Serial.printf("Received PID message: %s\n", message);
-                //message in this format P,A,R,5
+                // message in this format P,A,R,5
                 telemetry::data_tx.signature = 'P';
                 telemetry::data_tx.payload1 = message[0];
                 telemetry::data_tx.payload2 = message[2];

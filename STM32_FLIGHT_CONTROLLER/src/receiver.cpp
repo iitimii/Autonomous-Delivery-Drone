@@ -1,4 +1,24 @@
-void handler(void) {
+#include "receiver.hpp"
+
+#define inTimPin PB10
+TIM_TypeDef *Instance_in = TIM2;
+HardwareTimer *InTim = new HardwareTimer(Instance_in);
+
+uint32_t chx = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(inTimPin), PinMap_PWM));
+uint8_t channel_select_counter;
+int32_t channel_1_start, channel_1, channel_1_base, pid_roll_setpoint_base;
+int32_t channel_2_start, channel_2, channel_2_base, pid_pitch_setpoint_base;
+int32_t channel_3_start, channel_3;
+int32_t channel_4_start, channel_4;
+int32_t channel_5_start, channel_5;
+int32_t channel_6_start, channel_6;
+int32_t channel_7_start, channel_7;
+int32_t channel_8_start, channel_8;
+int32_t channel_9_start, channel_9;
+int32_t channel_10_start, channel_10;
+int32_t measured_time, measured_time_start, receiver_watchdog;
+
+void handler() {
   measured_time = InTim->getCaptureCompare(chx, MICROSEC_COMPARE_FORMAT) - measured_time_start;
   if (measured_time < 0) measured_time += 0xFFFF;
   measured_time-=25;

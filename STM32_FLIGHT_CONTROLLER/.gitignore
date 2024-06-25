@@ -3,3 +3,5 @@ lib/RF24
 .snapshots
 .vscode
 lib
+lib/
+/lib

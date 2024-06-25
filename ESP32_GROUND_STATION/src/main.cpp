@@ -21,11 +21,11 @@ void setup()
 void loop()
 {
     loop_timer = micros();
-    websocket::send_data(telemetry::data_rx.signature, telemetry::data_rx.payload1, telemetry::data_rx.payload2, telemetry::data_rx.payload3, telemetry::data_rx.payload4, telemetry::data_rx.payload5, telemetry::data_rx.payload6);
     telemetry::loop();
-    telemetry::send(telemetry::data_tx);
-
+    websocket::send_data(telemetry::data_rx.signature, telemetry::data_rx.payload1, telemetry::data_rx.payload2, telemetry::data_rx.payload3, telemetry::data_rx.payload4, telemetry::data_rx.payload5, telemetry::data_rx.payload6);
     websocket::webSocket.loop();
+    // telemetry::send(telemetry::data_tx);
+
     while (micros() - loop_timer < 4300)
         ;
 }

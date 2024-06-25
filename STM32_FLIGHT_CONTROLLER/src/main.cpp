@@ -1,41 +1,37 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <nRF24L01.h>
-#include <RF24.h>
-#include <RF24_config.h>
-#include <variables.hpp>
-#include <gyro.hpp>
-#include <telemetry.hpp>
-#include <receiver_ppm.hpp>
-#include <calibration.hpp>
-#include <led_control.hpp>
-#include <PID.hpp>
-#include <I2C_utils.hpp>
-#include <voltage.hpp>
-#include <Motors.hpp>
-#include <KalmanFilter.hpp>
+#include "i2c_utils.hpp"
+#include "gyro.hpp"
+#include "telemetry.hpp"
+#include "receiver.hpp"
+#include "led.hpp"
+#include "pid_controller.hpp"
+#include "battery.hpp"
+#include "motors.hpp"
+#include "eeprom.hpp"
 
-PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel);
-PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel);
-PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel);
 
-PIDController PID_roll_ang(kp_roll_ang, ki_roll_ang, kd_roll_ang);
-PIDController PID_pitch_ang(kp_pitch_ang, ki_pitch_ang, kd_pitch_ang);
 
-KalmanFilter1d kf_roll;
-KalmanFilter1d kf_pitch;
+
+uint8_t start, armed, ready;
+uint8_t error;
+uint8_t flight_mode;
+uint8_t takeoff_detected, manual_altitude_change;
+uint16_t count_var;
+uint32_t loop_timer, loop_time_prev, loop_time_actual;
+bool auto_level = true; 
+float declination = -1.4;
 
 void setup()
 {
-    battery_setup();
-    pinMode(NRF_IRQ_PIN, INPUT_PULLUP);
-    blueled(HIGH);
-    ready = 0;
-    HWire.setClock(400000);
-    HWire.begin();
-    HWire.setClock(400000);
+    battery::setup();
+    led::setup();
+    i2c::setup();
 
-    pinMode(STM32_board_LED, OUTPUT);
+
+    led::on(); 
+    
+
+    
 
     telem_setup();
     timer_setup();
