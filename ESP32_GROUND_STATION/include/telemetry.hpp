@@ -26,7 +26,14 @@ namespace telemetry
   extern RadioData data_tx;
   extern RadioData data_rx;
 
+  extern bool ack;
+  extern uint64_t count;
+  extern volatile bool dataReceived;
+
   void setup();
+  void send(RadioData& data);
+  void interrupt();
+  void loop();
 }
 
 #endif // TELEMETRY_HPP

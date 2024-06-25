@@ -31,18 +31,26 @@ namespace wifi
         }
     }
 
-    void DNS_setup()
+    int DNS_setup()
+{
+    const char* host = "gs";
+    int retries = 0;
+    while (!MDNS.begin(host) && retries < 5)
     {
-        const char* host = "gs";
-        int retries = 0;
-        while (!MDNS.begin(host) && retries < 5)
-        {
-            Serial.println("Error setting up MDNS responder!");
-            ++retries;
-            delay(1000);
-        }
-        Serial.print("[Wifi] You can now connect to: http://");
-        Serial.print(host);
-        Serial.println(".local");
+        Serial.println("Error setting up MDNS responder!");
+        ++retries;
+        delay(1000);
     }
+
+    if (retries >= 5)
+    {
+        Serial.println("Failed to set up MDNS responder after 5 retries.");
+        return -1; // Indicate failure
+    }
+
+    Serial.print(host);
+    Serial.println(".local");
+    return 0; 
+}
+
 }

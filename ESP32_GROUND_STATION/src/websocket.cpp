@@ -1,5 +1,6 @@
 #include "websocket.hpp"
-
+#include "telemetry.hpp"
+#include <ArduinoJSON.h>
 
 namespace websocket
 {
@@ -27,9 +28,48 @@ namespace websocket
         break;
         case WStype_TEXT:
             Serial.printf("[%u] get Text: %s\n", num, payload);
-            int inputValue = atoi((char *)payload);
-            Serial.printf("Received integer: %d\n", inputValue);
-            webSocket.sendTXT(num, payload);
+
+            StaticJsonDocument<256> doc;
+
+            
+            DeserializationError error = deserializeJson(doc, payload);
+
+            if (error)
+            {
+                Serial.print(F("deserializeJson() failed: "));
+                Serial.println(error.f_str());
+                return;
+            }
+
+        
+            const char *type = doc["type"];
+            const char *message = doc["message"];
+            // telemetry::ack = false;
+
+            
+            if (strcmp(type, "PID") == 0)
+            {
+                Serial.printf("Received PID message: %s\n", message);
+                //message in this format P,A,R,5
+                telemetry::data_tx.signature = 'P';
+                telemetry::data_tx.payload1 = message[0];
+                telemetry::data_tx.payload2 = message[2];
+                telemetry::data_tx.payload3 = message[4];
+                telemetry::data_tx.payload5 = message[6];
+            }
+
+            else if (strcmp(type, "custom") == 0)
+            {
+                Serial.printf("Received custom message: %s\n", message);
+                telemetry::data_tx.signature = 'C';
+            }
+            else
+            {
+                Serial.printf("Unknown message type: %s\n", type);
+            }
+
+            telemetry::send(telemetry::data_tx);
+
             break;
         }
     }

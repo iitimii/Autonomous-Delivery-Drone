@@ -14,7 +14,7 @@ namespace wifi
     extern const char* esp_password;
 
     int connect(const char* ssid, const char* password);
-    void DNS_setup();
+    int DNS_setup();
 }
 
 #endif // WIFI_CONNECT_HPP

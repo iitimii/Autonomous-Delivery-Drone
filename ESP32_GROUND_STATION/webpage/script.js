@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const sendCustomMessageButton = document.getElementById('sendCustomMessageButton');
     const customMessageResponseField = document.getElementById('customMessageResponseField');
 
-    const ws = new WebSocket('ws://192.168.8.136:80');
-    let loop_time = 'N/A', error = 'N/A', ch1, ch2, battery_voltage = 'N/A', angle_pitch = 'N/A', ch3, ch4, angle_roll = 'N/A';
-    let ch5, ch6, ch7, ch8, ch9, ch10;
+    const ws = new WebSocket('ws://gs.local:80');
+    let loop_time = 'N/A', error = 'N/A', battery_voltage = 'N/A';
+    let ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10;
     let armed = 'N/A', start = 'N/A';
-    let angle_pitch_acc, angle_roll_acc;
+    let angle_pitch_acc, angle_roll_acc, angle_pitch = 'N/A', angle_roll = 'N/A';
 
     ws.onopen = () => {
         connectionStatus.textContent = 'Connected';
@@ -106,7 +106,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         const command = `${selectedButton1.textContent},${selectedButton2.textContent},${selectedButton3.textContent},${floatValue}`;
-        ws.send(command);
+        // ws.send(command);
+        ws.send(JSON.stringify({ type: 'PID', message: command }));
         showResponseMessage(`Sent command: ${command}`, 'success');
     });
 
