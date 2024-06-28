@@ -28,11 +28,13 @@ namespace telemetry
   extern uint64_t count;
   extern volatile bool dataReceived;
 
+  extern int irq_pin;
+
   void setup();
-  void send(RadioData& data);
-  void interrupt();
+  inline void send(RadioData& data);
+  void IRAM_ATTR interrupt();
   void loop();
-  void read(uint32_t loop_time);
+  // void read(uint32_t loop_time);
 }
 
 #endif // TELEMETRY_HPP

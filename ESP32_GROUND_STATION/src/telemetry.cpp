@@ -2,6 +2,7 @@
 
 namespace telemetry
 {
+    int irq_pin = 17;
     RF24 radio(21, 5);
     const byte addresses[][6] = {"00001", "00002"};
     RadioData data_tx;
@@ -23,17 +24,17 @@ namespace telemetry
         radio.startListening();
         radio.maskIRQ(1, 1, 0);
         // pinMode(17, INPUT);
-        attachInterrupt(digitalPinToInterrupt(17), interrupt, FALLING);
+        attachInterrupt(digitalPinToInterrupt(irq_pin), interrupt, FALLING);
     }
 
-    void send(RadioData &data)
+    inline void send(RadioData &data)
     {
         radio.stopListening();
         radio.write(&data, sizeof(RadioData));
         radio.startListening();
     }
 
-    void interrupt()
+    void IRAM_ATTR interrupt()
     {
         dataReceived = true;
     }

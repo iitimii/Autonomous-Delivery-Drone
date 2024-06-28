@@ -1,4 +1,5 @@
 #include "i2c_utils.hpp"
+#include "telemetry.hpp"
 
 TwoWire HWire(PB4, PA8);
 uint8_t compass_address = 0x1E;
@@ -48,14 +49,14 @@ void i2c::scan() {
   delay(5000); 
 }
 
-void i2c::check(uint8_t address, uint8_t error_code)
+void i2c::check(const uint8_t& address, const uint8_t& error_code)
 {
   HWire.beginTransmission(address);
-  error = HWire.endTransmission();
+  uint8_t error = HWire.endTransmission();
   while (error != 0)
   {
     error = error_code;
-    send_telemetry();
+    telemetry::send();
     delay(4);
     HWire.beginTransmission(address);
     error = HWire.endTransmission();

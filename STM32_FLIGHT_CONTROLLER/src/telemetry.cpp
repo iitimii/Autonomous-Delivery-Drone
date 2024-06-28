@@ -1,118 +1,91 @@
 #include "telemetry.hpp"
 
-#define NRF_IRQ_PIN PA1
-#define CEPIN PB0
-#define CSNPIN PA4
-RF24 radio(CEPIN, CSNPIN); // CE, CSN on Blue Pill
-const byte addresses[][6] = {"00001", "00002"};
-uint8_t telemetry_send_byte, telemetry_loop_counter;
-uint32_t telemetry_send_payload1, telemetry_send_payload2;
-int32_t telemetry_send_payload3, telemetry_send_payload4;
-float telemetry_send_payload5, telemetry_send_payload6;
-uint8_t telemetry_send_signature;
-struct TXData
-{
-  uint8_t signature;
-  uint32_t payload1;
-  uint32_t payload2;
-  int32_t payload3;
-  int32_t payload4;
-  float payload5;
-  float payload6;
-};
+namespace telemetry {
 
-struct RXData
-{
-  uint8_t signature;
-  uint32_t payload1;
-  uint32_t payload2;
-  int32_t payload3;
-  int32_t payload4;
-  float payload5;
-  float payload6;
-};
+  int irq_pin = PA1;  // Assuming PA1 is intended here
 
-TXData data_tx;
-RXData data_rx;
+  RF24 radio(PB0, PA4); // CE, CSN on Blue Pill
+  const byte addresses[][6] = {"00001", "00002"};
 
-void nrf_interupt()
-{
-  while (radio.available())
-    radio.read(&data_rx, sizeof(data_rx));
+  RadioData data_tx;
+  RadioData data_rx;
 
-    digitalWrite(STM32_board_LED, !digitalRead(STM32_board_LED));
+  volatile bool dataReceived = false;
 
-}
-
-void telem_setup()
-{
-  delay(50);
-  radio.begin();
-  radio.setChannel(120);
-  radio.setDataRate(RF24_250KBPS);
-  radio.setPALevel(RF24_PA_MIN);
-  radio.setAutoAck(false);
-  radio.maskIRQ(true, true, false);
-  radio.disableAckPayload();
-  radio.disableDynamicPayloads();
-  radio.openWritingPipe(addresses[0]);
-  radio.openReadingPipe(1, addresses[1]);
-  radio.stopListening();
-  attachInterrupt(NRF_IRQ_PIN, nrf_interupt, FALLING);
-  delay(50);
-}
-
-void send_telemetry()
-{
-
-  switch (telemetry_loop_counter)
-  {
-
-  case 0:
-    telemetry_send_signature = 'T';                   // uint8_t
-    telemetry_send_payload1 = loop_time_actual;       // uint32_t
-    telemetry_send_payload2 = error;                  // uint32_t
-    telemetry_send_payload3 = 0;              // int32_t
-    telemetry_send_payload4 = 0;              // int32_t
-    telemetry_send_payload5 = (float)roll_angle; // float
-    telemetry_send_payload6 = (float)pitch_angle;     // float
-    break;
-
-  default:
-    telemetry_send_signature = 'E';
-    telemetry_send_payload1 = 0;
-    telemetry_send_payload2 = 0;
-    telemetry_send_payload3 = 0;
-    telemetry_send_payload4 = 0;
-    telemetry_send_payload5 = 0;
-    telemetry_send_payload6 = 0;
-    break;
+  void setup() {
+    delay(50);
+    radio.begin();
+    radio.setChannel(120);
+    radio.setDataRate(RF24_250KBPS);
+    radio.setPALevel(RF24_PA_MIN);
+    radio.setAutoAck(false);
+    radio.maskIRQ(true, true, false);
+    radio.disableAckPayload();
+    radio.disableDynamicPayloads();
+    radio.openWritingPipe(addresses[0]);
+    radio.openReadingPipe(1, addresses[1]);
+    radio.stopListening();
+    attachInterrupt(irq_pin, interrupt, FALLING);  // Make sure 'interupt' is defined somewhere
+    delay(50);
   }
 
-  data_tx.signature = telemetry_send_signature;
-  data_tx.payload1 = telemetry_send_payload1;
-  data_tx.payload2 = telemetry_send_payload2;
-  data_tx.payload3 = telemetry_send_payload3;
-  data_tx.payload4 = telemetry_send_payload4;
-  data_tx.payload5 = telemetry_send_payload5;
-  data_tx.payload6 = telemetry_send_payload6;
+  void select_data()
+  {
+    static uint8_t telemetry_loop_counter = 0; 
 
-  ++telemetry_loop_counter;
-  if (telemetry_loop_counter >= 4)
-    telemetry_loop_counter = 0;
-  radio.stopListening();
-  // radio.startFastWrite(&data_tx, sizeof(data_tx), true, true);
-  radio.write(&data_tx, sizeof(data_tx));
-  // radio.startListening();
-}
+    switch (telemetry_loop_counter) {
+      case 0:
+        data_tx.signature = 'T';               // uint8_t
+        data_tx.payload1 = loop_time_actual;   // uint32_t
+        data_tx.payload2 = error;              // uint32_t
+        data_tx.payload3 = 0;                  // int32_t
+        data_tx.payload4 = 0;                  // int32_t
+        data_tx.payload5 = static_cast<float>(roll_angle);  // float
+        data_tx.payload6 = static_cast<float>(pitch_angle); // float
+        break;
 
-void receive_telemetry()
-{
-  radio.startListening();
-}
+      default:
+        data_tx.signature = 'E';
+        data_tx.payload1 = 0;
+        data_tx.payload2 = 0;
+        data_tx.payload3 = 0;
+        data_tx.payload4 = 0;
+        data_tx.payload5 = 0.0f;
+        data_tx.payload6 = 0.0f;
+        break;
+    }
 
+    telemetry_loop_counter++;
+    if (telemetry_loop_counter >= 4)
+      telemetry_loop_counter = 0;
+  }
 
+  inline void send() {
+    radio.stopListening();
+    radio.write(&data_tx, sizeof(data_tx));
+    radio.startListening();
+  }
 
+  void interrupt()
+  {
+     dataReceived = true;
+  }
+
+  void loop()
+    {
+        if (dataReceived)
+        {
+            dataReceived = false;
+            while (radio.available())
+            {
+                radio.read(&data_rx, sizeof(RadioData));
+            }
+            ++count;
+            Serial.println(count);
+        }
+    }
+
+}  // namespace telemetry
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
