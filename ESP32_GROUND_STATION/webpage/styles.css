@@ -1,64 +1,101 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #2b2b2b;
     margin: 0;
-    padding: 0;
+    display: flex;
+    color: #fff;
+}
+
+.sidebar {
+    background-color: #1c1c1c;
+    padding: 20px;
+    width: 250px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header {
-    background-color: #282c34;
-    color: white;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.sidebar h2 {
+    margin: 0;
+    font-size: 1.5em;
 }
 
 #connectionStatus {
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 1.2em;
 }
 
-.disconnected {
-    color: red;
+.sidebar nav {
+    margin-top: 30px;
+    width: 100%;
 }
 
-.connected {
-    color: green;
+.sidebar nav a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
 }
 
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 90%;
+.sidebar nav a:hover {
+    background-color: #007BFF;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+header {
+    background-color: #1c1c1c;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
     margin-top: 20px;
 }
 
-.data-section, .control-section {
-    background: white;
+section {
+    background-color: #333;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.data-container {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+section h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #555;
+    padding-bottom: 10px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table td {
     padding: 10px;
-    border-radius: 8px;
-    height: 300px;
-    overflow-y: auto;
+    border: 1px solid #444;
 }
 
 .send-form {
     display: flex;
-    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -66,9 +103,11 @@ header {
     flex: 1;
     padding: 10px;
     font-size: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 4px;
     margin-right: 10px;
+    background-color: #1c1c1c;
+    color: #fff;
 }
 
 .send-button {
@@ -81,6 +120,7 @@ header {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 
 .send-button:hover {
     background-color: #0056b3;
@@ -101,7 +141,7 @@ header {
     padding: 10px;
     font-size: 1em;
     color: #007BFF;
-    background-color: #f4f4f4;
+    background-color: #1c1c1c;
     border: 1px solid #007BFF;
     border-radius: 4px;
     cursor: pointer;
@@ -123,14 +163,16 @@ header {
     width: calc(100% - 40px);
     padding: 10px;
     font-size: 1em;
-    border: 1px solid #ddd;
+    border: 1px solid #444;
     border-radius: 4px;
     margin-bottom: 10px;
+    background-color: #1c1c1c;
+    color: #fff;
 }
 
 .pid-control-response, .custom-message-response {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #1c1c1c;
+    border: 1px solid #444;
     padding: 10px;
     border-radius: 8px;
     height: 100px;
@@ -148,4 +190,8 @@ header {
 
 .response-message.error {
     color: red;
+}
+
+.hidden {
+    display: none;
 }

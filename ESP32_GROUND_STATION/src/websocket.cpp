@@ -23,7 +23,7 @@ namespace websocket
         {
             IPAddress ip = webSocket.remoteIP(num);
             Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
-            webSocket.sendTXT(num, "Connected");
+            // webSocket.sendTXT(num, "Connected");
         }
         break;
         case WStype_TEXT:
@@ -65,15 +65,29 @@ namespace websocket
                 Serial.printf("Unknown message type: %s\n", type);
             }
 
-            telemetry::send(telemetry::data_tx);
+            telemetry::send();
 
             break;
         }
     }
 
-    void send_data(uint8_t signature, uint32_t payload1, uint32_t payload2, int32_t payload3, int32_t payload4, float payload5, float payload6)
+    void send_data()
     {
-        String message = String(signature) + "," + String(payload1) + "," + String(payload2) + "," + String(payload3) + "," + String(payload4) + "," + String(payload5) + "," + String(payload6);
-        webSocket.broadcastTXT(message);
+        StaticJsonDocument<300> doc;
+
+        doc["signature"] = String(telemetry::data_rx.signature);
+        doc["payload1"] = String(telemetry::data_rx.payload1);
+        doc["payload2"] = String(telemetry::data_rx.payload2);
+        doc["payload3"] = String(telemetry::data_rx.payload3);
+        doc["payload4"] = String(telemetry::data_rx.payload4);
+        doc["payload5"] = String(telemetry::data_rx.payload5);
+        doc["payload6"] = String(telemetry::data_rx.payload6);
+        doc["payload7"] = String(telemetry::data_rx.payload7);
+        doc["payload8"] = String(telemetry::data_rx.payload8);
+        doc["payload9"] = String(telemetry::data_rx.payload9);
+
+        String json;
+        serializeJson(doc, json);
+        webSocket.broadcastTXT(json);
     }
 }

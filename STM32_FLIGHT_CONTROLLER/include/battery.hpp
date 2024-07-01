@@ -1,11 +1,12 @@
 #ifndef BATTERY_HPP
 #define BATTERY_HPP
+#include <Arduino.h>
 
 namespace battery
 {
-    int pin;
-    int adc_res;
-    float voltage;
+    extern int pin;
+    extern float low;
+    extern float voltage;
     
     void setup();
     void read();

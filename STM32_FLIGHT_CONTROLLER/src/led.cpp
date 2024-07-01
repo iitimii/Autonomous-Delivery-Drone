@@ -9,6 +9,11 @@ namespace led
     pinMode(pin, OUTPUT);
   }
 
+  void blink_once()
+  {
+    digitalWrite(pin, !digitalRead(pin));
+  }
+
   void blink()
   {
     uint8_t count = 0;
@@ -16,7 +21,7 @@ namespace led
     {
       if (count % 125 == 0)
       {
-        digitalWrite(pin, !digitalRead(pin));
+        blink_once();
       }
       delay(4);
     }

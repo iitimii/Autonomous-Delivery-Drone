@@ -4,7 +4,7 @@
 #include "telemetry.hpp"
 #
 
-uint32_t loop_timer;
+uint32_t loop_time;
 
 void setup()
 {
@@ -20,12 +20,12 @@ void setup()
 
 void loop()
 {
-    loop_timer = micros();
+    loop_time = micros();
     telemetry::loop();
-    websocket::send_data(telemetry::data_rx.signature, telemetry::data_rx.payload1, telemetry::data_rx.payload2, telemetry::data_rx.payload3, telemetry::data_rx.payload4, telemetry::data_rx.payload5, telemetry::data_rx.payload6);
+    
+    websocket::send_data();
     websocket::webSocket.loop();
-    // telemetry::send(telemetry::data_tx);
 
-    while (micros() - loop_timer < 4300)
+    while (micros() - loop_time < 2000)
         ;
 }
