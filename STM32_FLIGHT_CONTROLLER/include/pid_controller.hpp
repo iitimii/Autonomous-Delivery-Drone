@@ -2,6 +2,24 @@
 #define PID_CONTROLLER_HPP
 #include <Arduino.h>
 
+class PIDController
+{
+private:
+    float kp, ki, kd;
+    float integral, prev_error;
+    const float i_max;
+    float dt;
+    
+public:
+
+    PIDController(float kp, float ki, float kd, float dt = 0.004, float i_max = 400);
+
+    float calculate(int setpoint, float input);
+    void reset();
+    void setPIDgains(float kp, float ki, float kd);
+    int channel_setpoint(int channel_value);
+};
+
 namespace pid
 {
     struct PIDGains
