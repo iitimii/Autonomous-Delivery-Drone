@@ -1,6 +1,7 @@
 #include "gyro.hpp"
 #include "i2c_utils.hpp"
 #include "led.hpp"
+#include "telemetry.hpp"
 
 namespace gyro
 {
@@ -15,11 +16,12 @@ namespace gyro
 
     int16_t acc_x = 0, acc_y = 0, acc_z = 0;
     int32_t acc_resultant = 0;
-    int32_t roll_rate_cal = 0, pitch_rate_cal = 0, yaw_rate_cal = 0;
-    double roll_rate_lpf = 0.0, pitch_rate_lpf = 0.0, yaw_rate_lpf = 0.0;
+    float roll_rate_lpf = 0.0, pitch_rate_lpf = 0.0, yaw_rate_lpf = 0.0;
     int16_t temperature = 0;
 
-    
+    bool use_manual_calibration = true;
+    int32_t roll_rate_cal = -268, pitch_rate_cal = 124, yaw_rate_cal = -47;
+    int32_t roll_accelerometer_cal = 257, pitch_accelerometer_cal = 92;
 
     void setup()
     {
@@ -31,13 +33,38 @@ namespace gyro
         i2c::write(address, 0x1A, 0x03); // CONFIG register: Digital Low Pass Filter to ~43Hz.
     }
 
+    void reset()
+    {
+        // Power down the MPU6050
+        i2c::HWire.beginTransmission(static_cast<uint8_t>(address));
+        i2c::HWire.write(0x6B); // Power management register
+        i2c::HWire.write(0x80); // Set the reset bit
+        i2c::HWire.endTransmission();
+
+        delayMicroseconds(50);
+
+        setup();
+    }
+
     void read()
     {
+        static uint8_t failureCount = 0;
         const uint8_t nbytes = 14;
         i2c::HWire.beginTransmission(static_cast<uint8_t>(address));
         i2c::HWire.write(0x3B);
         i2c::HWire.endTransmission();
-        i2c::HWire.requestFrom(static_cast<uint8_t>(address), nbytes);
+        uint8_t bytesRead = i2c::HWire.requestFrom(static_cast<uint8_t>(address), nbytes);
+
+        if (bytesRead != nbytes)
+        {
+            ++failureCount;
+            if (failureCount >= 5)
+            {
+                reset();
+                failureCount = 0;
+            }
+            return;
+        }
 
         acc_y = (i2c::HWire.read() << 8) | i2c::HWire.read();
         acc_x = (i2c::HWire.read() << 8) | i2c::HWire.read();
@@ -53,30 +80,39 @@ namespace gyro
         roll_rate -= roll_rate_cal;
         pitch_rate -= pitch_rate_cal;
         yaw_rate -= yaw_rate_cal;
+
+        acc_y -= pitch_accelerometer_cal;
+        acc_x -= roll_accelerometer_cal;
     }
 
     void calibrate()
     {
-        roll_rate_cal = 0;
-        pitch_rate_cal = 0;
-        yaw_rate_cal = 0;
-
-        for (uint16_t i = 0; i < 2000; ++i)
+        if (!use_manual_calibration)
         {
-            if (i % 125 == 0)
-                led::blink_once(); // Change the LED status every 125 readings to indicate calibration.
+            roll_rate_cal = 0;
+            pitch_rate_cal = 0;
+            yaw_rate_cal = 0;
 
-            read();
-            roll_rate_cal += roll_rate;
-            pitch_rate_cal += pitch_rate;
-            yaw_rate_cal += yaw_rate;
+            for (uint16_t i = 1; i <= 4000; ++i)
+            {
+                if (i % 25 == 0)
+                    led::blink_once();
 
-            delay(4); // Small delay to simulate a 250Hz loop during calibration.
+                read();
+                // roll_rate_cal += roll_rate;
+                // pitch_rate_cal += pitch_rate;
+                // yaw_rate_cal += yaw_rate;
+
+                roll_rate_cal = ((i - 1) / i) * roll_rate_cal + (roll_rate / i);
+                pitch_rate_cal = ((i - 1) / i) * pitch_rate_cal + (pitch_rate / i);
+                yaw_rate_cal = ((i - 1) / i) * yaw_rate_cal + (yaw_rate / i);
+
+                delay(4);
+            }
+            // roll_rate_cal /= 4000;
+            // pitch_rate_cal /= 4000;
+            // yaw_rate_cal /= 4000;
         }
-
-        roll_rate_cal /= 2000;
-        pitch_rate_cal /= 2000;
-        yaw_rate_cal /= 2000;
     }
 
     void get_acc_angle()
@@ -94,9 +130,9 @@ namespace gyro
     {
         constexpr float filter_coefficient = 0.3;
         constexpr float one_minus_filter_coefficient = 0.7;
-        const double roll_rate_scaled = static_cast<double>(roll_rate) / 65.5;
-        const double pitch_rate_scaled = static_cast<double>(pitch_rate) / 65.5;
-        const double yaw_rate_scaled = static_cast<double>(yaw_rate) / 65.5;
+        const float roll_rate_scaled = static_cast<float>(roll_rate) / 65.5;
+        const float pitch_rate_scaled = static_cast<float>(pitch_rate) / 65.5;
+        const float yaw_rate_scaled = static_cast<float>(yaw_rate) / 65.5;
 
         roll_rate_lpf = (roll_rate_lpf * one_minus_filter_coefficient) + (roll_rate_scaled * filter_coefficient);
         pitch_rate_lpf = (pitch_rate_lpf * one_minus_filter_coefficient) + (pitch_rate_scaled * filter_coefficient);
@@ -107,9 +143,9 @@ namespace gyro
     {
         filter();
 
-        const double pitch_increment = static_cast<double>(pitch_rate) * degrees_per_second;
-        const double roll_increment = static_cast<double>(roll_rate) * degrees_per_second;
-        const double yaw_scaled = static_cast<double>(yaw_rate) * dps_to_radians;
+        const float pitch_increment = static_cast<float>(pitch_rate) * degrees_per_second;
+        const float roll_increment = static_cast<float>(roll_rate) * degrees_per_second;
+        const float yaw_scaled = static_cast<float>(yaw_rate) * dps_to_radians;
 
         pitch += pitch_increment;
         roll += roll_increment;
@@ -121,5 +157,62 @@ namespace gyro
 
         pitch = pitch * alpha + pitch_accelerometer * (1 - alpha);
         roll = roll * alpha + roll_accelerometer * (1 - alpha);
+    }
+
+    void calibrate_manual()
+    {
+        delay(2000);
+
+        roll_rate_cal = 0;
+        pitch_rate_cal = 0;
+        yaw_rate_cal = 0;
+        roll_accelerometer_cal = 0;
+        pitch_accelerometer_cal = 0;
+
+        for (uint16_t i = 0; i < 1000; ++i)
+        {
+            if (i % 125 == 0)
+                led::blink_once();
+
+            read();
+            delay(4);
+        }
+
+        for (uint16_t i = 0; i < 10000; ++i)
+        {
+            if (i % 25 == 0)
+                led::blink_once();
+
+            read();
+            roll_rate_cal += roll_rate;
+            pitch_rate_cal += pitch_rate;
+            yaw_rate_cal += yaw_rate;
+
+            pitch_accelerometer_cal += acc_y;
+            roll_accelerometer_cal += acc_x;
+
+            delay(4);
+        }
+        led::on();
+
+        roll_rate_cal /= 10000;
+        pitch_rate_cal /= 10000;
+        yaw_rate_cal /= 10000;
+
+        pitch_accelerometer_cal /= 10000;
+        roll_accelerometer_cal /= 10000;
+
+        roll = roll_rate_cal;
+        pitch = pitch_rate_cal;
+        yaw = yaw_rate_cal;
+
+        roll_accelerometer = roll_accelerometer_cal;
+        pitch_accelerometer = pitch_accelerometer_cal;
+
+        while (1)
+        {
+            telemetry::send();
+            delay(4);
+        }
     }
 }

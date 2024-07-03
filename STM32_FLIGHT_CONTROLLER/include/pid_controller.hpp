@@ -2,39 +2,28 @@
 #define PID_CONTROLLER_HPP
 #include <Arduino.h>
 
-class PIDController
-{
-private:
-    float kp, ki, kd;
-    float integral, prev_error;
-    const float i_max;
-    float dt;
-    
-public:
-
-    PIDController(float kp, float ki, float kd, float dt = 0.004, float i_max = 400);
-
-    float calculate(int setpoint, float input);
-    void reset();
-    void setPIDgains(float kp, float ki, float kd);
-    int channel_setpoint(int channel_value);
-};
-
 namespace pid
 {
+    class PIDController
+    {
+    private:
+        float kp, ki, kd;
+        float integral, prev_error;
+        const float i_max;
+        float dt;
+
+    public:
+        PIDController(float kp, float ki, float kd, float dt = 0.004, float i_max = 400);
+
+        float calculate(int setpoint, float input);
+        void reset();
+        void setPIDgains(float kp, float ki, float kd);
+        float channel_setpoint(uint16_t& channel_value);
+    };
+
     struct PIDGains
     {
         float kp, ki, kd;
-    };
-
-    struct PIDOutput
-    {
-        int16_t pitch, roll, throttle, yaw;
-
-        struct Angle
-        {
-            int16_t pitch, roll;
-        } angle;
     };
 
     struct PIDGain
@@ -50,8 +39,11 @@ namespace pid
         } angle;
     };
 
-    extern PIDOutput output;
     extern PIDGain gain;
+
+    void calculate();
+    void setup();
+    void reset();
 
 } // namespace pid
 

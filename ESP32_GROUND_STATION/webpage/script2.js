@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yawRateElement = document.getElementById('yaw_rate');
     const pitchAccelElement = document.getElementById('pitch_accel');
     const rollAccelElement = document.getElementById('roll_accel');
+    const vibrationElement = document.getElementById('vibration');
     const altitudeElement = document.getElementById('altitude');
     const gpsLongitudeElement = document.getElementById('longitude');
     const gpsLatitudeElement = document.getElementById('latitude');
@@ -60,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const angleRollOutputElement = document.getElementById('angle_roll_output');
 
     const ws = new WebSocket('ws://gs.local:80');
+    const FLIGH_MODES = ["STANDBY", "READY", "ACRO", "LEVEL", "ALT_HOLD"];
+    const ERRORS = ["GYRO", "RECEIVER", "BATTERY"];
 
     ws.onopen = () => {
         connectionStatus.textContent = 'Connected';
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'I':
                 armedElement.textContent = data.payload1;
-                flightModeElement.textContent = data.payload2;
+                flightModeElement.textContent = FLIGH_MODES[data.payload2];
                 headingLockElement.textContent = data.payload3;
                 pitchRateElement.textContent = data.payload4;
                 rollRateElement.textContent = data.payload5;
@@ -100,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'M':
                 numSatellitesElement.textContent = data.payload1;
                 fixTypeElement.textContent = data.payload2;
+                vibrationElement.textContent = data.payload3;
                 airPressureElement.textContent = data.payload4;
                 altitudeElement.textContent = data.payload5;
                 temperatureElement.textContent = data.payload6;

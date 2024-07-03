@@ -94,6 +94,13 @@ section h2 {
     border: 1px solid #444;
 }
 
+.fixed-width {
+    display: inline-block;
+    width: 100px; /* Adjust width as needed */
+    text-align: right; /* Align text to the right for numbers */
+    padding-right: 10px; /* Add some padding if needed */
+}
+
 .send-form {
     display: flex;
     margin-bottom: 20px;
@@ -120,7 +127,6 @@ section h2 {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 
 .send-button:hover {
     background-color: #0056b3;

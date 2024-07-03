@@ -1,89 +1,105 @@
 #include "pid_controller.hpp"
+#include "outputs.hpp"
+#include "gyro.hpp"
+#include "receiver.hpp"
 
 namespace pid
 {
-
-PIDOutput output;
-PIDGain gain;
-
-}
-
-class PIDController
-{
-private:
-    float kp, ki, kd;
-    float integral, prev_error;
-    const float i_max;
-    float dt;
-    
-public:
-
-    PIDController(float kp, float ki, float kd, float dt = 0.004, float i_max = 400)
-    : kp(kp), ki(ki), kd(kd), i_max(i_max), integral(0), prev_error(0), dt(dt)
+    PIDController::PIDController(float kp, float ki, float kd, float dt=0.004, float i_max=400)
+        : kp(kp), ki(ki), kd(kd), dt(dt), i_max(i_max), integral(0), prev_error(0)
     {
-
     }
 
-    float calculate(int setpoint, float input)
+    float PIDController::calculate(int setpoint, float input)
     {
         float error = setpoint - input;
         float proportional = kp * error;
 
-        if (ki == 0.0 && kd == 0.0) return proportional;
-    
-        integral += ki * ((error + prev_error)/2) * dt;
-        // i += ki * error * dt;
-        // Anti-windup: Limit integral term
-        if (integral > i_max)
-            integral = i_max;
-        else if (integral < -i_max)
-            integral = -i_max;
-        float derivative = kd * (error - prev_error) / dt;
-        prev_error = error;
-        return proportional + integral + derivative;
+        if (ki != 0.0f || kd != 0.0f) {
+            integral += ki * error * dt;
+            integral = constrain(integral, -i_max, i_max);
+            float derivative = kd * (error - prev_error) / dt;
+            prev_error = error;
+            return proportional + integral + derivative;
+        }
+
+        return proportional;
     }
 
-    void reset()
+    void PIDController::reset()
     {
         integral = 0;
         prev_error = 0;
     }
 
-    void setPIDgains(float kp, float ki, float kd)
+    void PIDController::setPIDgains(float kp, float ki, float kd)
     {
         this->kp = kp;
         this->ki = ki;
         this->kd = kd;
     }
 
-    int channel_setpoint(int channel_value)
+    float PIDController::channel_setpoint(uint16_t& channel_value)
     {
-        int setpoint{0};
+        float setpoint{0};
+
         if (channel_value > 1508)
             setpoint = channel_value - 1508;
         else if (channel_value < 1492)
             setpoint = channel_value - 1492;
+
         return setpoint;
     }
-};
 
+    // Declare PID controllers
+    PIDGain gain;
 
-int roll_vel_setpoint, pitch_vel_setpoint, yaw_vel_setpoint;
-int pid_roll_vel_output, pid_pitch_vel_output, pid_yaw_vel_output;
+    PIDController roll_rate_controller(gain.rate.roll.kp, gain.rate.roll.ki, gain.rate.roll.kd);
+    PIDController pitch_rate_controller(gain.rate.pitch.kp, gain.rate.pitch.ki, gain.rate.pitch.kd);
+    PIDController yaw_rate_controller(gain.rate.yaw.kp, gain.rate.yaw.ki, gain.rate.yaw.kd);
 
-float kp_roll_vel = 3.0, ki_roll_vel = 0.05, kd_roll_vel = 0.1;
-float kp_pitch_vel = kp_roll_vel, ki_pitch_vel = ki_roll_vel, kd_pitch_vel = kd_roll_vel;
-float kp_yaw_vel = 3.0, ki_yaw_vel = 0.05, kd_yaw_vel = 1.0;
+    PIDController roll_angle_controller(gain.angle.roll.kp, gain.angle.roll.ki, gain.angle.roll.kd);
+    PIDController pitch_angle_controller(gain.angle.pitch.kp, gain.angle.pitch.ki, gain.angle.pitch.kd);
 
-int roll_ang_setpoint, pitch_ang_setpoint;
-int pid_roll_ang_output, pid_pitch_ang_output;
-float kp_roll_ang =2.0, ki_roll_ang = 0.0, kd_roll_ang = 0.0;
-float kp_pitch_ang = kp_roll_ang, ki_pitch_ang = ki_roll_ang, kd_pitch_ang = kd_roll_ang;
+    void setup()
+    {
+        gain.rate.roll = {5.0f, 0.05f, 0.0f};
+        gain.rate.pitch = gain.rate.roll;
+        gain.rate.yaw = {5.0f, 0.05f, 0.0f};
 
+        gain.angle.roll = {2.0f, 0.0f, 0.0f};
+        gain.angle.pitch = gain.angle.roll;
 
-PIDController PID_roll_vel(kp_roll_vel, ki_roll_vel, kd_roll_vel);
-PIDController PID_pitch_vel(kp_pitch_vel, ki_pitch_vel, kd_pitch_vel);
-PIDController PID_yaw_vel(kp_yaw_vel, ki_yaw_vel, kd_yaw_vel);
+        roll_rate_controller.setPIDgains(gain.rate.roll.kp, gain.rate.roll.ki, gain.rate.roll.kd);
+        pitch_rate_controller.setPIDgains(gain.rate.pitch.kp, gain.rate.pitch.ki, gain.rate.pitch.kd);
+        yaw_rate_controller.setPIDgains(gain.rate.yaw.kp, gain.rate.yaw.ki, gain.rate.yaw.kd);
 
-PIDController PID_roll_ang(kp_roll_ang, ki_roll_ang, kd_roll_ang);
-PIDController PID_pitch_ang(kp_pitch_ang, ki_pitch_ang, kd_pitch_ang);
+        roll_angle_controller.setPIDgains(gain.angle.roll.kp, gain.angle.roll.ki, gain.angle.roll.kd);
+        pitch_angle_controller.setPIDgains(gain.angle.pitch.kp, gain.angle.pitch.ki, gain.angle.pitch.kd);
+    }
+
+    void calculate()
+    {
+        const float max_angle = 30.0f;
+        float roll_ang_setpoint = roll_angle_controller.channel_setpoint(receiver::roll) * max_angle / 500.0f;
+        float pitch_ang_setpoint = pitch_angle_controller.channel_setpoint(receiver::pitch) * max_angle / 500.0f;
+        float yaw_vel_setpoint = yaw_rate_controller.channel_setpoint(receiver::yaw);
+
+        outputs::angle.roll = roll_angle_controller.calculate(roll_ang_setpoint, gyro::roll);
+        outputs::angle.pitch = pitch_angle_controller.calculate(pitch_ang_setpoint, gyro::pitch);
+
+        outputs::roll = roll_rate_controller.calculate(outputs::angle.roll, gyro::roll_rate_lpf);
+        outputs::pitch = pitch_rate_controller.calculate(outputs::angle.pitch, gyro::pitch_rate_lpf);
+        outputs::yaw = yaw_rate_controller.calculate(yaw_vel_setpoint, gyro::yaw_rate_lpf);
+        outputs::throttle = receiver::throttle;
+    }
+
+    void reset()
+    {
+        roll_rate_controller.reset();
+        pitch_rate_controller.reset();
+        yaw_rate_controller.reset();
+        roll_angle_controller.reset();
+        pitch_angle_controller.reset();
+    }
+}

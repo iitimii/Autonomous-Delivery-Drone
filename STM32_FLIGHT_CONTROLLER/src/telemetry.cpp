@@ -10,6 +10,7 @@
 #include "receiver.hpp"
 #include "motors.hpp"
 #include "pid_controller.hpp"
+#include "outputs.hpp"
 
 namespace telemetry
 {
@@ -45,16 +46,16 @@ namespace telemetry
     switch (telemetry_loop_counter)
     {
     case 0:
-      data_tx.signature = 'T';             // uint8_t
+      data_tx.signature = 'T';                    // uint8_t
       data_tx.payload1 = drone::loop_time_actual; // int16_t
-      data_tx.payload2 = drone::error;                // int16_t
-      data_tx.payload3 = flight::start;                // int16_t
-      data_tx.payload4 = battery::voltage;               
-      data_tx.payload5 = gyro::pitch;             
-      data_tx.payload6 = gyro::roll; 
-      data_tx.payload7 = gyro::yaw;               
-      data_tx.payload8 = gyro::pitch_accelerometer;             
-      data_tx.payload9 = gyro::roll_accelerometer;              
+      data_tx.payload2 = drone::error;            // int16_t
+      data_tx.payload3 = flight::start;           // int16_t
+      data_tx.payload4 = battery::voltage;
+      data_tx.payload5 = gyro::pitch;
+      data_tx.payload6 = gyro::roll;
+      data_tx.payload7 = gyro::yaw;
+      data_tx.payload8 = gyro::pitch_accelerometer;
+      data_tx.payload9 = gyro::roll_accelerometer;
       break;
 
     case 1:
@@ -62,51 +63,51 @@ namespace telemetry
       data_tx.payload1 = flight::armed;
       data_tx.payload2 = flight::mode;
       data_tx.payload3 = compass::heading_lock;
-      data_tx.payload4 = gyro::pitch_rate;               
-      data_tx.payload5 = gyro::roll_rate;             
-      data_tx.payload6 = gyro::yaw_rate; 
-      data_tx.payload7 = gps::latitude;               
-      data_tx.payload8 = gps::longitude;             
-      data_tx.payload9 = compass::compass_heading;  
+      data_tx.payload4 = gyro::pitch_rate;
+      data_tx.payload5 = gyro::roll_rate;
+      data_tx.payload6 = gyro::yaw_rate;
+      data_tx.payload7 = gps::latitude;
+      data_tx.payload8 = gps::longitude;
+      data_tx.payload9 = compass::compass_heading;
       break;
 
     case 2:
       data_tx.signature = 'M';
       data_tx.payload1 = gps::num_satelites;
       data_tx.payload2 = gps::fix_type;
-      data_tx.payload3 = 0;
-      data_tx.payload4 = baro::pressure;               
-      data_tx.payload5 = baro::altitude;             
-      data_tx.payload6 = baro::temperature; 
-      data_tx.payload7 = receiver::channels[0];               
-      data_tx.payload8 = receiver::channels[1];             
-      data_tx.payload9 = receiver::channels[2];  
+      data_tx.payload3 = gyro::acc_resultant;
+      data_tx.payload4 = baro::pressure;
+      data_tx.payload5 = baro::altitude;
+      data_tx.payload6 = gyro::temperature;
+      data_tx.payload7 = receiver::roll;
+      data_tx.payload8 = receiver::pitch;
+      data_tx.payload9 = receiver::throttle;
       break;
 
     case 3:
       data_tx.signature = 'L';
-      data_tx.payload1 = receiver::channels[3];
-      data_tx.payload2 = receiver::channels[4];
-      data_tx.payload3 = receiver::channels[5];
-      data_tx.payload4 = receiver::channels[6];               
-      data_tx.payload5 = receiver::channels[7];             
-      data_tx.payload6 = receiver::channels[8]; 
-      data_tx.payload7 = receiver::channels[9];               
-      data_tx.payload8 = pid::output.pitch;             
-      data_tx.payload9 = pid::output.roll;  
+      data_tx.payload1 = receiver::yaw;
+      data_tx.payload2 = receiver::switch_a;
+      data_tx.payload3 = receiver::switch_b;
+      data_tx.payload4 = receiver::vra;
+      data_tx.payload5 = receiver::switch_c;
+      data_tx.payload6 = receiver::vrb;
+      data_tx.payload7 = receiver::switch_d;
+      data_tx.payload8 = outputs::pitch;
+      data_tx.payload9 = outputs::roll;
       break;
 
     case 4:
       data_tx.signature = 'H';
       data_tx.payload1 = motors::br;
       data_tx.payload2 = motors::bl;
-      data_tx.payload3 = pid::output.throttle;
-      data_tx.payload4 = pid::output.yaw;               
-      data_tx.payload5 = pid::output.angle.pitch;             
-      data_tx.payload6 = pid::output.angle.roll; 
-      data_tx.payload7 = pid::gain.rate.pitch.kp;               
-      data_tx.payload8 = pid::gain.rate.pitch.ki;             
-      data_tx.payload9 = pid::gain.rate.pitch.kd;  
+      data_tx.payload3 = outputs::throttle;
+      data_tx.payload4 = outputs::yaw;
+      data_tx.payload5 = outputs::angle.pitch;
+      data_tx.payload6 = outputs::angle.roll;
+      data_tx.payload7 = pid::gain.rate.pitch.kp;
+      data_tx.payload8 = pid::gain.rate.pitch.ki;
+      data_tx.payload9 = pid::gain.rate.pitch.kd;
       break;
 
     case 5:
@@ -114,12 +115,12 @@ namespace telemetry
       data_tx.payload1 = motors::fl;
       data_tx.payload2 = motors::fr;
       data_tx.payload3 = 0;
-      data_tx.payload4 = pid::gain.rate.roll.kp;               
-      data_tx.payload5 = pid::gain.rate.roll.ki;             
-      data_tx.payload6 = pid::gain.rate.roll.kd; 
-      data_tx.payload7 = pid::gain.rate.yaw.kp;               
-      data_tx.payload8 = pid::gain.rate.yaw.ki;             
-      data_tx.payload9 = pid::gain.rate.yaw.kd; 
+      data_tx.payload4 = pid::gain.rate.roll.kp;
+      data_tx.payload5 = pid::gain.rate.roll.ki;
+      data_tx.payload6 = pid::gain.rate.roll.kd;
+      data_tx.payload7 = pid::gain.rate.yaw.kp;
+      data_tx.payload8 = pid::gain.rate.yaw.ki;
+      data_tx.payload9 = pid::gain.rate.yaw.kd;
       break;
 
     case 6:
@@ -127,38 +128,50 @@ namespace telemetry
       data_tx.payload1 = 0;
       data_tx.payload2 = 0;
       data_tx.payload3 = 0;
-      data_tx.payload4 = pid::gain.angle.pitch.kp;               
-      data_tx.payload5 = pid::gain.angle.pitch.ki;             
-      data_tx.payload6 = pid::gain.angle.pitch.kd; 
-      data_tx.payload7 = pid::gain.angle.roll.kp;               
-      data_tx.payload8 = pid::gain.angle.roll.ki;             
-      data_tx.payload9 = pid::gain.angle.roll.kd; 
+      data_tx.payload4 = pid::gain.angle.pitch.kp;
+      data_tx.payload5 = pid::gain.angle.pitch.ki;
+      data_tx.payload6 = pid::gain.angle.pitch.kd;
+      data_tx.payload7 = pid::gain.angle.roll.kp;
+      data_tx.payload8 = pid::gain.angle.roll.ki;
+      data_tx.payload9 = pid::gain.angle.roll.kd;
       break;
 
     default:
-      data_tx.signature = 'E';             // uint8_t
-      data_tx.payload1 = 0;                // int16_t
-      data_tx.payload2 = 0;                // int16_t
-      data_tx.payload3 = 0;                // int16_t
-      data_tx.payload4 = 0.0f;               
-      data_tx.payload5 = 0.0f;             
-      data_tx.payload6 = 0.0f; 
-      data_tx.payload7 = 0.0f;               
-      data_tx.payload8 = 0.0f;             
-      data_tx.payload9 = 0.0f;  
+      data_tx.signature = 'E'; // uint8_t
+      data_tx.payload1 = 0;    // int16_t
+      data_tx.payload2 = 0;    // int16_t
+      data_tx.payload3 = 0;    // int16_t
+      data_tx.payload4 = 0.0f;
+      data_tx.payload5 = 0.0f;
+      data_tx.payload6 = 0.0f;
+      data_tx.payload7 = 0.0f;
+      data_tx.payload8 = 0.0f;
+      data_tx.payload9 = 0.0f;
       break;
     }
 
     telemetry_loop_counter++;
-    if (telemetry_loop_counter >= 7)
+    if (telemetry_loop_counter > 6)
       telemetry_loop_counter = 0;
   }
 
   void send()
   {
+    static uint8_t failureCount = 0;
     radio.stopListening();
+
     select_data();
-    radio.write(&data_tx, sizeof(data_tx));
+    bool success = radio.write(&data_tx, sizeof(data_tx));
+
+    if (!success)
+    {
+      ++failureCount;
+      if (failureCount >= 5)
+      {
+        setup();
+        failureCount = 0;
+      }
+    }
     radio.startListening();
   }
 

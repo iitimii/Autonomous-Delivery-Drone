@@ -7,6 +7,16 @@ namespace receiver
      uint8_t channel_select_counter;
      uint16_t channels[10] = {0};
      int32_t measured_time, measured_time_start;
+     uint16_t &roll = channels[0];
+     uint16_t &pitch = channels[1];
+     uint16_t &throttle = channels[2];
+     uint16_t &yaw = channels[3];
+     uint16_t &switch_a = channels[4];
+     uint16_t &switch_b = channels[5];
+     uint16_t &vra = channels[6];
+     uint16_t &switch_c = channels[8];
+     uint16_t &vrb = channels[8];
+     uint16_t &switch_d = channels[9];
 
      int pin = PB10;
      TIM_TypeDef *Instance_in = TIM2;
@@ -34,7 +44,7 @@ namespace receiver
           measured_time -= 25;
           measured_time_start = current_time;
 
-          if (measured_time > 3000)
+          if (measured_time > 5000)
           {
                channel_select_counter = 0;
           }

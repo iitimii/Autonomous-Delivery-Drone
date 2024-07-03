@@ -26,6 +26,6 @@ void loop()
     websocket::send_data();
     websocket::webSocket.loop();
 
-    while (micros() - loop_time < 2000)
+    while (micros() - loop_time < 500)
         ;
 }

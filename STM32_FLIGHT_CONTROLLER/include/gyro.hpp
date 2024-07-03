@@ -1,6 +1,6 @@
 #ifndef GYRO_HPP
 #define GYRO_HPP
-
+#include <Arduino.h>
 namespace gyro
 {
     extern float pitch;
@@ -18,12 +18,19 @@ namespace gyro
     extern int16_t acc_y;
     extern int16_t acc_z;
     extern int32_t acc_resultant;
+
+    extern bool use_manual_calibration;
+
     extern int32_t roll_rate_cal;
     extern int32_t pitch_rate_cal;
     extern int32_t yaw_rate_cal;
-    extern double roll_rate_lpf;
-    extern double pitch_rate_lpf;
-    extern double yaw_rate_lpf;
+
+    extern int32_t roll_accelerometer_cal;
+    extern int32_t pitch_accelerometer_cal;
+
+    extern float roll_rate_lpf;
+    extern float pitch_rate_lpf;
+    extern float yaw_rate_lpf;
     extern int16_t temperature;
 
     void setup();
@@ -32,6 +39,7 @@ namespace gyro
     void get_acc_angle();
     void filter();
     void calculate_attitude();
+    void calibrate_manual();
 }
 
 #endif // GYRO_HPP

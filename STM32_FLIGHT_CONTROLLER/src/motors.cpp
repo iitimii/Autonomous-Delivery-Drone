@@ -1,4 +1,10 @@
 #include "motors.hpp"
+#include "outputs.hpp"
+#include "drone.hpp"
+#include "gyro.hpp"
+#include "telemetry.hpp"
+#include "receiver.hpp"
+#include "led.hpp"
 
 namespace motors
 {
@@ -45,6 +51,14 @@ namespace motors
 
     void running()
     {
+
+        outputs::throttle = constrain(outputs::throttle, initial_speed, outputs::max_throtle);
+
+        fr = outputs::throttle + outputs::pitch - outputs::roll + outputs::yaw; // FR CCW
+        fl = outputs::throttle + outputs::pitch + outputs::roll - outputs::yaw; // FL CW
+        br = outputs::throttle - outputs::pitch - outputs::roll - outputs::yaw; // BR CW
+        bl = outputs::throttle - outputs::pitch + outputs::roll + outputs::yaw; // BL CCW
+
         // Clamp motor speeds within allowable range
         fr = constrain(fr, idle_speed, max_speed);
         fl = constrain(fl, idle_speed, max_speed);
@@ -69,5 +83,102 @@ namespace motors
         br = idle_speed;
         bl = idle_speed;
         set_speed();
+    }
+
+    void balance_props()
+    {
+        int32_t vibration_array[20], avarage_vibration_level, vibration_total_result, vibration_total_result_final;
+        uint8_t array_counter, throttle_init_ok = 0, vibration_counter;
+        uint32_t wait_timer;
+        led::off();
+
+        while (1)
+        {
+            drone::loop();
+
+            if (throttle_init_ok)
+            {
+                led::on();
+                gyro::read();
+                gyro::get_acc_angle();
+
+                vibration_array[0] = gyro::acc_resultant;
+
+                for (array_counter = 16; array_counter > 0; array_counter--)
+                {
+                    vibration_array[array_counter] = vibration_array[array_counter - 1];
+                    avarage_vibration_level += vibration_array[array_counter];
+                }
+                avarage_vibration_level /= 17;
+
+                if (vibration_counter < 20)
+                {
+                    vibration_counter++;
+                    vibration_total_result += abs(vibration_array[0] - avarage_vibration_level);
+                }
+                else
+                {
+                    vibration_counter = 0;
+                    vibration_total_result_final = vibration_total_result / 50;
+                    vibration_total_result = 0;
+                }
+
+                if (receiver::switch_a > 1500)
+                {
+                    fr = 1000; // 65
+                    fl = 1000; // 55
+                    br = 1000; // 60
+                    bl = 1000; // 50 perfect
+
+                    switch (receiver::vra)
+                    {
+                    case 990 ... 1050:
+                        fr = receiver::throttle;
+                        break;
+
+                    case 1200 ... 1400:
+                        fl = receiver::throttle;
+                        break;
+
+                    case 1480 ... 1700:
+                        br = receiver::throttle;
+                        break;
+
+                    case 1800 ... 2100:
+                        bl = receiver::throttle;
+                        break;
+
+                    default:
+                        fr = 1000;
+                        fl = 1000;
+                        br = 1000;
+                        bl = 1000;
+                        break;
+                    }
+
+                    set_speed();
+                }
+
+                else
+                    off();
+            }
+
+            else
+            {
+                led::off();
+                wait_timer = millis() + 10000;
+                while (wait_timer > millis() && !throttle_init_ok)
+                {
+                    if (receiver::throttle < 1050 && receiver::throttle > 990)
+                        throttle_init_ok = 1;
+                    delay(500);
+                }
+            }
+
+            gyro::acc_resultant = vibration_total_result_final;
+
+            telemetry::send();
+            drone::wait();
+        }
     }
 }

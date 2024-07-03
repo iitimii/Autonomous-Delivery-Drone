@@ -15,6 +15,7 @@ namespace motors
     void running();
     void off();
     void idle();
+    void balance_props();
 }
 
 #endif // MOTORS_HPP
