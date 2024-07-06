@@ -1,24 +1,70 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     const connectionStatus = document.getElementById('connectionStatus');
     const loopTimeElement = document.getElementById('loop_time');
     const errorElement = document.getElementById('error');
     const startElement = document.getElementById('start');
     const armedElement = document.getElementById('armed');
-    const anglePitchElement = document.getElementById('angle_pitch');
-    const angleRollElement = document.getElementById('angle_roll');
+    const flightModeElement = document.getElementById('flight_mode');
     const batteryVoltageElement = document.getElementById('battery_voltage');
-    const sendForm = document.getElementById('sendForm');
-    const inputField = document.getElementById('inputField');
-    const responseField = document.getElementById('responseField');
-    const customMessageInput = document.getElementById('customMessageInput');
-    const sendCustomMessageButton = document.getElementById('sendCustomMessageButton');
-    const customMessageResponseField = document.getElementById('customMessageResponseField');
+    const batteryPercentageElement = document.getElementById('battery_percentage');
+    const pitchElement = document.getElementById('pitch');
+    const rollElement = document.getElementById('roll');
+    const yawElement = document.getElementById('yaw');
+    const pitchRateElement = document.getElementById('pitch_rate');
+    const rollRateElement = document.getElementById('roll_rate');
+    const yawRateElement = document.getElementById('yaw_rate');
+    const accXElement = document.getElementById('acc_x');
+    const accYElement = document.getElementById('acc_y');
+    const accZElement = document.getElementById('acc_z');
+    const vibrationElement = document.getElementById('vibration');
+    const altitudeElement = document.getElementById('altitude');
+    const gpsLongitudeElement = document.getElementById('longitude');
+    const gpsLatitudeElement = document.getElementById('latitude');
+    const compassHeadingElement = document.getElementById('compass_heading');
+    const headingLockElement = document.getElementById('heading_lock');
+    const numSatellitesElement = document.getElementById('num_sats');
+    const fixTypeElement = document.getElementById('fix_type');
+    const temperatureElement = document.getElementById('temperature');
+    const airPressureElement = document.getElementById('air_pressure');
+    const channel1Element = document.getElementById('channel1');
+    const channel2Element = document.getElementById('channel2');
+    const channel3Element = document.getElementById('channel3');
+    const channel4Element = document.getElementById('channel4');
+    const channel5Element = document.getElementById('channel5');
+    const channel6Element = document.getElementById('channel6');
+    const channel7Element = document.getElementById('channel7');
+    const channel8Element = document.getElementById('channel8');
+    const channel9Element = document.getElementById('channel9');
+    const channel10Element = document.getElementById('channel10');
+    const motorFrontLeftElement = document.getElementById('front_left');
+    const motorFrontRightElement = document.getElementById('front_right');
+    const motorBackRightElement = document.getElementById('back_right');
+    const motorBackLeftElement = document.getElementById('back_left');
+    const pidGainRatePitchKpElement = document.getElementById('rate_pitch_kp');
+    const pidGainRatePitchKiElement = document.getElementById('rate_pitch_ki');
+    const pidGainRatePitchKdElement = document.getElementById('rate_pitch_kd');
+    const pidGainRateRollKpElement = document.getElementById('rate_roll_kp');
+    const pidGainRateRollKiElement = document.getElementById('rate_roll_ki');
+    const pidGainRateRollKdElement = document.getElementById('rate_roll_kd');
+    const pidGainRateYawKpElement = document.getElementById('rate_yaw_kp');
+    const pidGainRateYawKiElement = document.getElementById('rate_yaw_ki');
+    const pidGainRateYawKdElement = document.getElementById('rate_yaw_kd');
+    const pidGainAnglePitchKpElement = document.getElementById('angle_pitch_kp');
+    const pidGainAnglePitchKiElement = document.getElementById('angle_pitch_ki');
+    const pidGainAnglePitchKdElement = document.getElementById('angle_pitch_kd');
+    const pidGainAngleRollKpElement = document.getElementById('angle_roll_kp');
+    const pidGainAngleRollKiElement = document.getElementById('angle_roll_ki');
+    const pidGainAngleRollKdElement = document.getElementById('angle_roll_kd');
+    const pitchOutputElement = document.getElementById('pitch_output');
+    const rollOutputElement = document.getElementById('roll_output');
+    const throttleOutputElement = document.getElementById('throttle_output');
+    const yawOutputElement = document.getElementById('yaw_output');
+    const anglePitchOutputElement = document.getElementById('angle_pitch_output');
+    const angleRollOutputElement = document.getElementById('angle_roll_output');
 
     const ws = new WebSocket('ws://gs.local:80');
-    let loop_time = 'N/A', error = 'N/A', battery_voltage = 'N/A';
-    let ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10;
-    let armed = 'N/A', start = 'N/A';
-    let angle_pitch_acc, angle_roll_acc, angle_pitch = 'N/A', angle_roll = 'N/A';
+    const FLIGH_MODES = ["STANDBY", "READY", "ACRO", "LEVEL", "ALT_HOLD"];
+    const ERRORS = ["GYRO", "RECEIVER", "BATTERY"];
 
     ws.onopen = () => {
         connectionStatus.textContent = 'Connected';
@@ -31,60 +77,94 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     ws.onmessage = (event) => {
-        const data = event.data.split(',');
-        switch (String.fromCharCode(data[0])) {
+        const data = JSON.parse(event.data);
+
+        switch (String.fromCharCode(data.signature)) {
             case 'T':
-                loop_time = data[1];
-                error = data[2];
-                ch1 = data[3];
-                ch2 = data[4];
-                battery_voltage = data[5];
-                angle_pitch = data[6];
+                loopTimeElement.textContent = data.payload1;
+                errorElement.textContent = data.payload2;
+                startElement.textContent = data.payload3;
+                batteryVoltageElement.textContent = data.payload4;
+                pitchElement.textContent = data.payload5;
+                rollElement.textContent = data.payload6;
+                yawElement.textContent = data.payload7;
+                accYElement.textContent = data.payload8;
+                accXElement.textContent = data.payload9;
                 break;
             case 'I':
-                ch3 = data[1];
-                ch4 = data[2];
-                ch5 = data[3];
-                ch6 = data[4];
-                angle_pitch_acc = data[5];
-                angle_roll = data[6];
+                armedElement.textContent = data.payload1;
+                flightModeElement.textContent = FLIGH_MODES[data.payload2];
+                headingLockElement.textContent = data.payload3;
+                pitchRateElement.textContent = data.payload4;
+                rollRateElement.textContent = data.payload5;
+                yawRateElement.textContent = data.payload6;
+                gpsLatitudeElement.textContent = data.payload7;
+                gpsLongitudeElement.textContent = data.payload8;
+                compassHeadingElement.textContent = data.payload9;
                 break;
             case 'M':
-                ch7 = data[1];
-                ch8 = data[2];
-                ch9 = data[3];
-                ch10 = data[4];
-                angle_roll_acc = data[5];
+                numSatellitesElement.textContent = data.payload1;
+                fixTypeElement.textContent = data.payload2;
+                vibrationElement.textContent = data.payload3;
+                airPressureElement.textContent = data.payload4;
+                altitudeElement.textContent = data.payload5;
+                temperatureElement.textContent = data.payload6;
+                channel1Element.textContent = data.payload7;
+                channel2Element.textContent = data.payload8;
+                channel3Element.textContent = data.payload9;
                 break;
             case 'L':
-                armed = data[1];
-                start = data[2];
+                channel4Element.textContent = data.payload1;
+                channel5Element.textContent = data.payload2;
+                channel6Element.textContent = data.payload3;
+                channel7Element.textContent = data.payload4;
+                channel8Element.textContent = data.payload5;
+                channel9Element.textContent = data.payload6;
+                channel10Element.textContent = data.payload7;
+                pitchOutputElement.textContent = data.payload8;
+                rollOutputElement.textContent = data.payload9;
+                break;
+            case 'H':
+                motorBackRightElement.textContent = data.payload1;
+                motorBackLeftElement.textContent = data.payload2;
+                throttleOutputElement.textContent = data.payload3;
+                yawOutputElement.textContent = data.payload4;
+                anglePitchOutputElement.textContent = data.payload5;
+                angleRollOutputElement.textContent = data.payload6;
+                pidGainRatePitchKpElement.textContent = data.payload7;
+                pidGainRatePitchKiElement.textContent = data.payload8;
+                pidGainRatePitchKdElement.textContent = data.payload9;
+                break;
+            case 'N':
+                motorFrontLeftElement.textContent = data.payload1;
+                motorFrontRightElement.textContent = data.payload2;
+                batteryPercentageElement.textContent = data.payload3;
+                pidGainRateRollKpElement.textContent = data.payload4;
+                pidGainRateRollKiElement.textContent = data.payload5;
+                pidGainRateRollKdElement.textContent = data.payload6;
+                pidGainRateYawKpElement.textContent = data.payload7;
+                pidGainRateYawKiElement.textContent = data.payload8;
+                pidGainRateYawKdElement.textContent = data.payload9;
+                break;
+            case 'O':
+                pidGainAnglePitchKpElement.textContent = data.payload4;
+                pidGainAnglePitchKiElement.textContent = data.payload5;
+                pidGainAnglePitchKdElement.textContent = data.payload6;
+                pidGainAngleRollKpElement.textContent = data.payload7;
+                pidGainAngleRollKiElement.textContent = data.payload8;
+                pidGainAngleRollKdElement.textContent = data.payload9;
+                break;
+            case 'W':
+                accZElement.textContent = data.payload4;
                 break;
             default:
                 break;
         }
-        updateTelemetryData();
     };
 
-    function updateTelemetryData() {
-        loopTimeElement.textContent = loop_time;
-        errorElement.textContent = error;
-        startElement.textContent = start;
-        armedElement.textContent = armed;
-        anglePitchElement.textContent = angle_pitch;
-        angleRollElement.textContent = angle_roll;
-        batteryVoltageElement.textContent = battery_voltage;
-    }
-
-    function showResponseMessage(message, type) {
-        const responseMessage = document.createElement('div');
-        responseMessage.classList.add('response-message', type);
-        responseMessage.textContent = message;
-        responseField.appendChild(responseMessage);
-        setTimeout(() => {
-            responseField.removeChild(responseMessage);
-        }, 3000);
-    }
+    const sendForm = document.getElementById('sendForm');
+    const inputField = document.getElementById('inputField');
+    const responseField = document.getElementById('responseField');
 
     sendForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -96,20 +176,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
 
-        const selectedButton1 = document.querySelector('.pid-control-buttons .column:nth-child(1) .button-selected');
-        const selectedButton2 = document.querySelector('.pid-control-buttons .column:nth-child(2) .button-selected');
-        const selectedButton3 = document.querySelector('.pid-control-buttons .column:nth-child(3) .button-selected');
-
-        if (!selectedButton1 || !selectedButton2 || !selectedButton3) {
+        const selectedButtons = document.querySelectorAll('.pid-control-buttons .button-selected');
+        if (selectedButtons.length !== 3) {
             showResponseMessage('Please select a button from each column.', 'error');
             return;
         }
 
-        const command = `${selectedButton1.textContent},${selectedButton2.textContent},${selectedButton3.textContent},${floatValue}`;
-        // ws.send(command);
+        const selectedButtonValues = Array.from(selectedButtons).map(button => button.textContent);
+        const command = `${selectedButtonValues.join(',')},${floatValue}`;
         ws.send(JSON.stringify({ type: 'PID', message: command }));
         showResponseMessage(`Sent command: ${command}`, 'success');
     });
+
+    const customMessageInput = document.getElementById('customMessageInput');
+    const sendCustomMessageButton = document.getElementById('sendCustomMessageButton');
+    const customMessageResponseField = document.getElementById('customMessageResponseField');
 
     sendCustomMessageButton.addEventListener('click', () => {
         const message = customMessageInput.value;
@@ -117,28 +198,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         customMessageResponseField.textContent = `Sent custom message: ${message}`;
     });
 
-    const buttons1 = document.querySelectorAll('.pid-control-buttons .column:nth-child(1) button');
-    const buttons2 = document.querySelectorAll('.pid-control-buttons .column:nth-child(2) button');
-    const buttons3 = document.querySelectorAll('.pid-control-buttons .column:nth-child(3) button');
+    function showResponseMessage(message, type) {
+        const responseMessage = document.createElement('div');
+        responseMessage.classList.add('response-message', type);
+        responseMessage.textContent = message;
+        responseField.appendChild(responseMessage);
+        setTimeout(() => {
+            responseField.removeChild(responseMessage);
+        }, 3000);
+    }
 
-    buttons1.forEach((button) => {
-        button.addEventListener('click', function() {
-            buttons1.forEach((btn) => btn.classList.remove('button-selected'));
-            this.classList.add('button-selected');
-        });
-    });
+    const pidControlButtons = document.querySelectorAll('.pid-control-buttons .column button');
 
-    buttons2.forEach((button) => {
-        button.addEventListener('click', function() {
-            buttons2.forEach((btn) => btn.classList.remove('button-selected'));
-            this.classList.add('button-selected');
-        });
-    });
-
-    buttons3.forEach((button) => {
-        button.addEventListener('click', function() {
-            buttons3.forEach((btn) => btn.classList.remove('button-selected'));
-            this.classList.add('button-selected');
+    pidControlButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const columnButtons = button.parentElement.querySelectorAll('button');
+            columnButtons.forEach(btn => btn.classList.remove('button-selected'));
+            button.classList.add('button-selected');
         });
     });
 });

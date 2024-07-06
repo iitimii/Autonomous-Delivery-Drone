@@ -1,48 +1,51 @@
 #include <Arduino.h>
-#include "i2c_utils.hpp"
-#include "drone.hpp"
-#include "flight.hpp"
-#include "gyro.hpp"
-#include "telemetry.hpp"
-#include "receiver.hpp"
-#include "led.hpp"
-#include "pid_controller.hpp"
-#include "battery.hpp"
-#include "motors.hpp"
-#include "outputs.hpp"
-#include "eeprom.hpp"
-// TODO if !read or send like 10 times, restart the device
+
+#include "uav/i2c_utils.hpp"
+#include "uav/drone.hpp"
+#include "uav/flight.hpp"
+#include "uav/eeprom.hpp"
+#include "uav/led.hpp"
+#include "uav/battery.hpp"
+
+#include "attitude_estimation/attitude_estimation.hpp"
+
+#include "communication/telemetry.hpp"
+#include "communication/receiver.hpp"
+
+#include "controllers/pid.hpp"
+
+#include "actuators/motors.hpp"
+#include "actuators/outputs.hpp"
+
+AttitudeEstimator attitude_estimator;
 
 void setup()
 {
+    led::setup();
     drone::setup();
     flight::setup();
     battery::setup();
-    led::setup();
     i2c::setup();
-    telemetry::setup();
     receiver::setup();
     motors::setup();
-    gyro::setup();
-    pid::setup();
+    telemetry::setup();
+    attitude_estimator.setup();
 
-    motors::off();
-    gyro::calibrate();
-    battery::read();
+    led::off();
 }
 
 void loop()
 {
     drone::loop();
 
-    gyro::read();
-    gyro::calculate_attitude();
+    attitude_estimator.update();
 
     battery::read();
 
     flight::update();
 
     telemetry::send();
-
+    telemetry::loop();
+    motors::set_speed();
     drone::wait();
 }

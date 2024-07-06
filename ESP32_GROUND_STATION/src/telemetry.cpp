@@ -15,11 +15,10 @@ namespace telemetry
     {
         radio.begin();
         radio.setChannel(120);
-        radio.setDataRate(RF24_250KBPS);
-        radio.setPALevel(RF24_PA_MIN);
+        radio.setDataRate(RF24_2MBPS);
+        radio.setPALevel(RF24_PA_MAX);
         radio.setAutoAck(false);
         radio.disableDynamicPayloads();
-        // radio.setRetries(0, 2);
         radio.maskIRQ(1, 1, 0);
         attachInterrupt(digitalPinToInterrupt(irq_pin), interrupt, FALLING);
         radio.openReadingPipe(0, addresses[0]);
@@ -29,12 +28,9 @@ namespace telemetry
 
     void send()
     {
-        Serial.println("Starting Send");
         radio.stopListening();
         radio.write(&data_tx, sizeof(data_tx));
-        Serial.println("Middle Send");
         radio.startListening();
-        Serial.println("Ending Send");
     }
 
     void IRAM_ATTR interrupt()

@@ -26,6 +26,8 @@ void loop()
     websocket::send_data();
     websocket::webSocket.loop();
 
-    while (micros() - loop_time < 500)
+    telemetry::send();
+
+    while (micros() - loop_time < 4300)
         ;
 }
