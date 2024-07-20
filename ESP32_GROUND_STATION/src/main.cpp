@@ -2,7 +2,6 @@
 #include "wifi.hpp"
 #include "websocket.hpp"
 #include "telemetry.hpp"
-#
 
 uint32_t loop_time;
 

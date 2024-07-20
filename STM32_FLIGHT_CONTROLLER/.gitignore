@@ -5,3 +5,4 @@ lib/RF24
 lib
 lib/
 /lib
+*.DS_Store
