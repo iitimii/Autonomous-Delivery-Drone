@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>UAV Monitoring Dashboard</h1>
+      <a href="index.html">Home</a>
+    </header>
+    <section class="container debug">
+        <div class="card">
+            <h2>Channels</h2>
+            <table class="table">
+                    <tr><td>Channel 1</td><td>N/A</td></tr>
+                    <tr><td>Channel 2</td><td>N/A</td></tr>
+                    <tr><td>Channel 3</td><td>N/A</td></tr>
+                    <tr><td>Channel 4</td><td>N/A</td></tr>
+                    <tr><td>Channel 5</td><td>N/A</td></tr>
+                    <tr><td>Channel 6</td><td>N/A</td></tr>
+                    <tr><td>Channel 7</td><td>N/A</td></tr>
+                    <tr><td>Channel 8</td><td>N/A</td></tr>
+                    <tr><td>Channel 9</td><td>N/A</td></tr>
+                    <tr><td>Channel 10</td><td>N/A</td></tr>
+            </table>
+        </div>
+        <div class="card">
+            <h2>PID Gains</h2>
+            <table class="table">
+                <tr><td>Rate Pitch kp</td><td>N/A</td></tr>
+                <tr><td>Rate Pitch ki</td><td>N/A</td></tr>
+                <tr><td>Rate Pitch kd</td><td>N/A</td></tr>
+                <tr><td>Rate Roll kp</td><td>N/A</td></tr>
+                <tr><td>Rate Roll ki</td><td>N/A</td></tr>
+                <tr><td>Rate Roll kd</td><td>N/A</td></tr>
+                <tr><td>Rate Yaw kp</td><td>N/A</td></tr>
+                <tr><td>Rate Yaw ki</td><td>N/A</td></tr>
+                <tr><td>Rate Yaw kd</td><td>N/A</td></tr>
+                <tr><td>Angle Pitch kp</td><td>N/A</td></tr>
+                <tr><td>Angle Pitch ki</td><td>N/A</td></tr>
+                <tr><td>Angle Pitch kd</td><td>N/A</td></tr>
+                <tr><td>Angle Roll kp</td><td>N/A</td></tr>
+                <tr><td>Angle Roll ki</td><td>N/A</td></tr>
+                <tr><td>Angle Roll kd</td><td>N/A</td></tr>
+            </table>
+        </div>
+        <div class="card">
+            <h2>Outputs</h2>
+            <table class="table">
+                <tr><td>Pitch</td><td>N/A</td></tr>
+                <tr><td>Roll</td><td>N/A</td></tr>
+                <tr><td>Throttle</td><td>N/A</td></tr>
+                <tr><td>Yaw</td><td>N/A</td></tr>
+                <tr><td>Angle Pitch</td><td>N/A</td></tr>
+                <tr><td>Angle Roll</td><td>N/A</td></tr>             
+            </table>
+        </div>
+        <div class="card control">
+            <h2>Control</h2>
+                <div>
+                    <input type="number" placeholder="Enter value" required>
+                    <button type="submit">Send</button>
+                </div>
+                    
+                <div class="pid-control-buttons">
+                    <div class="column">
+                        <button class="pid-button button-selected">P</button>
+                        <button class="pid-button">I</button>
+                        <button class="pid-button">D</button>
+                    </div>
+                    <div class="column">
+                        <button class="pid-button button-selected">A</button>
+                        <button class="pid-button">R</button>
+                    </div>
+                    <div class="column">
+                        <button class="pid-button button-selected">R</button>
+                        <button class="pid-button">P</button>
+                        <button class="pid-button">Y</button>
+                    </div>
+        </div>
+        
+    </section>
+</body>
+</html>
