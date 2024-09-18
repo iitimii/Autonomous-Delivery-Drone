@@ -1,168 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UAV Monitoring Ground Station</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <div class="sidebar">
-        <h2>UAV Ground Station</h2>
-        <div id="connectionStatus" class="disconnected">Disconnected</div>
-        <nav>
-            <a href="#flightStatus">Flight Status</a>
-            <a href="#systemStatus">System Status</a>
-            <a href="#attitude">Attitude</a>
-            <a href="#gps">GPS</a>
-            <a href="#environmental">Environmental</a>
-            <a href="#control">Control</a>
-            <a href="#channels">Channels</a>
-            <a href="#motors">Motors</a>
-            <a href="#pid_gains">PID Gains</a>
-            <a href="#outputs">Outputs</a>
-        </nav>
-    </div>
-    <div class="main-content">
-        <header>
-            <h1>UAV Monitoring Dashboard</h1>
-        </header>
-        <div class="content-container">
-            <section id="flightStatus">
-                <h2>Flight Status</h2>
-                <table class="data-table">
-                    <tr><td>Start</td><td><span id="start">N/A</span></td></tr>
-                    <tr><td>Armed</td><td><span id="armed">N/A</span></td></tr>
-                    <tr><td>Flight Mode</td><td><span id="flight_mode">Normal</span></td></tr>
-                </table>
-            </section>
-            <section id="systemStatus">
-                <h2>System Status</h2>
-                <table class="data-table">
-                    <tr><td>Loop Time</td><td><span id="loop_time">N/A</span></td></tr>
-                    <tr><td>Error</td><td><span id="error">N/A</span></td></tr>
-                    <tr><td>Battery Voltage</td><td><span id="battery_voltage">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="attitude">
-                <h2>Attitude</h2>
-                <table class="data-table">
-                    <tr><td>Pitch</td><td><span id="pitch">N/A</span></td></tr>
-                    <tr><td>Roll</td><td><span id="roll">N/A</span></td></tr>
-                    <tr><td>Yaw</td><td><span id="yaw">N/A</span></td></tr>
-                    <tr><td>Pitch Rate</td><td><span id="pitch_rate">N/A</span></td></tr>
-                    <tr><td>Roll Rate</td><td><span id="roll_rate">N/A</span></td></tr>
-                    <tr><td>Yaw Rate</td><td><span id="yaw_rate">N/A</span></td></tr>
-                    <tr><td>Pitch Accel</td><td><span id="pitch_accel">N/A</span></td></tr>
-                    <tr><td>Roll Accel</td><td><span id="roll_accel">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="gps">
-                <h2>GPS</h2>
-                <table class="data-table">
-                    <tr><td>Altitude</td><td><span id="altitude">N/A</span></td></tr>
-                    <tr><td>Longitude</td><td><span id="longitude">N/A</span></td></tr>
-                    <tr><td>Latitude</td><td><span id="latitude">N/A</span></td></tr>
-                    <tr><td>Compass Heading</td><td><span id="compass_heading">N/A</span></td></tr>
-                    <tr><td>Heading Lock</td><td><span id="heading_lock">off</span></td></tr>
-                    <tr><td>Satellites</td><td><span id="num_sats">N/A</span></td></tr>
-                    <tr><td>Fix</td><td><span id="fix_type">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="environmental">
-                <h2>Environmental Conditions</h2>
-                <table class="data-table">
-                    <tr><td>Temperature</td><td><span id="temperature">N/A</span></td></tr>
-                    <tr><td>Air Pressure</td><td><span id="air_pressure">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="control">
-                <h2>Control</h2>
-                <form id="sendForm" class="send-form">
-                    <input type="number" id="inputField" class="input-field" placeholder="Enter value" required>
-                    <button type="submit" class="send-button">Send</button>
-                </form>
-                <div class="pid-control-buttons">
-                    <div class="column">
-                        <button class="pid-button button-selected">P</button>
-                        <button class="pid-button">I</button>
-                        <button class="pid-button">D</button>
-                    </div>
-                    <div class="column">
-                        <button class="pid-button button-selected">A</button>
-                        <button class="pid-button">R</button>
-                    </div>
-                    <div class="column">
-                        <button class="pid-button button-selected">R</button>
-                        <button class="pid-button">P</button>
-                        <button class="pid-button">Y</button>
-                    </div>
-                </div>
-                <div id="responseField" class="pid-control-response"></div>
-                <input type="text" id="customMessageInput" class="custom-message-input" placeholder="Enter custom message">
-                <button id="sendCustomMessageButton" class="send-button">Send</button>
-                <div id="customMessageResponseField" class="custom-message-response"></div>
-            </section>
-            <section id="channels">
-                <h2>Channels</h2>
-                <table class="data-table">
-                    <tr><td>Channel 1</td><td><span id="channel1">N/A</span></td></tr>
-                    <tr><td>Channel 2</td><td><span id="channel2">N/A</span></td></tr>
-                    <tr><td>Channel 3</td><td><span id="channel3">N/A</span></td></tr>
-                    <tr><td>Channel 4</td><td><span id="channel4">N/A</span></td></tr>
-                    <tr><td>Channel 5</td><td><span id="channel5">N/A</span></td></tr>
-                    <tr><td>Channel 6</td><td><span id="channel6">N/A</span></td></tr>
-                    <tr><td>Channel 7</td><td><span id="channel7">N/A</span></td></tr>
-                    <tr><td>Channel 8</td><td><span id="channel8">N/A</span></td></tr>
-                    <tr><td>Channel 9</td><td><span id="channel9">N/A</span></td></tr>
-                    <tr><td>Channel 10</td><td><span id="channel10">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="motors">
-                <h2>Motors</h2>
-                <table class="data-table">
-                    <tr><td>Front Left</td><td><span id="front_left">N/A</span></td></tr>
-                    <tr><td>Front Right</td><td><span id="front_right">N/A</span></td></tr>
-                    <tr><td>Back Right</td><td><span id="back_right">N/A</span></td></tr>
-                    <tr><td>Back Left</td><td><span id="back_left">N/A</span></td></tr>
-                </table>
-            </section>
-            <section id="pid_gains">
-                <h2>PID Gains</h2>
-                <table class="data-table">
-                    <tr><td>Rate Pitch kp</td><td><span id="rate_pitch_kp">N/A</span></td></tr>
-                    <tr><td>Rate Pitch ki</td><td><span id="rate_pitch_ki">N/A</span></td></tr>
-                    <tr><td>Rate Pitch kd</td><td><span id="rate_pitch_kd">N/A</span></td></tr>
-                    <tr><td>Rate Roll kp</td><td><span id="rate_roll_kp">N/A</span></td></tr>
-                    <tr><td>Rate Roll ki</td><td><span id="rate_roll_ki">N/A</span></td></tr>
-                    <tr><td>Rate Roll kd</td><td><span id="rate_roll_kd">N/A</span></td></tr>
-                    <tr><td>Rate Yaw kp</td><td><span id="rate_yaw_kp">N/A</span></td></tr>
-                    <tr><td>Rate Yaw ki</td><td><span id="rate_yaw_ki">N/A</span></td></tr>
-                    <tr><td>Rate Yaw kd</td><td><span id="rate_yaw_kd">N/A</span></td></tr>
-                    <tr><td>Angle Pitch kp</td><td><span id="angle_pitch_kp">N/A</span></td></tr>
-                    <tr><td>Angle Pitch ki</td><td><span id="angle_pitch_ki">N/A</span></td></tr>
-                    <tr><td>Angle Pitch kd</td><td><span id="angle_pitch_kd">N/A</span></td></tr>
-                    <tr><td>Angle Roll kp</td><td><span id="angle_roll_kp">N/A</span></td></tr>
-                    <tr><td>Angle Roll ki</td><td><span id="angle_roll_ki">N/A</span></td></tr>
-                    <tr><td>Angle Roll kd</td><td><span id="angle_roll_kd">N/A</span></td></tr>
-                </table>
-            </section>
-            
-            <section id="outputs">
-                <h2>Outputs</h2>
-                <table class="data-table">
-                    <tr><td>Pitch</td><td><span id="pitch_output">N/A</span></td></tr>
-                    <tr><td>Roll</td><td><span id="roll_output">N/A</span></td></tr>
-                    <tr><td>Throttle</td><td><span id="throttle_output">N/A</span></td></tr>
-                    <tr><td>Yaw</td><td><span id="yaw_output">N/A</span></td></tr>
-                    <tr><td>Angle Pitch</td><td><span id="angle_pitch_output">N/A</span></td></tr>
-                    <tr><td>Angle Roll</td><td><span id="angle_roll_output">N/A</span></td></tr>
-                </table>
-            </section>
-            
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UAV MONTORING DASHBOARD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>UAV Monitoring Dashboard</h1>
+      <a href="debugging.html">Debugging</a>
+    </header>
+    <section class="container">
+      <div class="card main flight">
+        <h2>Flight Status</h2>
+        <table class="table">
+          <tr>
+            <td>Start</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Armed</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Flight Mode</td>
+            <td>STANDBY</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main system">
+        <h2>System Status</h2>
+        <table class="table">
+          <tr>
+            <td>Loop Time</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Error</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Battery Voltage</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Battery Percentage</td>
+            <td>N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main environ">
+        <h2>Environmental Conditions</h2>
+        <table class="table">
+          <tr>
+            <td>Temperature</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Air Pressure</td>
+            <td>N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main attitude">
+        <h2>Attitude</h2>
+        <table class="table">
+          <tr>
+            <td>Roll</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Pitch</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Yaw</td>
+            <td>>N/A</td>
+          </tr>
+          <tr>
+            <td>Roll Rate</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Pitch Rate</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Yaw Rate</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Acc X</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Acc Y</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Acc Z</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Vibration</td>
+            <td>N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main gps">
+        <h2>GPS</h2>
+        <table class="table">
+          <tr>
+            <td>Altitude</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Longitude</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Latitude</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Compass Heading</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Heading Lock</td>
+            <td>off</td>
+          </tr>
+          <tr>
+            <td>Satellites</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Fix</td>
+            <td>N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main motors">
+        <h2>Motors</h2>
+        <table class="table">
+          <tr>
+            <td>Front Left</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Front Right</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Back Right</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Back Left</td>
+            <td>N/A</td>
+          </tr>
+        </table>
+      </div>
+      <div class="card main control">
+        <h2>Control</h2>
+        <div>
+            <input type="text" placeholder="Enter value" required>
+            <button type="submit">Send</button>
         </div>
-    </div>
-
-    <script src="script2.js"></script>
-</body>
+        <div class="response">Response</div>
+      </div>
+    </section>
+  </body>
 </html>
