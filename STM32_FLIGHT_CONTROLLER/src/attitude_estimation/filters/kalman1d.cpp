@@ -23,7 +23,7 @@ void KalmanFilter1D::update(const float &gx, const float &gy, const float &gz, c
     float pitch_acc = atan2(-ax, sqrt(ay * ay + az * az)) * RAD_TO_DEG;
 
     // Update roll
-    float y_roll = roll_acc - roll;
+    float y_roll = roll_acc - roll; // residual
     float K_roll = P_roll / (P_roll + R);
     roll += K_roll * y_roll;
     P_roll = (1 - K_roll) * P_roll;
@@ -34,7 +34,7 @@ void KalmanFilter1D::update(const float &gx, const float &gy, const float &gz, c
     pitch += K_pitch * y_pitch;
     P_pitch = (1 - K_pitch) * P_pitch;
 
-    // Update yaw (simple integration, no Kalman filter applied)
+    // Update yaw 
     yaw += gz * dt;
     
     // Normalize yaw to -180 to 180 degrees
@@ -48,4 +48,7 @@ void KalmanFilter1D::update(const float &gx, const float &gy, const float &gz, c
 void KalmanFilter1D::reset(const float &gx, const float &gy, const float &gz, const float &ax, const float &ay, const float &az)
 {
 
+    P_roll = 16.0f;  // 4 * 4
+    P_pitch = 16.0f; // 4 * 4
+    
 }

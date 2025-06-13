@@ -5,11 +5,11 @@
 
 namespace control
 {
-    PIDGain roll_rate_gain {2.0, 0.0, 0.0};
-    PIDGain pitch_rate_gain {2.0, 0.0, 0.0};
-    PIDGain yaw_rate_gain {2.0, 0.0, 0.0};
-    PIDGain roll_angle_gain {2.0, 0.0, 0.0};
-    PIDGain pitch_angle_gain {2.0, 0.0, 0.0};
+    PIDGain roll_rate_gain {4.0, 0.1, 0.1};
+    PIDGain pitch_rate_gain {4.0, 0.1, 0.1};
+    PIDGain yaw_rate_gain {4.0, 0.1, 0.1};
+    PIDGain roll_angle_gain {4.0, 0.1, 0.1};
+    PIDGain pitch_angle_gain {4.0, 0.1, 0.1};
 
     PIDController roll_rate_controller{roll_rate_gain.kp, roll_rate_gain.ki, roll_rate_gain.kd};
     PIDController pitch_rate_controller{pitch_rate_gain.kp, pitch_rate_gain.ki, pitch_rate_gain.kd};

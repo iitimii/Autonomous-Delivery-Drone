@@ -1,0 +1,20 @@
+[100%] Built target quad_lifecycle
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/include/include/quadcopter_firmware/stm32_uart.hpp
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/bin/quad_lifecycle
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/package_run_dependencies/quadcopter_firmware
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/parent_prefix_path/quadcopter_firmware
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.sh
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.dsv
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.bash
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.sh
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.zsh
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.dsv
+-- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.dsv
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/packages/quadcopter_firmware
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig.cmake
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig-version.cmake
+-- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.xml

@@ -17,6 +17,7 @@ public:
 
     IMU imu;
     KalmanFilter1D filter;
+    // ComplementaryFilter filter;
 
 
     AttitudeEstimator();

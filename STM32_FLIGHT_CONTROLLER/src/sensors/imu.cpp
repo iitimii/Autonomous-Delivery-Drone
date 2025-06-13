@@ -65,8 +65,9 @@ bool IMU::read()
     gy = ((buffer[10] << 8) | buffer[11]);
     gz = ((buffer[12] << 8) | buffer[13]);
 
-    az *= -1;
+
     ay *= -1;
+    az *= -1;
     gy *= -1;
     gz *= -1;
 

@@ -6,6 +6,8 @@ namespace flight
 {
     extern uint8_t start, mode;
     extern uint16_t armed;
+    
+    enum class modes {STANDBY, READY, ACRO, LEVEL, ALT_HOLD};
 
     void setup();
     void update();

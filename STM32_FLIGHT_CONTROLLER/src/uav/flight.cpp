@@ -39,7 +39,7 @@ namespace flight
             control::reset_controllers();
         }
 
-        if (mode != 0 && mode != 2)
+        if (mode >= 3)
         {
             control::calculate();
             motors::running();

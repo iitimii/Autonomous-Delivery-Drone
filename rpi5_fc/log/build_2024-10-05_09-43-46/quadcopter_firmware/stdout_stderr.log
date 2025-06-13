@@ -1,0 +1,24 @@
+[ 25%] Building CXX object CMakeFiles/stm32_uart.dir/src/stm32_uart.cpp.o
+[ 75%] Built target quad_lifecycle
+[100%] Linking CXX executable stm32_uart
+Undefined symbols for architecture arm64:
+  "LibSerial::SerialPort::SetBaudRate(LibSerial::BaudRate const&)", referenced from:
+      STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+  "LibSerial::SerialPort::IsDataAvailable()", referenced from:
+      STM32_UART_Node::timerCallback() in stm32_uart.cpp.o
+  "LibSerial::SerialPort::Open(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, unsigned int const&)", referenced from:
+      STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+  "LibSerial::SerialPort::Close()", referenced from:
+      STM32_UART_Node::~STM32_UART_Node() in stm32_uart.cpp.o
+  "LibSerial::SerialPort::ReadLine(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>&, char, unsigned long)", referenced from:
+      STM32_UART_Node::timerCallback() in stm32_uart.cpp.o
+  "LibSerial::SerialPort::SerialPort()", referenced from:
+      STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+  "LibSerial::SerialPort::~SerialPort()", referenced from:
+      STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+      STM32_UART_Node::~STM32_UART_Node() in stm32_uart.cpp.o
+ld: symbol(s) not found for architecture arm64
+arm64-apple-darwin20.0: error: linker command failed with exit code 1 (use -v to see invocation)
+make[2]: *** [CMakeFiles/stm32_uart.dir/build.make:158: stm32_uart] Error 1
+make[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/stm32_uart.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

@@ -1,0 +1,48 @@
+[0.024s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[0.092s] -- Found ament_cmake: 1.3.7 (/Users/timii/miniforge3/envs/ros2/share/ament_cmake/cmake)
+[0.368s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.395s] -- Found rclcpp: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp/cmake)
+[0.444s] -- Found rosidl_generator_c: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_c/cmake)
+[0.448s] -- Found rosidl_adapter: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_adapter/cmake)
+[0.457s] -- Found rosidl_generator_cpp: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_cpp/cmake)
+[0.473s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.496s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.620s] -- Found rmw_implementation_cmake: 6.1.1 (/Users/timii/miniforge3/envs/ros2/share/rmw_implementation_cmake/cmake)
+[0.623s] -- Found rmw_cyclonedds_cpp: 1.3.4 (/Users/timii/miniforge3/envs/ros2/share/rmw_cyclonedds_cpp/cmake)
+[0.662s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[0.758s] -- Found rclcpp_lifecycle: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp_lifecycle/cmake)
+[0.795s] -- Found std_msgs: 4.2.3 (/Users/timii/miniforge3/envs/ros2/share/std_msgs/cmake)
+[0.850s] -- Found ament_lint_auto: 0.12.10 (/Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake)
+[0.943s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.943s] -- Configured cppcheck include dirs: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/include
+[0.943s] -- Configured cppcheck exclude dirs and/or files: 
+[0.944s] -- Added test 'lint_cmake' to check CMake code style
+[0.945s] -- Added test 'uncrustify' to check C / C++ code style
+[0.945s] -- Configured uncrustify additional arguments: 
+[0.945s] -- Added test 'xmllint' to check XML markup files
+[0.948s] -- Configuring done (0.9s)
+[0.986s] -- Generating done (0.0s)
+[0.991s] -- Build files have been written to: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware
+[1.062s] [100%] Built target quad_lifecycle
+[1.074s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '0': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[1.149s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --install /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware
+[1.160s] -- Install configuration: ""
+[1.161s] -- Execute custom install script
+[1.162s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/include/include/quadcopter_firmware/stm32_uart.hpp
+[1.173s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/bin/quad_lifecycle
+[1.184s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/package_run_dependencies/quadcopter_firmware
+[1.184s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/parent_prefix_path/quadcopter_firmware
+[1.184s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.sh
+[1.184s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.dsv
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.sh
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.dsv
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.bash
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.sh
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.zsh
+[1.185s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.dsv
+[1.186s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.dsv
+[1.197s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/packages/quadcopter_firmware
+[1.197s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig.cmake
+[1.197s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig-version.cmake
+[1.197s] -- Up-to-date symlink: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.xml
+[1.198s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '0': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --install /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware

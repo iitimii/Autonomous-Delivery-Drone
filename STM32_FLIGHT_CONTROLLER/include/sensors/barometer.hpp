@@ -2,11 +2,24 @@
 #define BARO_HPP
 #include <cstdint>
 
-namespace baro
+namespace Sensors
 {
-    extern float pressure;
-    extern float altitude;
-    extern float temperature;
+
+class Barometer
+{
+    private:
+    float pressure;
+    float temperature;
+
+    public:
+    Barometer();
+    float get_pressure(){return 0.01f;};
+    float get_temperature(){return 0.01f;};
+
+};
+
+extern Barometer barometer;
+
 }
 
 #endif // !BARO_HPP

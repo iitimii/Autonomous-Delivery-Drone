@@ -1,0 +1,4 @@
+source;share/quadcopter_firmware/local_setup.bash
+source;share/quadcopter_firmware/local_setup.dsv
+source;share/quadcopter_firmware/local_setup.sh
+source;share/quadcopter_firmware/local_setup.zsh

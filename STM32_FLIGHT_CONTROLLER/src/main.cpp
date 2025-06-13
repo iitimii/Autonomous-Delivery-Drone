@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 #include "uav/i2c_utils.hpp"
 #include "uav/drone.hpp"
 #include "uav/flight.hpp"
@@ -11,16 +10,19 @@
 
 #include "communication/telemetry.hpp"
 #include "communication/receiver.hpp"
-
+#include "communication/raspberrypi.hpp"
+,
 #include "controllers/pid.hpp"
 
 #include "actuators/motors.hpp"
 #include "actuators/outputs.hpp"
+#include "actuators/control.hpp"
 
 AttitudeEstimator attitude_estimator;
 
 void setup()
 {
+    // rpi::setup();
     led::setup();
     drone::setup();
     flight::setup();
@@ -36,16 +38,18 @@ void setup()
 
 void loop()
 {
-    drone::loop();
-
     attitude_estimator.update();
 
     battery::read();
 
     flight::update();
 
-    telemetry::send();
-    telemetry::loop();
     motors::set_speed();
+
+    // telemetry::send();
+    // rpi::send();
+
+    // telemetry::loop();
+    
     drone::wait();
 }

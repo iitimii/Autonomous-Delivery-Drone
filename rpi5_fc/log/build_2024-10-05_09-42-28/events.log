@@ -1,0 +1,89 @@
+[0.000000] (-) TimerEvent: {}
+[0.000239] (quadcopter_firmware) JobQueued: {'identifier': 'quadcopter_firmware', 'dependencies': OrderedDict()}
+[0.000453] (quadcopter_firmware) JobStarted: {'identifier': 'quadcopter_firmware'}
+[0.038618] (quadcopter_firmware) JobProgress: {'identifier': 'quadcopter_firmware', 'progress': 'cmake'}
+[0.039680] (quadcopter_firmware) JobProgress: {'identifier': 'quadcopter_firmware', 'progress': 'build'}
+[0.040088] (quadcopter_firmware) Command: {'cmd': ['/Users/timii/miniforge3/envs/ros2/bin/cmake', '--build', '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware', '--', '-j8', '-l8'], 'cwd': '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware', 'env': OrderedDict([('AS', 'arm64-apple-darwin20.0.0-as'), ('LDFLAGS', '-Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib'), ('AR', 'arm64-apple-darwin20.0.0-ar'), ('ac_cv_func_malloc_0_nonnull', 'yes'), ('TERM_PROGRAM', 'WarpTerminal'), ('PROJ_DATA', '/Users/timii/miniforge3/envs/ros2/share/proj'), ('ac_cv_func_realloc_0_nonnull', 'yes'), ('OBJC', 'arm64-apple-darwin20.0.0-clang'), ('HOST', 'arm64-apple-darwin20.0.0'), ('WARP_HONOR_PS1', '0'), ('TERM', 'xterm-256color'), ('SHELL', '/bin/zsh'), ('NM', 'arm64-apple-darwin20.0.0-nm'), ('CPPFLAGS', '-D_FORTIFY_SOURCE=2 -isystem /Users/timii/miniforge3/envs/ros2/include'), ('HOMEBREW_REPOSITORY', '/opt/homebrew'), ('TMPDIR', '/var/folders/2v/kf1_w44n4h7d8y01qynvcqhm0000gn/T/'), ('PAGESTUFF', 'arm64-apple-darwin20.0.0-pagestuff'), ('CONDA_SHLVL', '2'), ('LIPO', 'arm64-apple-darwin20.0.0-lipo'), ('CONDA_PROMPT_MODIFIER', ''), ('TERM_PROGRAM_VERSION', 'v0.2024.09.24.08.02.stable_01'), ('GSETTINGS_SCHEMA_DIR_CONDA_BACKUP', ''), ('SIZE', 'arm64-apple-darwin20.0.0-size'), ('NMEDIT', 'arm64-apple-darwin20.0.0-nmedit'), ('ROS_PYTHON_VERSION', '3'), ('SDKROOT', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'), ('ROS_VERSION', '2'), ('AMENT_PREFIX_PATH', '/Users/timii/miniforge3/envs/ros2'), ('CXX_FOR_BUILD', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++'), ('INSTALL_NAME_TOOL', 'arm64-apple-darwin20.0.0-install_name_tool'), ('SEGEDIT', 'arm64-apple-darwin20.0.0-segedit'), ('GFORTRAN', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('SEG_HACK', 'arm64-apple-darwin20.0.0-seg_hack'), ('USER', 'timii'), ('CLANGXX', 'arm64-apple-darwin20.0.0-clang++'), ('LIBTOOL', 'arm64-apple-darwin20.0.0-libtool'), ('CONDA_BACKUP_HOST', 'Timis-MacBook-Pro.local'), ('COMMAND_MODE', 'unix2003'), ('CONDA_TOOLCHAIN_BUILD', 'arm64-apple-darwin20.0.0'), ('FC_FOR_BUILD', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('CONDA_EXE', '/Users/timii/miniforge3/bin/conda'), ('OTOOL', 'arm64-apple-darwin20.0.0-otool'), ('SSH_AUTH_SOCK', '/private/tmp/com.apple.launchd.gBgjhCXiSt/Listeners'), ('DEBUG_FORTRANFLAGS', '-march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include -march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -Og -g -Wall -Wextra -fcheck=all -fbacktrace -fimplicit-none -fvar-tracking-assignments'), ('__CF_USER_TEXT_ENCODING', '0x1F5:0x0:0x0'), ('WARP_IS_LOCAL_SHELL_SESSION', '1'), ('ROS_OS_OVERRIDE', 'conda:osx'), ('CXXFLAGS', '-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include'), ('WARP_USE_SSH_WRAPPER', '1'), ('STRINGS', 'arm64-apple-darwin20.0.0-strings'), ('CONDA_TOOLCHAIN_HOST', 'arm64-apple-darwin20.0.0'), ('_CE_CONDA', ''), ('CHECKSYMS', 'arm64-apple-darwin20.0.0-checksyms'), ('CONDA_PREFIX_1', '/Users/timii/miniforge3'), ('PATH', '/Users/timii/miniforge3/envs/ros2/bin:/Users/timii/miniforge3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin'), ('PROJ_NETWORK', 'ON'), ('GSETTINGS_SCHEMA_DIR', '/Users/timii/miniforge3/envs/ros2/share/glib-2.0/schemas'), ('MESON_ARGS', '-Dbuildtype=release'), ('XML_CATALOG_FILES', 'file:///Users/timii/miniforge3/envs/ros2/etc/xml/catalog file:///etc/xml/catalog'), ('DEBUG_CXXFLAGS', '-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -Og -g -Wall -Wextra -isystem /Users/timii/miniforge3/envs/ros2/include'), ('BUILD', 'arm64-apple-darwin20.0.0'), ('LD', 'arm64-apple-darwin20.0.0-ld'), ('CONDA_PREFIX', '/Users/timii/miniforge3/envs/ros2'), ('__CFBundleIdentifier', 'dev.warp.Warp-Stable'), ('F90', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('PWD', '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware'), ('COLCON', '1'), ('STRIP', 'arm64-apple-darwin20.0.0-strip'), ('CMAKE_ARGS', '-DCMAKE_AR=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ar -DCMAKE_CXX_COMPILER_AR=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ar -DCMAKE_C_COMPILER_AR=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ar -DCMAKE_RANLIB=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ranlib -DCMAKE_CXX_COMPILER_RANLIB=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ranlib -DCMAKE_C_COMPILER_RANLIB=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ranlib -DCMAKE_LINKER=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld -DCMAKE_STRIP=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-strip -DCMAKE_INSTALL_NAME_TOOL=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-install_name_tool -DCMAKE_LIBTOOL=/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-libtool -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_SYSROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'), ('F95', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('RMW_IMPLEMENTATION', 'rmw_cyclonedds_cpp'), ('DEBUG_FFLAGS', '-march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include -march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -Og -g -Wall -Wextra -fcheck=all -fbacktrace -fimplicit-none -fvar-tracking-assignments'), ('XPC_FLAGS', '0x0'), ('F77', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('REDO_PREBINDING', 'arm64-apple-darwin20.0.0-redo_prebinding'), ('CXX', 'arm64-apple-darwin20.0.0-clang++'), ('CC_FOR_BUILD', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang'), ('CLANG', 'arm64-apple-darwin20.0.0-clang'), ('_CE_M', ''), ('XPC_SERVICE_NAME', '0'), ('SHLVL', '2'), ('HOME', '/Users/timii'), ('ROS_DISTRO', 'humble'), ('FORTRANFLAGS', '-march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include'), ('CFLAGS', '-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include'), ('HOMEBREW_PREFIX', '/opt/homebrew'), ('_CONDA_PYTHON_SYSCONFIGDATA_NAME', '_sysconfigdata_arm64_apple_darwin20_0_0'), ('FC', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-gfortran'), ('PYTHONPATH', '/Users/timii/miniforge3/envs/ros2/lib/python311/site-packages:/Users/timii/miniforge3/envs/ros2/lib/python3.11/site-packages'), ('CONDA_PYTHON_EXE', '/Users/timii/miniforge3/bin/python'), ('LOGNAME', 'timii'), ('build_alias', 'arm64-apple-darwin20.0.0'), ('LC_CTYPE', 'UTF-8'), ('SSH_SOCKET_DIR', '~/.ssh'), ('CONDA_DEFAULT_ENV', 'ros2'), ('DEBUG_CFLAGS', '-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -Og -g -Wall -Wextra -isystem /Users/timii/miniforge3/envs/ros2/include'), ('RANLIB', 'arm64-apple-darwin20.0.0-ranlib'), ('INFOPATH', '/opt/homebrew/share/info:'), ('HOMEBREW_CELLAR', '/opt/homebrew/Cellar'), ('CMAKE_PREFIX_PATH', ':/Users/timii/miniforge3/envs/ros2'), ('CC', 'arm64-apple-darwin20.0.0-clang'), ('SEG_ADDR_TABLE', 'arm64-apple-darwin20.0.0-seg_addr_table'), ('DISPLAY', '/private/tmp/com.apple.launchd.inRKe65aYR/org.xquartz:0'), ('ROS_LOCALHOST_ONLY', '0'), ('host_alias', 'arm64-apple-darwin20.0.0'), ('LDFLAGS_LD', '-headerpad_max_install_names -dead_strip_dylibs -rpath /Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib'), ('CONDA_CHANGEPS1', 'false'), ('ROS_ETC_DIR', '/Users/timii/miniforge3/envs/ros2/etc/ros'), ('OBJC_FOR_BUILD', '/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang'), ('FFLAGS', '-march=armv8.3-a -ftree-vectorize -fPIC -fno-stack-protector -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include'), ('COLORTERM', 'truecolor'), ('_', '/Users/timii/miniforge3/envs/ros2/bin/env')]), 'shell': False}
+[0.104943] (-) TimerEvent: {}
+[0.210041] (-) TimerEvent: {}
+[0.315171] (-) TimerEvent: {}
+[0.420286] (-) TimerEvent: {}
+[0.479600] (quadcopter_firmware) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.7 (/Users/timii/miniforge3/envs/ros2/share/ament_cmake/cmake)\n'}
+[0.525311] (-) TimerEvent: {}
+[0.630395] (-) TimerEvent: {}
+[0.735486] (-) TimerEvent: {}
+[0.761423] (quadcopter_firmware) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[0.797622] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rclcpp: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp/cmake)\n'}
+[0.840506] (-) TimerEvent: {}
+[0.921123] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_c/cmake)\n'}
+[0.941015] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_adapter/cmake)\n'}
+[0.941113] (-) TimerEvent: {}
+[0.965697] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_cpp/cmake)\n'}
+[0.997017] (quadcopter_firmware) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.040554] (quadcopter_firmware) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.041246] (-) TimerEvent: {}
+[1.146032] (-) TimerEvent: {}
+[1.251102] (-) TimerEvent: {}
+[1.356235] (-) TimerEvent: {}
+[1.461088] (-) TimerEvent: {}
+[1.562676] (-) TimerEvent: {}
+[1.667844] (-) TimerEvent: {}
+[1.770033] (-) TimerEvent: {}
+[1.871414] (-) TimerEvent: {}
+[1.972045] (-) TimerEvent: {}
+[2.076244] (-) TimerEvent: {}
+[2.178910] (-) TimerEvent: {}
+[2.196734] (quadcopter_firmware) StdoutLine: {'line': b"-- Checking for module 'yaml-0.1'\n"}
+[2.283952] (-) TimerEvent: {}
+[2.387151] (-) TimerEvent: {}
+[2.454015] (quadcopter_firmware) StdoutLine: {'line': b'--   Found yaml-0.1, version 0.2.5\n'}
+[2.488781] (-) TimerEvent: {}
+[2.593868] (-) TimerEvent: {}
+[2.698955] (-) TimerEvent: {}
+[2.804058] (-) TimerEvent: {}
+[2.909159] (-) TimerEvent: {}
+[2.946678] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/Users/timii/miniforge3/envs/ros2/share/rmw_implementation_cmake/cmake)\n'}
+[2.958587] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rmw_cyclonedds_cpp: 1.3.4 (/Users/timii/miniforge3/envs/ros2/share/rmw_cyclonedds_cpp/cmake)\n'}
+[3.014216] (-) TimerEvent: {}
+[3.029766] (quadcopter_firmware) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_cyclonedds_cpp' as default\n"}
+[3.059027] (quadcopter_firmware) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[3.119278] (-) TimerEvent: {}
+[3.220436] (-) TimerEvent: {}
+[3.325529] (-) TimerEvent: {}
+[3.430964] (-) TimerEvent: {}
+[3.533798] (-) TimerEvent: {}
+[3.636107] (-) TimerEvent: {}
+[3.737400] (-) TimerEvent: {}
+[3.842637] (-) TimerEvent: {}
+[3.943654] (-) TimerEvent: {}
+[4.048739] (-) TimerEvent: {}
+[4.153819] (-) TimerEvent: {}
+[4.258914] (-) TimerEvent: {}
+[4.364004] (-) TimerEvent: {}
+[4.452447] (quadcopter_firmware) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[4.453197] (quadcopter_firmware) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[4.466695] (-) TimerEvent: {}
+[4.571753] (-) TimerEvent: {}
+[4.576020] (quadcopter_firmware) StdoutLine: {'line': b'-- Found rclcpp_lifecycle: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp_lifecycle/cmake)\n'}
+[4.647922] (quadcopter_firmware) StdoutLine: {'line': b'-- Found std_msgs: 4.2.3 (/Users/timii/miniforge3/envs/ros2/share/std_msgs/cmake)\n'}
+[4.676766] (-) TimerEvent: {}
+[4.730997] (quadcopter_firmware) StdoutLine: {'line': b'-- Found PkgConfig: /Users/timii/miniforge3/envs/ros2/bin/pkg-config (found version "0.29.2") \n'}
+[4.731425] (quadcopter_firmware) StdoutLine: {'line': b"-- Checking for module 'libserial'\n"}
+[4.781810] (-) TimerEvent: {}
+[4.789591] (quadcopter_firmware) StdoutLine: {'line': b"--   No package 'libserial' found\n"}
+[4.791756] (quadcopter_firmware) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.10 (/Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake)\n'}
+[4.886875] (-) TimerEvent: {}
+[4.887404] (quadcopter_firmware) StderrLine: {'line': b'CMake Error at /Users/timii/miniforge3/envs/ros2/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:53 (message):\n'}
+[4.887619] (quadcopter_firmware) StderrLine: {'line': b"  ament_package_xml() package name 'quadcopter_firmware' in '/package.xml'\n"}
+[4.887669] (quadcopter_firmware) StderrLine: {'line': b"  does not match current PROJECT_NAME 'aq_communication'.  You must call\n"}
+[4.887705] (quadcopter_firmware) StderrLine: {'line': b'  project() with the same package name before.\n'}
+[4.887739] (quadcopter_firmware) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[4.887774] (quadcopter_firmware) StderrLine: {'line': b'  /Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake/ament_lint_auto_find_test_dependencies.cmake:31 (ament_package_xml)\n'}
+[4.887815] (quadcopter_firmware) StderrLine: {'line': b'  CMakeLists.txt:52 (ament_lint_auto_find_test_dependencies)\n'}
+[4.887849] (quadcopter_firmware) StderrLine: {'line': b'\n'}
+[4.887881] (quadcopter_firmware) StderrLine: {'line': b'\n'}
+[4.887913] (quadcopter_firmware) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[4.890939] (quadcopter_firmware) StderrLine: {'line': b'make: *** [Makefile:226: cmake_check_build_system] Error 1\n'}
+[4.892252] (quadcopter_firmware) CommandEnded: {'returncode': 2}
+[4.962358] (quadcopter_firmware) JobEnded: {'identifier': 'quadcopter_firmware', 'rc': 2}
+[4.963001] (-) EventReactorShutdown: {}

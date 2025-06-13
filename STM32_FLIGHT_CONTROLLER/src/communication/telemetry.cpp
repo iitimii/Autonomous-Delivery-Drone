@@ -75,8 +75,8 @@ namespace telemetry
       data_tx.payload1 = gps::num_satelites;
       data_tx.payload2 = gps::fix_type;
       data_tx.payload3 = attitude_estimator.acc_resultant;
-      data_tx.payload4 = baro::pressure;
-      data_tx.payload5 = baro::altitude;
+      data_tx.payload4 = Sensors::barometer.get_pressure();
+      // data_tx.payload5 = baro::altitude;
       data_tx.payload6 = attitude_estimator.temperature;
       data_tx.payload7 = receiver::roll;
       data_tx.payload8 = receiver::pitch;
@@ -177,7 +177,7 @@ namespace telemetry
     if (!success)
     {
       ++failureCount;
-      if (failureCount >= 100)
+      if (failureCount >= 1500)
       {
         setup();
         failureCount = 0;
@@ -205,7 +205,6 @@ namespace telemetry
       {
         radio.read(&data_rx, sizeof(RadioData));
       }
-      ++flight::armed;
     }
   }
 

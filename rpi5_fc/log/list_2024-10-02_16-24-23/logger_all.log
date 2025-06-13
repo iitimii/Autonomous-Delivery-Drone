@@ -1,0 +1,56 @@
+[0.181s] colcon DEBUG Command line arguments: ['/Users/timii/miniforge3/envs/ros2/bin/colcon', 'list', '-p', '--base-paths', '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc']
+[0.181s] colcon DEBUG Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x10625aa50>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x10624b2d0>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x10624b2d0>>)
+[0.211s] colcon.colcon_core.package_discovery Level 1 discover_packages(colcon_meta) check parameters
+[0.214s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) check parameters
+[0.214s] colcon.colcon_core.package_discovery Level 1 discover_packages(ignore) check parameters
+[0.214s] colcon.colcon_core.package_discovery Level 1 discover_packages(path) check parameters
+[0.214s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) discover
+[0.214s] colcon.colcon_core.package_discovery INFO Crawling recursively for packages in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc'
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['ignore', 'ignore_ament_install']
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'ignore'
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'ignore_ament_install'
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['colcon_pkg']
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'colcon_pkg'
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['colcon_meta']
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'colcon_meta'
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['ros']
+[0.215s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'ros'
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['cmake', 'python']
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'cmake'
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'python'
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extensions ['python_setup_py']
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc) by extension 'python_setup_py'
+[0.238s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build) by extension 'ignore'
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build) ignored
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install) by extension 'ignore'
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install) ignored
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/log) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/log) by extension 'ignore'
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/log) ignored
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['ignore', 'ignore_ament_install']
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'ignore'
+[0.239s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'ignore_ament_install'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['colcon_pkg']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'colcon_pkg'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['colcon_meta']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'colcon_meta'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['ros']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'ros'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['cmake', 'python']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'cmake'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'python'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extensions ['python_setup_py']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src) by extension 'python_setup_py'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extensions ['ignore', 'ignore_ament_install']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extension 'ignore'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extension 'ignore_ament_install'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extensions ['colcon_pkg']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extension 'colcon_pkg'
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extensions ['colcon_meta']
+[0.240s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extension 'colcon_meta'
+[0.241s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extensions ['ros']
+[0.241s] colcon.colcon_core.package_identification Level 1 _identify(/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware) by extension 'ros'
+[0.243s] colcon.colcon_core.package_identification DEBUG Package '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware' with type 'ros.ament_cmake' and name 'quadcopter_firmware'
+[0.243s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) using defaults

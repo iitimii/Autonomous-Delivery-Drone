@@ -1,0 +1,3 @@
+[ 50%] Built target quad_lifecycle
+[ 75%] Building CXX object CMakeFiles/stm32_uart.dir/src/stm32_uart.cpp.o
+[100%] Linking CXX executable stm32_uart

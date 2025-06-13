@@ -1,0 +1,26 @@
+[0.025s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[0.192s] [ 25%] Building CXX object CMakeFiles/stm32_uart.dir/src/stm32_uart.cpp.o
+[0.214s] [ 75%] Built target quad_lifecycle
+[3.001s] [100%] Linking CXX executable stm32_uart
+[3.083s] Undefined symbols for architecture arm64:
+[3.083s]   "LibSerial::SerialPort::SetBaudRate(LibSerial::BaudRate const&)", referenced from:
+[3.083s]       STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+[3.083s]   "LibSerial::SerialPort::IsDataAvailable()", referenced from:
+[3.084s]       STM32_UART_Node::timerCallback() in stm32_uart.cpp.o
+[3.084s]   "LibSerial::SerialPort::Open(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&, unsigned int const&)", referenced from:
+[3.084s]       STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+[3.084s]   "LibSerial::SerialPort::Close()", referenced from:
+[3.084s]       STM32_UART_Node::~STM32_UART_Node() in stm32_uart.cpp.o
+[3.084s]   "LibSerial::SerialPort::ReadLine(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>&, char, unsigned long)", referenced from:
+[3.084s]       STM32_UART_Node::timerCallback() in stm32_uart.cpp.o
+[3.084s]   "LibSerial::SerialPort::SerialPort()", referenced from:
+[3.084s]       STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+[3.084s]   "LibSerial::SerialPort::~SerialPort()", referenced from:
+[3.084s]       STM32_UART_Node::STM32_UART_Node(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in stm32_uart.cpp.o
+[3.084s]       STM32_UART_Node::~STM32_UART_Node() in stm32_uart.cpp.o
+[3.085s] ld: symbol(s) not found for architecture arm64
+[3.086s] arm64-apple-darwin20.0: error: linker command failed with exit code 1 (use -v to see invocation)
+[3.087s] make[2]: *** [CMakeFiles/stm32_uart.dir/build.make:158: stm32_uart] Error 1
+[3.087s] make[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/stm32_uart.dir/all] Error 2
+[3.088s] make: *** [Makefile:146: all] Error 2
+[3.090s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '2': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8

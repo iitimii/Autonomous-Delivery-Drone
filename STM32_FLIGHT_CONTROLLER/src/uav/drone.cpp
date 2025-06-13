@@ -24,5 +24,6 @@ namespace drone
                 loop_time_actual = micros() - loop_time_prev;
                 while (micros() - loop_time < 4000)
                         ;
+                loop();
         }
 }

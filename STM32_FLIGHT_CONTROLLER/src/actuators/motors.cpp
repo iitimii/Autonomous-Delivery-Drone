@@ -124,7 +124,7 @@ namespace motors
                     fr = 1000; // 65
                     fl = 1000; // 55
                     br = 1000; // 60
-                    bl = 1000; // 50 perfect
+                    bl = 1000; // 50 perfect vibration
 
                     switch (receiver::vra)
                     {

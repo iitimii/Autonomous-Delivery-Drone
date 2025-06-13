@@ -1,8 +1,9 @@
 #include "sensors/barometer.hpp"
 
-namespace baro
+namespace Sensors
 {
-    float pressure;
-    float altitude;
-    float temperature;
+
+    Barometer::Barometer()
+    {}
+
 }

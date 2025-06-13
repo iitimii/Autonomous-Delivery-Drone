@@ -1,0 +1,35 @@
+[0.042s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[0.480s] -- Found ament_cmake: 1.3.7 (/Users/timii/miniforge3/envs/ros2/share/ament_cmake/cmake)
+[0.761s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.797s] -- Found rclcpp: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp/cmake)
+[0.921s] -- Found rosidl_generator_c: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_c/cmake)
+[0.941s] -- Found rosidl_adapter: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_adapter/cmake)
+[0.965s] -- Found rosidl_generator_cpp: 3.1.5 (/Users/timii/miniforge3/envs/ros2/share/rosidl_generator_cpp/cmake)
+[0.997s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.040s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.196s] -- Checking for module 'yaml-0.1'
+[2.454s] --   Found yaml-0.1, version 0.2.5
+[2.946s] -- Found rmw_implementation_cmake: 6.1.1 (/Users/timii/miniforge3/envs/ros2/share/rmw_implementation_cmake/cmake)
+[2.958s] -- Found rmw_cyclonedds_cpp: 1.3.4 (/Users/timii/miniforge3/envs/ros2/share/rmw_cyclonedds_cpp/cmake)
+[3.029s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[3.059s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.452s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.453s] -- Found Threads: TRUE  
+[4.576s] -- Found rclcpp_lifecycle: 16.0.8 (/Users/timii/miniforge3/envs/ros2/share/rclcpp_lifecycle/cmake)
+[4.648s] -- Found std_msgs: 4.2.3 (/Users/timii/miniforge3/envs/ros2/share/std_msgs/cmake)
+[4.731s] -- Found PkgConfig: /Users/timii/miniforge3/envs/ros2/bin/pkg-config (found version "0.29.2") 
+[4.731s] -- Checking for module 'libserial'
+[4.789s] --   No package 'libserial' found
+[4.791s] -- Found ament_lint_auto: 0.12.10 (/Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake)
+[4.887s] CMake Error at /Users/timii/miniforge3/envs/ros2/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:53 (message):
+[4.887s]   ament_package_xml() package name 'quadcopter_firmware' in '/package.xml'
+[4.887s]   does not match current PROJECT_NAME 'aq_communication'.  You must call
+[4.887s]   project() with the same package name before.
+[4.887s] Call Stack (most recent call first):
+[4.887s]   /Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake/ament_lint_auto_find_test_dependencies.cmake:31 (ament_package_xml)
+[4.887s]   CMakeLists.txt:52 (ament_lint_auto_find_test_dependencies)
+[4.887s] 
+[4.887s] 
+[4.887s] -- Configuring incomplete, errors occurred!
+[4.890s] make: *** [Makefile:226: cmake_check_build_system] Error 1
+[4.892s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '2': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8

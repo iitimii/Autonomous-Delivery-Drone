@@ -1,0 +1,13 @@
+[0.020s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[0.148s] [ 50%] Built target quad_lifecycle
+[0.156s] [ 75%] Building CXX object CMakeFiles/stm32_uart.dir/src/stm32_uart.cpp.o
+[0.400s] [100%] Linking CXX executable stm32_uart
+[0.473s] Undefined symbols for architecture arm64:
+[0.473s]   "_main", referenced from:
+[0.473s]      implicit entry/start for main executable
+[0.474s] ld: symbol(s) not found for architecture arm64
+[0.474s] arm64-apple-darwin20.0: error: linker command failed with exit code 1 (use -v to see invocation)
+[0.475s] make[2]: *** [CMakeFiles/stm32_uart.dir/build.make:158: stm32_uart] Error 1
+[0.476s] make[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/stm32_uart.dir/all] Error 2
+[0.476s] make: *** [Makefile:146: all] Error 2
+[0.477s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '2': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8

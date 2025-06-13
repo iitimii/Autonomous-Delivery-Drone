@@ -1,0 +1,14 @@
+source;share/quadcopter_firmware/hook/cmake_prefix_path.ps1
+source;share/quadcopter_firmware/hook/cmake_prefix_path.dsv
+source;share/quadcopter_firmware/hook/cmake_prefix_path.sh
+source;share/quadcopter_firmware/hook/path.ps1
+source;share/quadcopter_firmware/hook/path.dsv
+source;share/quadcopter_firmware/hook/path.sh
+source;share/quadcopter_firmware/hook/pythonscriptspath.ps1
+source;share/quadcopter_firmware/hook/pythonscriptspath.dsv
+source;share/quadcopter_firmware/hook/pythonscriptspath.sh
+source;share/quadcopter_firmware/local_setup.bash
+source;share/quadcopter_firmware/local_setup.dsv
+source;share/quadcopter_firmware/local_setup.ps1
+source;share/quadcopter_firmware/local_setup.sh
+source;share/quadcopter_firmware/local_setup.zsh

@@ -1,0 +1,8 @@
+Undefined symbols for architecture arm64:
+  "_main", referenced from:
+     implicit entry/start for main executable
+ld: symbol(s) not found for architecture arm64
+arm64-apple-darwin20.0: error: linker command failed with exit code 1 (use -v to see invocation)
+make[2]: *** [CMakeFiles/stm32_uart.dir/build.make:158: stm32_uart] Error 1
+make[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/stm32_uart.dir/all] Error 2
+make: *** [Makefile:146: all] Error 2

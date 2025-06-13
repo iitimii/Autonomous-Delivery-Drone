@@ -1,0 +1,448 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:233 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Darwin - 24.1.0 - arm64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang 
+      Build flags: -ftree-vectorize;-fPIC;-fstack-protector-strong;-O2;-pipe;-isystem;/Users/timii/miniforge3/envs/ros2/include
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is Clang, found in:
+        /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/3.28.3/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++ 
+      Build flags: -ftree-vectorize;-fPIC;-fstack-protector-strong;-O2;-pipe;-stdlib=libc++;-fvisibility-inlines-hidden;-fmessage-length=0;-isystem;/Users/timii/miniforge3/envs/ros2/include
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is Clang, found in:
+        /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/3.28.3/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2"
+      binary: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_C_FLAGS: "-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2'
+        
+        Run Build Command(s): /Users/timii/miniforge3/envs/ros2/bin/cmake -E env VERBOSE=1 /Users/timii/miniforge3/envs/ros2/bin/make -f Makefile cmTC_60833/fast
+        /Users/timii/miniforge3/envs/ros2/bin/make  -f CMakeFiles/cmTC_60833.dir/build.make CMakeFiles/cmTC_60833.dir/build
+        make[1]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2'
+        Building C object CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang   -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk   -v -Wl,-v -MD -MT CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        clang version 17.0.6
+        Target: arm64-apple-darwin20.0.0
+        Thread model: posix
+        InstalledDir: /Users/timii/miniforge3/envs/ros2/bin
+        arm64-apple-darwin20.0: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+         (in-process)
+         "/Users/timii/miniforge3/envs/ros2/bin/clang-17" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -funwind-tables=1 -target-sdk-version=15.0 -fcompatibility-qualified-id-block-type-checking -fvisibility-inlines-hidden-static-local-var -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +lse -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sha2 -target-feature +sha3 -target-feature +neon -target-feature +zcm -target-feature +zcz -target-feature +fullfp16 -target-abi darwinpcs -debugger-tuning=lldb -target-linker-version 711 -v -fcoverage-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2 -resource-dir /Users/timii/miniforge3/envs/ros2/lib/clang/17 -dependency-file CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -sys-header-deps -isystem /Users/timii/miniforge3/envs/ros2/include -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -O2 -fdebug-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2 -ferror-limit 19 -stack-protector 2 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -vectorize-loops -vectorize-slp -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -x c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target arm64-apple-darwin24.1.0
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /Users/timii/miniforge3/envs/ros2/include
+         /Users/timii/miniforge3/envs/ros2/lib/clang/17/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+        End of search list.
+        Linking C executable cmTC_60833
+        /Users/timii/miniforge3/envs/ros2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60833.dir/link.txt --verbose=1
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib -v -Wl,-v CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -o cmTC_60833 
+        clang version 17.0.6
+        Target: arm64-apple-darwin20.0.0
+        Thread model: posix
+        InstalledDir: /Users/timii/miniforge3/envs/ros2/bin
+         "/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld" -demangle -lto_library /Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -o cmTC_60833 -L/Users/timii/miniforge3/envs/ros2/lib -search_paths_first -headerpad_max_install_names -headerpad_max_install_names -dead_strip_dylibs -rpath /Users/timii/miniforge3/envs/ros2/lib -v CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -lSystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a
+        @(#)PROGRAM:ld  PROJECT:ld64-711
+        BUILD 01:31:26 Mar 15 2024
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em (tvOS)
+        Library search paths:
+        	/Users/timii/miniforge3/envs/ros2/lib
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
+        Framework search paths:
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/
+        make[1]: Leaving directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/Users/timii/miniforge3/envs/ros2/include]
+          add: [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+          add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        end of search list found
+        collapse include dir [/Users/timii/miniforge3/envs/ros2/include] ==> [/Users/timii/miniforge3/envs/ros2/include]
+        collapse include dir [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include] ==> [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+        collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        implicit include dirs: [/Users/timii/miniforge3/envs/ros2/include;/Users/timii/miniforge3/envs/ros2/lib/clang/17/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(arm64-apple-darwin20\\.0\\.0-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2']
+        ignore line: []
+        ignore line: [Run Build Command(s): /Users/timii/miniforge3/envs/ros2/bin/cmake -E env VERBOSE=1 /Users/timii/miniforge3/envs/ros2/bin/make -f Makefile cmTC_60833/fast]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/make  -f CMakeFiles/cmTC_60833.dir/build.make CMakeFiles/cmTC_60833.dir/build]
+        ignore line: [make[1]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2']
+        ignore line: [Building C object CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang   -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk   -v -Wl -v -MD -MT CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang version 17.0.6]
+        ignore line: [Target: arm64-apple-darwin20.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Users/timii/miniforge3/envs/ros2/bin]
+        ignore line: [arm64-apple-darwin20.0: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+        ignore line: [ (in-process)]
+        ignore line: [ "/Users/timii/miniforge3/envs/ros2/bin/clang-17" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -funwind-tables=1 -target-sdk-version=15.0 -fcompatibility-qualified-id-block-type-checking -fvisibility-inlines-hidden-static-local-var -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +lse -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sha2 -target-feature +sha3 -target-feature +neon -target-feature +zcm -target-feature +zcz -target-feature +fullfp16 -target-abi darwinpcs -debugger-tuning=lldb -target-linker-version 711 -v -fcoverage-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2 -resource-dir /Users/timii/miniforge3/envs/ros2/lib/clang/17 -dependency-file CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -sys-header-deps -isystem /Users/timii/miniforge3/envs/ros2/include -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -O2 -fdebug-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-et2TB2 -ferror-limit 19 -stack-protector 2 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -vectorize-loops -vectorize-slp -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -x c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target arm64-apple-darwin24.1.0]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /Users/timii/miniforge3/envs/ros2/include]
+        ignore line: [ /Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_60833]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60833.dir/link.txt --verbose=1]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names -Wl -headerpad_max_install_names -Wl -dead_strip_dylibs -Wl -rpath /Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib -v -Wl -v CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -o cmTC_60833 ]
+        ignore line: [clang version 17.0.6]
+        ignore line: [Target: arm64-apple-darwin20.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Users/timii/miniforge3/envs/ros2/bin]
+        link line: [ "/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld" -demangle -lto_library /Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -o cmTC_60833 -L/Users/timii/miniforge3/envs/ros2/lib -search_paths_first -headerpad_max_install_names -headerpad_max_install_names -dead_strip_dylibs -rpath /Users/timii/miniforge3/envs/ros2/lib -v CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o -lSystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+          arg [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-lto_library] ==> ignore, skip following value
+          arg [/Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib] ==> skip value of -lto_library
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-platform_version] ==> ignore
+          arg [macos] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [15.0] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_60833] ==> ignore
+          arg [-L/Users/timii/miniforge3/envs/ros2/lib] ==> dir [/Users/timii/miniforge3/envs/ros2/lib]
+          arg [-search_paths_first] ==> ignore
+          arg [-headerpad_max_install_names] ==> ignore
+          arg [-headerpad_max_install_names] ==> ignore
+          arg [-dead_strip_dylibs] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/Users/timii/miniforge3/envs/ros2/lib] ==> ignore
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_60833.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lSystem] ==> lib [System]
+          arg [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        Library search paths: [;/Users/timii/miniforge3/envs/ros2/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/]
+        remove lib [System]
+        remove lib [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        collapse library dir [/Users/timii/miniforge3/envs/ros2/lib] ==> [/Users/timii/miniforge3/envs/ros2/lib]
+        collapse library dir [/Users/timii/miniforge3/envs/ros2/lib] ==> [/Users/timii/miniforge3/envs/ros2/lib]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: [/Users/timii/miniforge3/envs/ros2/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW"
+      binary: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_FLAGS: "-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW'
+        
+        Run Build Command(s): /Users/timii/miniforge3/envs/ros2/bin/cmake -E env VERBOSE=1 /Users/timii/miniforge3/envs/ros2/bin/make -f Makefile cmTC_f5d12/fast
+        /Users/timii/miniforge3/envs/ros2/bin/make  -f CMakeFiles/cmTC_f5d12.dir/build.make CMakeFiles/cmTC_f5d12.dir/build
+        make[1]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW'
+        Building CXX object CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++   -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk   -v -Wl,-v -MD -MT CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        clang version 17.0.6
+        Target: arm64-apple-darwin20.0.0
+        Thread model: posix
+        InstalledDir: /Users/timii/miniforge3/envs/ros2/bin
+        arm64-apple-darwin20.0: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+         (in-process)
+         "/Users/timii/miniforge3/envs/ros2/bin/clang-17" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -funwind-tables=1 -target-sdk-version=15.0 -fcompatibility-qualified-id-block-type-checking -fvisibility-inlines-hidden-static-local-var -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +lse -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sha2 -target-feature +sha3 -target-feature +neon -target-feature +zcm -target-feature +zcz -target-feature +fullfp16 -target-abi darwinpcs -debugger-tuning=lldb -target-linker-version 711 -v -fcoverage-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW -resource-dir /Users/timii/miniforge3/envs/ros2/lib/clang/17 -dependency-file CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isystem /Users/timii/miniforge3/envs/ros2/include -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -stdlib=libc++ -internal-isystem /Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -O2 -fdeprecated-macro -fdebug-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW -ferror-limit 19 -fvisibility-inlines-hidden -stack-protector 2 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -vectorize-loops -vectorize-slp -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target arm64-apple-darwin24.1.0
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /Users/timii/miniforge3/envs/ros2/include
+         /Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1
+         /Users/timii/miniforge3/envs/ros2/lib/clang/17/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+        End of search list.
+        Linking CXX executable cmTC_f5d12
+        /Users/timii/miniforge3/envs/ros2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5d12.dir/link.txt --verbose=1
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++ -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib -v -Wl,-v CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_f5d12 
+        clang version 17.0.6
+        Target: arm64-apple-darwin20.0.0
+        Thread model: posix
+        InstalledDir: /Users/timii/miniforge3/envs/ros2/bin
+         "/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld" -demangle -lto_library /Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -o cmTC_f5d12 -L/Users/timii/miniforge3/envs/ros2/lib -search_paths_first -headerpad_max_install_names -headerpad_max_install_names -dead_strip_dylibs -rpath /Users/timii/miniforge3/envs/ros2/lib -v CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a
+        @(#)PROGRAM:ld  PROJECT:ld64-711
+        BUILD 01:31:26 Mar 15 2024
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em (tvOS)
+        Library search paths:
+        	/Users/timii/miniforge3/envs/ros2/lib
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
+        Framework search paths:
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/
+        make[1]: Leaving directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/Users/timii/miniforge3/envs/ros2/include]
+          add: [/Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1]
+          add: [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+          add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        end of search list found
+        collapse include dir [/Users/timii/miniforge3/envs/ros2/include] ==> [/Users/timii/miniforge3/envs/ros2/include]
+        collapse include dir [/Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1] ==> [/Users/timii/miniforge3/envs/ros2/include/c++/v1]
+        collapse include dir [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include] ==> [/Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+        collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        implicit include dirs: [/Users/timii/miniforge3/envs/ros2/include;/Users/timii/miniforge3/envs/ros2/include/c++/v1;/Users/timii/miniforge3/envs/ros2/lib/clang/17/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(arm64-apple-darwin20\\.0\\.0-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW']
+        ignore line: []
+        ignore line: [Run Build Command(s): /Users/timii/miniforge3/envs/ros2/bin/cmake -E env VERBOSE=1 /Users/timii/miniforge3/envs/ros2/bin/make -f Makefile cmTC_f5d12/fast]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/make  -f CMakeFiles/cmTC_f5d12.dir/build.make CMakeFiles/cmTC_f5d12.dir/build]
+        ignore line: [make[1]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW']
+        ignore line: [Building CXX object CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++   -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk   -v -Wl -v -MD -MT CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -c /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang version 17.0.6]
+        ignore line: [Target: arm64-apple-darwin20.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Users/timii/miniforge3/envs/ros2/bin]
+        ignore line: [arm64-apple-darwin20.0: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+        ignore line: [ (in-process)]
+        ignore line: [ "/Users/timii/miniforge3/envs/ros2/bin/clang-17" -cc1 -triple arm64-apple-macosx15.0.0 -Wundef-prefix=TARGET_OS_ -Werror=undef-prefix -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -funwind-tables=1 -target-sdk-version=15.0 -fcompatibility-qualified-id-block-type-checking -fvisibility-inlines-hidden-static-local-var -target-cpu apple-m1 -target-feature +v8.5a -target-feature +aes -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +lse -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sha2 -target-feature +sha3 -target-feature +neon -target-feature +zcm -target-feature +zcz -target-feature +fullfp16 -target-abi darwinpcs -debugger-tuning=lldb -target-linker-version 711 -v -fcoverage-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW -resource-dir /Users/timii/miniforge3/envs/ros2/lib/clang/17 -dependency-file CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isystem /Users/timii/miniforge3/envs/ros2/include -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -stdlib=libc++ -internal-isystem /Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -O2 -fdeprecated-macro -fdebug-compilation-dir=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-j1NovW -ferror-limit 19 -fvisibility-inlines-hidden -stack-protector 2 -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -vectorize-loops -vectorize-slp -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target arm64-apple-darwin24.1.0]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /Users/timii/miniforge3/envs/ros2/include]
+        ignore line: [ /Users/timii/miniforge3/envs/ros2/bin/../include/c++/v1]
+        ignore line: [ /Users/timii/miniforge3/envs/ros2/lib/clang/17/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_f5d12]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5d12.dir/link.txt --verbose=1]
+        ignore line: [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++ -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -stdlib=libc++ -fvisibility-inlines-hidden -fmessage-length=0 -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names -Wl -headerpad_max_install_names -Wl -dead_strip_dylibs -Wl -rpath /Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib -v -Wl -v CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_f5d12 ]
+        ignore line: [clang version 17.0.6]
+        ignore line: [Target: arm64-apple-darwin20.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Users/timii/miniforge3/envs/ros2/bin]
+        link line: [ "/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld" -demangle -lto_library /Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib -dynamic -arch arm64 -platform_version macos 15.0.0 15.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -o cmTC_f5d12 -L/Users/timii/miniforge3/envs/ros2/lib -search_paths_first -headerpad_max_install_names -headerpad_max_install_names -dead_strip_dylibs -rpath /Users/timii/miniforge3/envs/ros2/lib -v CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+          arg [/Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-ld] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-lto_library] ==> ignore, skip following value
+          arg [/Users/timii/miniforge3/envs/ros2/lib/libLTO.17.dylib] ==> skip value of -lto_library
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-platform_version] ==> ignore
+          arg [macos] ==> ignore
+          arg [15.0.0] ==> ignore
+          arg [15.0] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_f5d12] ==> ignore
+          arg [-L/Users/timii/miniforge3/envs/ros2/lib] ==> dir [/Users/timii/miniforge3/envs/ros2/lib]
+          arg [-search_paths_first] ==> ignore
+          arg [-headerpad_max_install_names] ==> ignore
+          arg [-headerpad_max_install_names] ==> ignore
+          arg [-dead_strip_dylibs] ==> ignore
+          arg [-rpath] ==> ignore
+          arg [/Users/timii/miniforge3/envs/ros2/lib] ==> ignore
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_f5d12.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lc++] ==> lib [c++]
+          arg [-lSystem] ==> lib [System]
+          arg [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        Library search paths: [;/Users/timii/miniforge3/envs/ros2/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/]
+        remove lib [System]
+        remove lib [/Users/timii/miniforge3/envs/ros2/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        collapse library dir [/Users/timii/miniforge3/envs/ros2/lib] ==> [/Users/timii/miniforge3/envs/ros2/lib]
+        collapse library dir [/Users/timii/miniforge3/envs/ros2/lib] ==> [/Users/timii/miniforge3/envs/ros2/lib]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        implicit libs: [c++]
+        implicit objs: []
+        implicit dirs: [/Users/timii/miniforge3/envs/ros2/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+      
+      
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/Users/timii/miniforge3/envs/ros2/share/cmake-3.28/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/Users/timii/miniforge3/envs/ros2/lib/cmake/spdlog/spdlogConfig.cmake:30 (find_package)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rcl_logging_spdlog/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rcl_logging_spdlog/cmake/rcl_logging_spdlogConfig.cmake:41 (include)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rcl/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rcl/cmake/rclConfig.cmake:41 (include)"
+      - "/Users/timii/miniforge3/envs/ros2/share/libstatistics_collector/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/Users/timii/miniforge3/envs/ros2/share/libstatistics_collector/cmake/libstatistics_collectorConfig.cmake:41 (include)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rclcpp/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/Users/timii/miniforge3/envs/ros2/share/rclcpp/cmake/rclcppConfig.cmake:41 (include)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO"
+      binary: "/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_C_FLAGS: "-ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib"
+      CMAKE_MODULE_PATH: "/Users/timii/miniforge3/envs/ros2/share/libyaml_vendor/cmake/Modules;/Users/timii/miniforge3/envs/ros2/share/fastrtps_cmake_module/cmake/Modules;/Users/timii/miniforge3/envs/ros2/lib/cmake/iceoryx_hoofs;/Users/timii/miniforge3/envs/ros2/lib/cmake/iceoryx_posh"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO'
+        
+        Run Build Command(s): /Users/timii/miniforge3/envs/ros2/bin/cmake -E env VERBOSE=1 /Users/timii/miniforge3/envs/ros2/bin/make -f Makefile cmTC_dffc2/fast
+        make[1]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO'
+        /Users/timii/miniforge3/envs/ros2/bin/make  -f CMakeFiles/cmTC_dffc2.dir/build.make CMakeFiles/cmTC_dffc2.dir/build
+        make[2]: Entering directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO'
+        Building C object CMakeFiles/cmTC_dffc2.dir/src.c.o
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang -DCMAKE_HAVE_LIBC_PTHREAD  -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -MD -MT CMakeFiles/cmTC_dffc2.dir/src.c.o -MF CMakeFiles/cmTC_dffc2.dir/src.c.o.d -o CMakeFiles/cmTC_dffc2.dir/src.c.o -c /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO/src.c
+        Linking C executable cmTC_dffc2
+        /Users/timii/miniforge3/envs/ros2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dffc2.dir/link.txt --verbose=1
+        /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang -ftree-vectorize -fPIC -fstack-protector-strong -O2 -pipe -isystem /Users/timii/miniforge3/envs/ros2/include  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -Wl,-headerpad_max_install_names -Wl,-dead_strip_dylibs -Wl,-rpath,/Users/timii/miniforge3/envs/ros2/lib -L/Users/timii/miniforge3/envs/ros2/lib  CMakeFiles/cmTC_dffc2.dir/src.c.o -o cmTC_dffc2 
+        make[2]: Leaving directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO'
+        make[1]: Leaving directory '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware/CMakeFiles/CMakeScratch/TryCompile-6iIZRO'
+        
+      exitCode: 0
+...

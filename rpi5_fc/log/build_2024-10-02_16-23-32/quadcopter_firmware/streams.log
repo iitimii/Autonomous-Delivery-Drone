@@ -1,0 +1,44 @@
+[0.038s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware
+[0.865s] -- The C compiler identification is Clang 17.0.6
+[0.958s] -- The CXX compiler identification is Clang 17.0.6
+[0.992s] -- Detecting C compiler ABI info
+[1.178s] -- Detecting C compiler ABI info - done
+[1.181s] -- Check for working C compiler: /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang - skipped
+[1.182s] -- Detecting C compile features
+[1.182s] -- Detecting C compile features - done
+[1.210s] -- Detecting CXX compiler ABI info
+[1.376s] -- Detecting CXX compiler ABI info - done
+[1.380s] -- Check for working CXX compiler: /Users/timii/miniforge3/envs/ros2/bin/arm64-apple-darwin20.0.0-clang++ - skipped
+[1.380s] -- Detecting CXX compile features
+[1.380s] -- Detecting CXX compile features - done
+[1.393s] -- Found ament_cmake: 1.3.7 (/Users/timii/miniforge3/envs/ros2/share/ament_cmake/cmake)
+[1.905s] -- Found Python3: /opt/homebrew/Frameworks/Python.framework/Versions/3.12/bin/python3.12 (found version "3.12.6") found components: Interpreter 
+[2.006s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.119s] -- Found ament_lint_auto: 0.12.10 (/Users/timii/miniforge3/envs/ros2/share/ament_lint_auto/cmake)
+[2.248s] -- Added test 'lint_cmake' to check CMake code style
+[2.249s] -- Added test 'xmllint' to check XML markup files
+[2.252s] -- Configuring done (2.0s)
+[2.266s] -- Generating done (0.0s)
+[2.269s] -- Build files have been written to: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware
+[2.272s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '0': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware
+[2.274s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[2.325s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '0': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --build /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware -- -j8 -l8
+[2.440s] Invoking command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --install /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware
+[2.451s] -- Install configuration: ""
+[2.451s] -- Execute custom install script
+[2.452s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/package_run_dependencies/quadcopter_firmware
+[2.463s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/parent_prefix_path/quadcopter_firmware
+[2.474s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.sh
+[2.485s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/ament_prefix_path.dsv
+[2.496s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.sh
+[2.507s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/environment/path.dsv
+[2.518s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.bash
+[2.529s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.sh
+[2.540s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.zsh
+[2.550s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/local_setup.dsv
+[2.562s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.dsv
+[2.573s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/ament_index/resource_index/packages/quadcopter_firmware
+[2.584s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig.cmake
+[2.594s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/cmake/quadcopter_firmwareConfig-version.cmake
+[2.605s] -- Symlinking: /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/install/quadcopter_firmware/share/quadcopter_firmware/package.xml
+[2.617s] Invoked command in '/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware' returned '0': SHLVL=2 _=/Users/timii/miniforge3/envs/ros2/bin/env /Users/timii/miniforge3/envs/ros2/bin/cmake --install /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/build/quadcopter_firmware

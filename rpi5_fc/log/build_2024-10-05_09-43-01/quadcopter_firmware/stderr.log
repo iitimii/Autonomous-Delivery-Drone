@@ -1,0 +1,19 @@
+In file included from /Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/src/stm32_uart.cpp:1:
+/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/include/quadcopter_firmware/stm32_uart.hpp:5:10: fatal error: 'rclcpp_lifecycle/lifecycle_node.hpp' file not found
+    5 | #include <rclcpp_lifecycle/lifecycle_node.hpp>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+make[2]: *** [CMakeFiles/stm32_uart.dir/build.make:76: CMakeFiles/stm32_uart.dir/src/stm32_uart.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/stm32_uart.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/src/quadcopter_lifecycyle.cpp:23:64: warning: unused parameter 'state' [-Wunused-parameter]
+   23 |     CallbackReturn on_configure(const rclcpp_lifecycle::State &state)
+      |                                                                ^
+/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/src/quadcopter_lifecycyle.cpp:30:63: warning: unused parameter 'state' [-Wunused-parameter]
+   30 |     CallbackReturn on_shutdown(const rclcpp_lifecycle::State &state)
+      |                                                               ^
+/Users/timii/Desktop/Developer/Autonomous-Delivery-Drone/rpi5_fc/src/quadcopter_firmware/src/quadcopter_lifecycyle.cpp:37:62: warning: unused parameter 'state' [-Wunused-parameter]
+   37 |     CallbackReturn on_cleanup(const rclcpp_lifecycle::State &state)
+      |                                                              ^
+3 warnings generated.
+make: *** [Makefile:146: all] Error 2
